@@ -1,0 +1,9 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/ExternalProject.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/GNUInstallDirs.cmake
+C:/Program Files/CMake/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake
+S:/Documents/School/UMD/CS 4212/renderer/json-develop/CMakeLists.txt
+S:/Documents/School/UMD/CS 4212/renderer/json-develop/cmake/config.cmake.in
+S:/Documents/School/UMD/CS 4212/renderer/json-develop/cmake/nlohmann_jsonConfigVersion.cmake.in
+S:/Documents/School/UMD/CS 4212/renderer/json-develop/cmake/pkg-config.pc.in

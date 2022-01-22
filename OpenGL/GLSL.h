@@ -38,7 +38,7 @@
 #include <string>
 #include <list>
 
-#include <GL/glew.h>
+#include <glew.h>
 
 namespace sivelab
 {

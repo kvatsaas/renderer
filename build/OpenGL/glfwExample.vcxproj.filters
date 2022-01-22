@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\OpenGL\glfwExample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\OpenGL\GLSL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\OpenGL\GLSL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="S:\Documents\School\UMD\CS 4212\renderer\OpenGL\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3073E489-0F10-3B80-A29E-192F33461FC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8B18406C-C2CE-3707-AFD9-4B0A43FCE605}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

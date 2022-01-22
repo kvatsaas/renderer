@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5D1EAC22-4F8A-312C-B061-36BAF446F277}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\CS4212Libs\include;S:\Documents\School\UMD\CS 4212\renderer\json-develop\include;S:\Documents\School\UMD\CS 4212\renderer\glfw-master\include;S:\Documents\School\UMD\CS 4212\renderer\glm-0.9.9.9;C:\local\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\CS4212Libs\include;S:\Documents\School\UMD\CS 4212\renderer\json-develop\include;S:\Documents\School\UMD\CS 4212\renderer\glfw-master\include;S:\Documents\School\UMD\CS 4212\renderer\glm-0.9.9.9;C:\local\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\CS4212Libs\include;S:\Documents\School\UMD\CS 4212\renderer\json-develop\include;S:\Documents\School\UMD\CS 4212\renderer\glfw-master\include;S:\Documents\School\UMD\CS 4212\renderer\glm-0.9.9.9;C:\local\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\CS4212Libs\include;S:\Documents\School\UMD\CS 4212\renderer\json-develop\include;S:\Documents\School\UMD\CS 4212\renderer\glfw-master\include;S:\Documents\School\UMD\CS 4212\renderer\glm-0.9.9.9;C:\local\boost_1_72_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="S:\Documents\School\UMD\CS 4212\renderer\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule S:/Documents/School/UMD/CS 4212/renderer/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SS:/Documents/School/UMD/CS 4212/renderer" "-BS:/Documents/School/UMD/CS 4212/renderer/build" --check-stamp-file "S:/Documents/School/UMD/CS 4212/renderer/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPNG.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\SelectLibraryConfigurations.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeCXXCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeRCCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeSystem.cmake;S:\Documents\School\UMD\CS 4212\renderer\cmake\Modules\FindGLEW.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule S:/Documents/School/UMD/CS 4212/renderer/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SS:/Documents/School/UMD/CS 4212/renderer" "-BS:/Documents/School/UMD/CS 4212/renderer/build" --check-stamp-file "S:/Documents/School/UMD/CS 4212/renderer/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPNG.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\SelectLibraryConfigurations.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeCXXCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeRCCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeSystem.cmake;S:\Documents\School\UMD\CS 4212\renderer\cmake\Modules\FindGLEW.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule S:/Documents/School/UMD/CS 4212/renderer/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SS:/Documents/School/UMD/CS 4212/renderer" "-BS:/Documents/School/UMD/CS 4212/renderer/build" --check-stamp-file "S:/Documents/School/UMD/CS 4212/renderer/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPNG.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\SelectLibraryConfigurations.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeCXXCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeRCCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeSystem.cmake;S:\Documents\School\UMD\CS 4212\renderer\cmake\Modules\FindGLEW.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule S:/Documents/School/UMD/CS 4212/renderer/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SS:/Documents/School/UMD/CS 4212/renderer" "-BS:/Documents/School/UMD/CS 4212/renderer/build" --check-stamp-file "S:/Documents/School/UMD/CS 4212/renderer/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPNG.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindVulkan.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\SelectLibraryConfigurations.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeCXXCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeRCCompiler.cmake;S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\3.22.1\CMakeSystem.cmake;S:\Documents\School\UMD\CS 4212\renderer\cmake\Modules\FindGLEW.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">S:\Documents\School\UMD\CS 4212\renderer\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\ZERO_CHECK.vcxproj">
+      <Project>{791819CF-FE6E-3FC6-8154-6AE77C17ADF2}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\Vulkan\basicCode.vcxproj">
+      <Project>{2336D087-32D4-3B58-8939-02680F342A4E}</Project>
+      <Name>basicCode</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\glfw-master\docs\docs.vcxproj">
+      <Project>{CEC58547-C77A-313E-AD2F-BDE6464E98B3}</Project>
+      <Name>docs</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\genRandomVals.vcxproj">
+      <Project>{211490D8-9427-342A-A2D5-70246A8B9101}</Project>
+      <Name>genRandomVals</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\glfw-master\src\glfw.vcxproj">
+      <Project>{CC64617E-3B69-3C12-962B-5C45AAB65904}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\OpenGL\glfwExample.vcxproj">
+      <Project>{920379CF-11B3-3EA1-84D4-15DF67C123D2}</Project>
+      <Name>glfwExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\src\sive-util.vcxproj">
+      <Project>{4E50EDA6-C122-3D4E-BF67-00BCF47CE3B8}</Project>
+      <Name>sive-util</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\sphereTest.vcxproj">
+      <Project>{C7D5B139-3E44-326B-B9FA-FC6A545DAF7B}</Project>
+      <Name>sphereTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\test_Timer.vcxproj">
+      <Project>{74B52211-B14C-30D8-9543-C6E472F8E23B}</Project>
+      <Name>test_Timer</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\test_XMLSceneParse.vcxproj">
+      <Project>{C0A8B22F-FC48-3330-9F9E-BB500C0A356F}</Project>
+      <Name>test_XMLSceneParse</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\test_pngWrite.vcxproj">
+      <Project>{1402D393-11DD-3DC8-95FC-98C18143491E}</Project>
+      <Name>test_pngWrite</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\test_readPNGFile.vcxproj">
+      <Project>{F70569AA-0B72-328D-B0E3-18BC208F8D95}</Project>
+      <Name>test_readPNGFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\utests\utest_Failure.vcxproj">
+      <Project>{D4224E52-2F3A-35B4-AD80-B7D756A831BA}</Project>
+      <Name>utest_Failure</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\utests\utest_Success.vcxproj">
+      <Project>{238AD0C2-0434-3FE1-905F-9E530455244F}</Project>
+      <Name>utest_Success</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\utests\utest_Vector3D.vcxproj">
+      <Project>{4817B9E4-1820-315E-9E86-356C561ABAF4}</Project>
+      <Name>utest_Vector3D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\ArgumentParsing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\handleGraphicsArgs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\jsonSceneParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\model_obj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\Vector3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\src\XMLSceneParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\ArgumentParsing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\handleGraphicsArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\jsonSceneParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\model_obj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\SceneDataContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\Vector3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="S:\Documents\School\UMD\CS 4212\renderer\src\XMLSceneParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="S:\Documents\School\UMD\CS 4212\renderer\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3073E489-0F10-3B80-A29E-192F33461FC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8B18406C-C2CE-3707-AFD9-4B0A43FCE605}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

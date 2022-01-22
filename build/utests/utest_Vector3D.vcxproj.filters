@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="S:\Documents\School\UMD\CS 4212\renderer\utests\utest_Vector3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="S:\Documents\School\UMD\CS 4212\renderer\utests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8B18406C-C2CE-3707-AFD9-4B0A43FCE605}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
