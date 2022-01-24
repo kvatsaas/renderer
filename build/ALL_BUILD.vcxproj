@@ -192,6 +192,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{920379CF-11B3-3EA1-84D4-15DF67C123D2}</Project>
       <Name>glfwExample</Name>
     </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\renderer\renderer.vcxproj">
+      <Project>{006940FB-A8F2-3844-811C-5BB0ECC4661A}</Project>
+      <Name>renderer</Name>
+    </ProjectReference>
     <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\src\sive-util.vcxproj">
       <Project>{4E50EDA6-C122-3D4E-BF67-00BCF47CE3B8}</Project>
       <Name>sive-util</Name>
@@ -200,9 +204,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{C7D5B139-3E44-326B-B9FA-FC6A545DAF7B}</Project>
       <Name>sphereTest</Name>
     </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\renderer\test_Framebuffer.vcxproj">
+      <Project>{9DE7A9A5-7B7E-3E7E-9DF1-0A8434920906}</Project>
+      <Name>test_Framebuffer</Name>
+    </ProjectReference>
     <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\test_Timer.vcxproj">
       <Project>{74B52211-B14C-30D8-9543-C6E472F8E23B}</Project>
       <Name>test_Timer</Name>
+    </ProjectReference>
+    <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\renderer\test_Vector3D.vcxproj">
+      <Project>{AA650391-CC0C-3FA0-A944-E9B3FE67016C}</Project>
+      <Name>test_Vector3D</Name>
     </ProjectReference>
     <ProjectReference Include="S:\Documents\School\UMD\CS 4212\renderer\build\examples\test_XMLSceneParse.vcxproj">
       <Project>{C0A8B22F-FC48-3330-9F9E-BB500C0A356F}</Project>

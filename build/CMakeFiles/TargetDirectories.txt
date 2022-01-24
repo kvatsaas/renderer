@@ -37,3 +37,8 @@ S:/Documents/School/UMD/CS 4212/renderer/build/utests/CMakeFiles/utest_Failure.d
 S:/Documents/School/UMD/CS 4212/renderer/build/utests/CMakeFiles/utest_Vector3D.dir
 S:/Documents/School/UMD/CS 4212/renderer/build/utests/CMakeFiles/RUN_TESTS.dir
 S:/Documents/School/UMD/CS 4212/renderer/build/utests/CMakeFiles/INSTALL.dir
+S:/Documents/School/UMD/CS 4212/renderer/build/renderer/CMakeFiles/renderer.dir
+S:/Documents/School/UMD/CS 4212/renderer/build/renderer/CMakeFiles/test_Vector3D.dir
+S:/Documents/School/UMD/CS 4212/renderer/build/renderer/CMakeFiles/test_Framebuffer.dir
+S:/Documents/School/UMD/CS 4212/renderer/build/renderer/CMakeFiles/RUN_TESTS.dir
+S:/Documents/School/UMD/CS 4212/renderer/build/renderer/CMakeFiles/INSTALL.dir

@@ -41,6 +41,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("S:/Documents/School/UMD/CS 4212/renderer/build/OpenGL/cmake_install.cmake")
   include("S:/Documents/School/UMD/CS 4212/renderer/build/Vulkan/cmake_install.cmake")
   include("S:/Documents/School/UMD/CS 4212/renderer/build/utests/cmake_install.cmake")
+  include("S:/Documents/School/UMD/CS 4212/renderer/build/renderer/cmake_install.cmake")
 
 endif()
 

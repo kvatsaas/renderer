@@ -1,7 +1,7 @@
 #ifndef _VECTOR_3D
 #define _VECTOR_3D
 
-namespace utils {
+namespace renderer {
 
 class Vector3D
 {

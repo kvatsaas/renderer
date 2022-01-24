@@ -185,3 +185,5 @@ add_subdirectory(Vulkan)
 #
 enable_testing()
 add_subdirectory(utests)
+
+add_subdirectory(renderer)

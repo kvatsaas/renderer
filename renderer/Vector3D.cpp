@@ -1,7 +1,7 @@
 #include "Vector3D.h"
 #include <stdexcept>
 
-namespace utils {
+namespace renderer {
 
 Vector3D::Vector3D()
   : x(0), y(x), z(x) {}
