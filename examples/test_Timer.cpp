@@ -8,7 +8,10 @@
  *
  */
 
-#include <process.h>
+#include <io.h>
+#ifndef WIN32
+#include <unistd.h>
+#endif
 #include <iostream>
 #include <cmath>
 #include <vector>
