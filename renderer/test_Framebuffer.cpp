@@ -43,6 +43,15 @@ int main(int argc, char *argv[])
     fb.exportAsPNG(oFilename);
   }
 
+  // should be blue
+  fb.clearToColor(Vector3D(0.0, 0.0, 1.0));
+  fb.exportAsPNG("clear_test.png");
+
+  // should be green
+  auto func = [](Vector3D &v) { v += Vector3D(0.0, 1.0, -1.0); };
+  fb.forEachPixel(func);
+  fb.exportAsPNG("modify_test.png");
+
   int endTime = ptimer.elapsed();
   std::cout << "Rendering time: " << endTime - startTime << std::endl;
 }

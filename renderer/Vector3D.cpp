@@ -17,6 +17,24 @@ Vector3D Vector3D::scale(const float scalar) const
   return Vector3D(x * scalar, y * scalar, z * scalar);
 }
 
+void Vector3D::bound(const float min, const float max)
+{
+  if (x < min)
+    x = min;
+  else if (x > max)
+    x = max;
+
+  if (y < min)
+    y = min;
+  else if (y > max)
+    y = max;
+
+  if (z < min)
+    z = min;
+  else if (z > max)
+    z = max;
+}
+
 const float Vector3D::operator[](const int index) const{
   switch (index) {
   case 0:

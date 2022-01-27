@@ -112,6 +112,21 @@ void testVector3D() {
   printVector3D("unit vector of e: ", e.unitVector());
   std::cout << std::endl;
 
+  // test bound
+  Vector3D f(-5, -2, -500);
+  Vector3D g(256, 260, 500);
+  Vector3D h(0, 20, 255);
+  printVector3D("f", f);
+  f.bound(0, 255);
+  printVector3D("f bound to 0-255", f);
+  printVector3D("g", g);
+  g.bound(0, 255);
+  printVector3D("g bound to 0-255", g);
+  printVector3D("h", h);
+  h.bound(0, 255);
+  printVector3D("h bound to 0-255", h);
+  std::cout << std::endl;
+
   // prescribed test
   b = Vector3D(4, 4, -1);
   printVector3D("a", a);

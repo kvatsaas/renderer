@@ -18,6 +18,9 @@ public:
 	// scale vector by scalar value
 	Vector3D scale(const float scalar) const;
 
+	// constrain to min and max bounds
+	void bound(const float min, const float max);
+
 	// access with []
 	const float operator[](const int index) const;
 
