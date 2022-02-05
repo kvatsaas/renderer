@@ -1,4 +1,4 @@
-add_library(renderer Vector3D.cpp Vector3D.h Framebuffer.cpp Framebuffer.h)
+add_library(renderer Camera.h CoordSys.cpp CoordSys.h Framebuffer.cpp Framebuffer.h Light.h OrthographicCamera.cpp OrthographicCamera.h PerspectiveCamera.cpp PerspectiveCamera.h PointLight.cpp PointLight.h Ray.cpp Ray.h SceneContainer.cpp SceneContainer.h Shader.h Shape.h Triangle.cpp Triangle.h Vector3D.cpp Vector3D.h)
 
 add_executable(test_Vector3D
   test_Vector3D.cpp
