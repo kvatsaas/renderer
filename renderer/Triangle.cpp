@@ -2,7 +2,7 @@
 
 namespace renderer {
 Triangle::Triangle()
-  : a(1.0, 0.0, 0.0), b(0.0, -1.0, 0.0), c(0.0, 1.0, 0.0),
+  : a(0.5, 0.0, 0.0), b(-0.5, -0.5, 0.0), c(-0.5, 0.5, 0.0),
     a_rgb(1.0, 1.0, 1.0), b_rgb(1.0, 1.0, 1.0), c_rgb(1.0, 1.0, 1.0) {}
 
 Triangle::Triangle(Vector3D a_vert, Vector3D b_vert, Vector3D c_vert, Vector3D a_col, Vector3D b_col, Vector3D c_col)

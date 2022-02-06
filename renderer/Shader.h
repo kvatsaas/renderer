@@ -6,7 +6,7 @@ namespace renderer {
 class Shader
 {
 public:
-  virtual ~Shader();
+  virtual ~Shader() = 0;
 
   virtual std::string getName() = 0;
 

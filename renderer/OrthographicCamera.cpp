@@ -10,8 +10,8 @@ OrthographicCamera::OrthographicCamera()
   coord = CoordSys();
 }
 
-OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float left, float right, float bottom, float top, float n_x, float n_y)
-  : l(left), r(right), b(bottom), t(top), nx(n_x), ny(n_y)
+OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float width, float height, float n_x, float n_y)
+  : r(width / 2), l(-r), t(height / 2), b(-t), nx(n_x), ny(n_y)
 {
   name = camName;
   position = pos;

@@ -11,6 +11,12 @@ class Camera
 public:
   virtual ~Camera() = 0;
 
+  /**
+   * @brief Creates a ray from the camera to the given pixel on the image
+   * @param i The x-coordinate of the pixel
+   * @param j The y-coordinate of the pixel
+   * @param ray A reference to the Ray object being generated
+  */
   virtual void generateRay(int i, int j, Ray &r) = 0;
 
   virtual std::string getName() = 0;

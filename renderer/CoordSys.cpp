@@ -8,8 +8,8 @@ CoordSys::CoordSys()
 CoordSys::CoordSys(const Vector3D &u, const Vector3D &v, const Vector3D &w)
   : u(u), v(v), w(w) {}
 
-CoordSys::CoordSys(const Vector3D &gazeDirection) 
-: u(gazeDirection[0], 0.0, 0.0), v(0.0, gazeDirection[1], 0.0), w(0.0, 0.0, gazeDirection[2]) {}
+//CoordSys::CoordSys(const Vector3D &gazeDirection) 
+//: u(gazeDirection[0], 0.0, 0.0), v(0.0, gazeDirection[1], 0.0), w(0.0, 0.0, gazeDirection[2]) {}
 
 Vector3D &CoordSys::get_u()
 {

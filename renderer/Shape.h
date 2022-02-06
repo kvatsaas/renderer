@@ -10,9 +10,12 @@ class Shape
 {
 public:
   virtual ~Shape() = 0;
-
-  virtual std::string getName() = 0;
   
-  virtual bool closestHit(const Ray &r) = 0; //will need to add other parameters; return true if ray intersects shape
+  /**
+   * @brief Determines whether the given ray intersects with this shape within the image
+   * @param r The Ray object
+   * @return True if it intersects, otherwise false
+  */
+  virtual bool closestHit(const Ray &r) = 0;
 };
 }// namespace renderer
