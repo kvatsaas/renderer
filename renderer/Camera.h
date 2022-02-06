@@ -9,7 +9,8 @@ namespace renderer {
 class Camera
 {
 public:
-  virtual ~Camera() = 0;
+  Camera(){}
+  virtual ~Camera(){};
 
   /**
    * @brief Creates a ray from the camera to the given pixel on the image

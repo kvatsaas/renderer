@@ -13,3 +13,11 @@ target_link_libraries (test_Framebuffer sive-util)
 target_link_libraries (test_Framebuffer ${Boost_LIBRARIES})
 target_link_libraries (test_Framebuffer ${PNG_LIBRARIES})
 target_link_libraries (test_Framebuffer ${ZLIB_LIBRARIES})
+
+add_executable (test_Raytracer
+  test_Raytracer.cpp
+)
+target_link_libraries (test_Raytracer renderer)
+target_link_libraries (test_Raytracer ${Boost_LIBRARIES})
+target_link_libraries (test_Raytracer ${PNG_LIBRARIES})
+target_link_libraries (test_Raytracer ${ZLIB_LIBRARIES})

@@ -8,12 +8,29 @@ class Triangle : Shape
 {
 public:
   /**
-   * @brief Creates an equilateral triangle centered on (0,0,0) and facing the z axis
+   * @brief Creates a white equilateral triangle centered on (0,0,0) and facing the z axis
   */
   Triangle();
 
   /**
-   * @brief Creates a triangle with the given attributes
+   * @brief Creates a white triangle with the given vertices
+   * @param a The location of vertice a
+   * @param b The location of vertice b
+   * @param c The location of vertice c
+  */
+  Triangle(Vector3D a, Vector3D b, Vector3D c);
+
+  /**
+   * @brief Creates a triangle with the given vertices and a solid color
+   * @param a The location of vertice a
+   * @param b The location of vertice b
+   * @param c The location of vertice c
+   * @param col The color of the triangle
+  */
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col);
+
+  /**
+   * @brief Creates a triangle with the given vertices and colors
    * @param a The location of vertice a
    * @param b The location of vertice b
    * @param c The location of vertice c
@@ -30,7 +47,13 @@ public:
   */
   bool closestHit(const Ray &r, const float focalLength);
 
+  /**
+   * @brief For now, returns the "average" color of all three vertices.
+   * @return The color of the triangle
+  */
+  Vector3D getColor();
+
 protected:
-  Vector3D v_a, v_b, v_c, a_rgb, b_rgb, c_rgb;
+  Vector3D v_a, v_b, v_c, a_rgb, b_rgb, c_rgb, color;
 };
 }// namespace renderer

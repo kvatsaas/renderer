@@ -9,7 +9,8 @@ namespace renderer {
 class Shape
 {
 public:
-  virtual ~Shape() = 0;
+  Shape(){}
+  ~Shape(){};
   
   /**
    * @brief Determines whether the given ray intersects with this shape
