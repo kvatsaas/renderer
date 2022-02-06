@@ -1,12 +1,12 @@
 #include "Ray.h"
 
 namespace renderer {
-Vector3D &Ray::getOrigin()
+const Vector3D &Ray::getOrigin() const
 {
   return origin;
 }
 
-Vector3D &Ray::getDirection()
+const Vector3D &Ray::getDirection() const
 {
   return direction;
 }

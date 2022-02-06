@@ -7,7 +7,7 @@ class OrthographicCamera : public Camera
 {
 public:
   /**
-   * @brief Creates a default camera with a 20x20 image plane and image size
+   * @brief Creates a default camera with a 0.5x0.5 image plane and 20x20 image size
   */
   OrthographicCamera();
 

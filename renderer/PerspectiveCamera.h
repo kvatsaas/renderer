@@ -8,7 +8,7 @@ class PerspectiveCamera : public Camera
 {
 public:
   /**
-   * @brief Creates a default camera with a 20x20 image plane and image size, and a focal length of 0.5
+   * @brief Creates a default camera with a 0.5x0.5 image plane and 20x20 image size, and a focal length of 1.0
   */
   PerspectiveCamera();
 

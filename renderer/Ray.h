@@ -24,13 +24,13 @@ public:
    * @brief Getter for the Ray's origin
    * @return A reference to the origin of the Ray
   */
-  Vector3D &getOrigin();
+  const Vector3D &getOrigin() const;
 
   /**
    * @brief Getter for the Ray's direction
    * @return A reference to the direction of the Ray
   */
-  Vector3D &getDirection();
+  const Vector3D &getDirection() const;
 
   /**
    * @brief Setter for the Ray's origin

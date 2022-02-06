@@ -3,7 +3,7 @@
 namespace renderer {
 
 OrthographicCamera::OrthographicCamera()
-  : l(-10), r(10), b(-10), t(10), nx(20), ny(20) 
+  : l(-0.25), r(0.25), b(-0.25), t(.25), nx(20), ny(20) 
 {
   name = "default";
   position = Vector3D(0.0, 0.0, 0.0);

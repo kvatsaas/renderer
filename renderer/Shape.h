@@ -12,10 +12,10 @@ public:
   virtual ~Shape() = 0;
   
   /**
-   * @brief Determines whether the given ray intersects with this shape within the image
+   * @brief Determines whether the given ray intersects with this shape
    * @param r The Ray object
    * @return True if it intersects, otherwise false
   */
-  virtual bool closestHit(const Ray &r) = 0;
+  virtual bool closestHit(const Ray &r, const float focalLength) = 0;
 };
 }// namespace renderer
