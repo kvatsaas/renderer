@@ -20,14 +20,15 @@ public:
   */
   virtual void generateRay(int i, int j, Ray &r) = 0;
 
-  virtual std::string getName() = 0;
-  virtual Vector3D &getPosition() = 0;
-  virtual CoordSys &getCoord() = 0;
+  std::string getName();
+  Vector3D &getPosition();
+  CoordSys &getCoord();
 
 protected:
   std::string name;
-  Vector3D position;
   CoordSys coord;
+  Vector3D position;
+  Vector3D gaze;
 };
 
 }// namespace renderer
