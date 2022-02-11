@@ -31,7 +31,8 @@ void raytraceTriangle(Triangle *t_ptr, int nx, int ny, std::string outfile)
   for (int i = 0; i < nx; i++)
     for (int j = 0; j < ny; j++) {
       Ray r;
-      r.setOrigin(Vector3D(0.0, 0.0, 0.0));
+      Vector3D origin(0.0, 0.0, 0.0);
+      r.setOrigin(origin);
 
       // this will only work for a square image... make sure to check types!
       float u = leftIP + (rightIP - leftIP) * (i + 0.5) / nx;
