@@ -108,7 +108,9 @@ message(STATUS "GLEW: incs= ${GLEW_INCLUDE_DIR}, libs= ${GLEW_LIBRARIES}")
 include_directories(${GLEW_INCLUDE_DIR})
 
 # We'll enable this later if possible
-find_package(Vulkan REQUIRED)
+if(WIN32)
+  find_package(Vulkan REQUIRED)
+endif(WIN32)
 
 # To be able to include the GLFW header from your code, you need to tell the compiler where to find it.
 add_subdirectory(${CMAKE_SOURCE_DIR}/glfw-master)
@@ -172,8 +174,10 @@ add_subdirectory(examples)
 add_subdirectory(OpenGL)
 
 # We'll enable this later if possible
-# My Linux VM doesn't have Vulkan right now, so I removed this for now
-#add_subdirectory(Vulkan)
+# My Linux VM doesn't have Vulkan right now, so I threw this condition in here for now
+if(WIN32)
+  add_subdirectory(Vulkan)
+endif(WIN32)
 
 
 #
