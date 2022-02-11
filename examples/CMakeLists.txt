@@ -7,14 +7,6 @@
 include_directories(${CMAKE_SOURCE_DIR}/src)
 # include_directories(${CMAKE_SOURCE_DIR}/raytrace)
 
-add_executable(test_Timer
-  test_Timer.cpp
-)
-target_link_libraries(test_Timer sive-util)
-IF(WIN32)
-   target_link_libraries(test_Timer Winmm)
-ENDIF(WIN32)
-
 add_executable(sphereTest
   sphereTest.cpp
 )

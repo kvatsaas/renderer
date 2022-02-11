@@ -172,7 +172,11 @@ add_subdirectory(examples)
 add_subdirectory(OpenGL)
 
 # We'll enable this later if possible
-add_subdirectory(Vulkan)
+# My Linux VM doesn't have Vulkan right now, so I threw this condition in here for now
+if(WIN32)
+  add_subdirectory(Vulkan)
+endif(WIN32)
+
 
 #
 # Unit Tests - by enabling testing with cmake, we can create a target that lets unit tests be run. After re-building
