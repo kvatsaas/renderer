@@ -28,7 +28,7 @@ public:
    * @brief Creates a coordinate system for a given gaze direction
    * @param gazeDirection The gaze direction on which to base the coordinate system
   */
-  CoordSys(const Vector3D &gazeDirection);
+  CoordSys(const Vector3D &gazeDirection, Vector3D tempUp = Vector3D(0, 1, 0));
 
   /**
    * @brief Returns the vector of the u axis

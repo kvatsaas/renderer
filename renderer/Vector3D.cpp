@@ -120,6 +120,15 @@ const float Vector3D::dotProduct(const Vector3D &rhs) const
   return x * rhs.x + y * rhs.y + z * rhs.z;
 }
 
+const Vector3D Vector3D::crossProduct(const Vector3D &rhs) const
+{
+  float i, j, k;
+  i = (this->y * rhs.z) - (this->z * rhs.y);
+  j = -((this->x * rhs.z) - (this->z * rhs.x));
+  k = (this->x * rhs.y) - (this->y * rhs.x);
+  return Vector3D(i, j, k);
+}
+
 Vector3D Vector3D::unitVector() const
 {
   float length = this->length();

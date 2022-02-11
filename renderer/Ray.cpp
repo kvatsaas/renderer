@@ -18,4 +18,8 @@ void Ray::setDirection(Vector3D &d)
 {
   direction = d;
 }
+Vector3D Ray::directionToColor()
+{
+  return (direction.unitVector() + Vector3D(1, 1, 1)) * 0.5;
+}
 }// namespace renderer

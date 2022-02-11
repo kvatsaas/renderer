@@ -109,6 +109,13 @@ public:
 	const float dotProduct(const Vector3D &rhs) const;
 
 	/**
+	 * @brief Calculates the cross product of this vector and another
+	 * @param rhs The other vector
+	 * @return The dot product
+	*/
+	const Vector3D crossProduct(const Vector3D &rhs) const;
+
+	/**
 	 * @brief Creates a unit vector in the direction of this vector
 	 * @return The unit vector
 	*/

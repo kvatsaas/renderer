@@ -44,6 +44,8 @@ public:
   */
   void setDirection(Vector3D &d);
 
+  Vector3D directionToColor();
+
 protected:
   Vector3D origin, direction;
 };

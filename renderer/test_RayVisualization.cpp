@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
+#include <vector>
 
 #include <boost/progress.hpp>
 #include <boost/thread.hpp>
@@ -16,34 +17,81 @@
 
 using namespace renderer;
 
-int main(int argc, char *argv[])
+void rayVis(Camera *camPtr, Framebuffer fb)
 {
-  int width = 400;
-  int height = 400;
-  Framebuffer fb(width, height);
-  Camera *camPtr = new PerspectiveCamera(); // Use only default
-
-  int startTime, endTime;
-  boost::progress_timer ptimer;
-  startTime = ptimer.elapsed();
-
   for (auto j = 0; j < fb.getHeight(); j++) {
     for (auto i = 0; i < fb.getWidth(); i++) {
 
       Ray r;
       camPtr->generateRay(i, j, r);
 
-      // turn ray direction into a color
-      Vector3D rayDirColor = ((r.getDirection().unitVector() + Vector3D(1, 1, 1)) * 0.5);
-
-      fb.setPixelColor(i, j, rayDirColor);
+      fb.setPixelColor(i, j, r.directionToColor());
     }
   }
 
-  fb.exportAsPNG("rayvis_default.png");
+  fb.exportAsPNG(camPtr->getName() + ".png");
+}
 
-  endTime = ptimer.elapsed();
-  std::cout << "Rendering time: " << endTime - startTime << std::endl;
+int main(int argc, char *argv[])
+{
+  int w = 350;
+  int h = 250;
+  Framebuffer fb(w, h);
+  std::vector<Camera *> cameras = {
+    new PerspectiveCamera("rayvis_yellow",
+      Vector3D(0, 0, 0),
+      CoordSys(Vector3D(0, 0, -1)),
+      1.0,
+      0.5,
+      w,
+      h),
+    new PerspectiveCamera("rayvis_blue",
+      Vector3D(0, 0, 0),
+      CoordSys(Vector3D(0, 0, 1)),
+      1.0,
+      0.5,
+      w,
+      h),
+    new PerspectiveCamera("rayvis_pink",
+      Vector3D(0, 0, 0),
+      CoordSys(Vector3D(1, 0, 0)),
+      1.0,
+      0.5,
+      w,
+      h),
+    new PerspectiveCamera("rayvis_teal",
+      Vector3D(0, 0, 0),
+      CoordSys(Vector3D(-1, 0, 0)),
+      1.0,
+      0.5,
+      w,
+      h),
+    new PerspectiveCamera("rayvis_light",
+      Vector3D(-19, 12, 3),
+      CoordSys(Vector3D(0, 1, 0)),
+      0.15,
+      0.5,
+      w,
+      h),
+    new PerspectiveCamera("rayvis_dark",
+      Vector3D(-19, 12, 3),
+      CoordSys(Vector3D(0, -1, 0)),
+      0.15,
+      0.5,
+      w,
+      h),
+    new PerspectiveCamera("rayvis_all",
+      Vector3D(0, 0, 0),
+      CoordSys(Vector3D(0, 0, -1)),
+      0.05,
+      0.5,
+      w,
+      h)
+  };
+  
+  for each (Camera* camPtr in cameras) {
+    rayVis(camPtr, fb);
+  }
 
   exit(EXIT_SUCCESS);
 }

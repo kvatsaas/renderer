@@ -13,7 +13,8 @@ public:
   PerspectiveCamera();
 
   /**
-   * @brief Creates a perspective camera with the given specifications.
+   * @brief Creates a perspective camera with the given specifications. Validates given dimensions for image plane and
+   *        pixel dimensions, but allows a 5% margin of error.
    * @param camName The name of the camera
    * @param pos The position of the camera within the scene
    * @param cs The coordinate system being used
@@ -24,7 +25,19 @@ public:
    * @param n_y The pixel height of the output
   */
   PerspectiveCamera(std::string camName, Vector3D pos, CoordSys cs, float fl, float width, float height, float n_x, float n_y);
-  
+
+  /**
+   * @brief Creates a perspective camera with the given specifications and calculates image plane height.
+   * @param camName The name of the camera
+   * @param pos The position of the camera within the scene
+   * @param cs The coordinate system being used
+   * @param fl The focal length of the camera
+   * @param width The width of the image plane
+   * @param n_x The pixel width of the output
+   * @param n_y The pixel height of the output
+  */
+  PerspectiveCamera(std::string camName, Vector3D pos, CoordSys cs, float fl, float width, float n_x, float n_y);
+
   /**
    * @brief Creates a ray from the camera to the given pixel on the image
    * @param i The x-coordinate of the pixel
@@ -42,7 +55,7 @@ public:
     ray = Ray(position, direction);
   }
 
-protected:
+//protected:
   float l, b, r, t, nx, ny;
   float focalLength;
 };
