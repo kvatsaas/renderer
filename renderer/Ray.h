@@ -43,7 +43,11 @@ public:
    * @param o A reference to the new direction for the Ray
   */
   void setDirection(Vector3D &d);
-
+  
+  /**
+   * @brief Maps the direction vector to a color vector in the 0-1 space
+   * @return The color vector
+  */
   Vector3D directionToColor();
 
 protected:

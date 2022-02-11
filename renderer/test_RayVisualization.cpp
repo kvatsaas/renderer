@@ -88,10 +88,8 @@ int main(int argc, char *argv[])
       w,
       h)
   };
-  
-  for each (Camera* camPtr in cameras) {
-    rayVis(camPtr, fb);
-  }
 
-  exit(EXIT_SUCCESS);
+  for (int i = 0; i < cameras.size(); i++) {
+    rayVis(cameras[i], fb);
+  }
 }
