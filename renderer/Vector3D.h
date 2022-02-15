@@ -6,125 +6,139 @@ namespace renderer {
 class Vector3D
 {
 public:
-	/**
+  /**
 	 * @brief Creates a default vector - (0, 0, 0)
 	*/
-	Vector3D();
+  Vector3D();
 
-	/**
+  /**
 	 * @brief Creates a vector with the given values
 	 * @param a The first value of the vector (x)
 	 * @param b The second value of the vector (y)
 	 * @param c The third value of the vector (z)
 	*/
-	Vector3D(float a, float b, float c);
+  Vector3D(float a, float b, float c);
 
-	/**
+  /**
 	 * @brief Creates a vector identical to another
 	 * @param v The vector to copy
 	*/
-	Vector3D(const Vector3D &v);
+  Vector3D(const Vector3D &v);
 
-	/**
+  /**
 	 * @brief Creates a new vector equal to this vector with each value multiplied by a given scalar
 	 * @param scalar The value to scale by
 	 * @return The scaled vector
 	*/
-	Vector3D scale(const float scalar) const;
+  Vector3D scale(const float scalar) const;
 
-	/**
+  /**
 	 * @brief Constrains each value in the vector to a given minimum and maximum by truncating
 	 * @param min The minimum value
 	 * @param max The maximum value
 	*/
-	void bound(const float min, const float max);
+  void bound(const float min, const float max);
 
-	/**
-	 * @brief Allows access to the vector with the [] operator
+  /**
+	 * @brief Allows access to the vector with the [] operator using an int as index
 	 * @param index The index of the value (0 for x, 1 for y, 2 for z)
 	 * @return The requested value
 	*/
-	const float operator[](const int index) const;
+  const float operator[](const int index) const;
 
-	/**
-	 * @brief Allows modification the vector with the [] operator
+  /**
+	 * @brief Allows modification the vector with the [] operator using an int as index
 	 * @param index The index of the value (0 for x, 1 for y, 2 for z)
 	 * @return A reference to the requested value
 	*/
-	float &operator[](const int index);
+  float &operator[](const int index);
 
-	/**
+  /**
+	 * @brief Allows access to the vector with the [] operator using a char as index
+	 * @param index The index of the value (x, y, z)
+	 * @return The requested value
+	*/
+  const float operator[](const char index) const;
+
+  /**
+	 * @brief Allows modification the vector with the [] operator using a char as index
+	 * @param index The index of the value (x, y, z)
+	 * @return A reference to the requested value
+	*/
+  float &operator[](const char index);
+
+  /**
 	 * @brief Allows use of the assignment operator
 	 * @param rhs The new value for this Vector3D
 	 * @return The updated Vector3D
 	*/
-	const Vector3D &operator=(const Vector3D &rhs);
+  const Vector3D &operator=(const Vector3D &rhs);
 
-    /**
-     * @brief Allows use of the += operator
-     * @param rhs The right hand side of the equation
-     * @return The updated Vector3D
+  /**
+    * @brief Allows use of the += operator
+    * @param rhs The right hand side of the equation
+    * @return The updated Vector3D
     */
-    const Vector3D &operator+=(const Vector3D &rhs);
+  const Vector3D &operator+=(const Vector3D &rhs);
 
-    /**
-     * @brief Allows use of the -= operator
-     * @param rhs The right hand side of the equation
-     * @return The updated Vector3D
+  /**
+    * @brief Allows use of the -= operator
+    * @param rhs The right hand side of the equation
+    * @return The updated Vector3D
     */
-    const Vector3D &operator-=(const Vector3D &rhs);
+  const Vector3D &operator-=(const Vector3D &rhs);
 
-    /**
-     * @brief Allows use of the *= operator for value-wise multiplication
-     * @param rhs The right hand side of the equation
-     * @return The updated Vector3D
+  /**
+    * @brief Allows use of the *= operator for value-wise multiplication
+    * @param rhs The right hand side of the equation
+    * @return The updated Vector3D
     */
-    const Vector3D &operator*=(const Vector3D &rhs);
+  const Vector3D &operator*=(const Vector3D &rhs);
 
-    /**
-     * @brief Allows use of the /= operator for value-wise division
-     * @param rhs The right hand side of the equation
-     * @return The updated Vector3D
+  /**
+    * @brief Allows use of the /= operator for value-wise division
+    * @param rhs The right hand side of the equation
+    * @return The updated Vector3D
     */
-    const Vector3D &operator/=(const Vector3D &rhs);
+  const Vector3D &operator/=(const Vector3D &rhs);
 
-	/**
-     * @brief Allows use of the *= operator for scaling
-     * @param rhs The right hand side of the equation
-     * @return The updated Vector3D
+  /**
+    * @brief Allows use of the *= operator for scaling
+    * @param rhs The right hand side of the equation
+    * @return The updated Vector3D
     */
-	const Vector3D &operator*=(const float &rhs);
+  const Vector3D &operator*=(const float &rhs);
 
-	/**
+  /**
 	 * @brief Calculates the length of the vector
 	 * @return The length of the vector
 	*/
-	float length() const;
+  float length() const;
 
-	/**
+  /**
 	 * @brief Calculates the dot product of this vector and another
 	 * @param rhs The other vector
 	 * @return The dot product
 	*/
-	const float dotProduct(const Vector3D &rhs) const;
+  const float dotProduct(const Vector3D &rhs) const;
 
-	/**
+  /**
 	 * @brief Calculates the cross product of this vector and another
 	 * @param rhs The other vector
 	 * @return The dot product
 	*/
-	const Vector3D crossProduct(const Vector3D &rhs) const;
+  const Vector3D crossProduct(const Vector3D &rhs) const;
 
-	/**
+  /**
 	 * @brief Creates a unit vector in the direction of this vector
 	 * @return The unit vector
 	*/
-	Vector3D unitVector() const;
+  Vector3D unitVector() const;
 
 private:
-	float x;
-	float y;
-	float z;
+  float x;
+  float y;
+  float z;
 };
 
 /**
@@ -183,7 +197,7 @@ const Vector3D operator/(const Vector3D &lhs, const Vector3D &rhs);
 */
 bool operator==(const Vector3D &lhs, const Vector3D &rhs);
 
-}
+}// namespace renderer
 
 
 #endif

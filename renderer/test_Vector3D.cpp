@@ -6,7 +6,7 @@ using namespace renderer;
 // tests access via [] operator
 void printVector3D(std::string name, const Vector3D &v)
 {
-	std::cout << name << ": (" << v[0] << ", " << v[1] << ", " << v[2] << ')' << std::endl;
+	std::cout << name << ": (" << v['x'] << ", " << v['y'] << ", " << v['z'] << ')' << std::endl;
 }
 
 void testVector3D() {
@@ -21,9 +21,9 @@ void testVector3D() {
   std::cout << std::endl;
 
   // test modification via [] operator
-  b[0] = 5;
-  b[1] = 10;
-  b[2] = 15;
+  b['x'] = 5;
+  b['y'] = 10;
+  b['z'] = 15;
   printVector3D("b", b);
   std::cout << std::endl;
 

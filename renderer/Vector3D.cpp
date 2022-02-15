@@ -36,7 +36,8 @@ void Vector3D::bound(const float min, const float max)
     z = max;
 }
 
-const float Vector3D::operator[](const int index) const{
+const float Vector3D::operator[](const int index) const
+{
   switch (index) {
   case 0:
     return x;
@@ -49,13 +50,42 @@ const float Vector3D::operator[](const int index) const{
   }
 }
 
-float &Vector3D::operator[](const int index) {
+float &Vector3D::operator[](const int index)
+{
   switch (index) {
   case 0:
     return x;
   case 1:
     return y;
   case 2:
+    return z;
+  default:
+    throw std::out_of_range("Vector3D index range is 0-2");
+  }
+}
+
+const float Vector3D::operator[](const char index) const
+{
+  switch (index) {
+  case 'x':
+    return x;
+  case 'y':
+    return y;
+  case 'z':
+    return z;
+  default:
+    throw std::out_of_range("Vector3D index range is 0-2");
+  }
+}
+
+float &Vector3D::operator[](const char index)
+{
+  switch (index) {
+  case 'x':
+    return x;
+  case 'y':
+    return y;
+  case 'z':
     return z;
   default:
     throw std::out_of_range("Vector3D index range is 0-2");
