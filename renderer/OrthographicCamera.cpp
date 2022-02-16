@@ -12,8 +12,36 @@ OrthographicCamera::OrthographicCamera()
 }
 
 OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float width, float height, float n_x, float n_y)
-  : r(width / 2), l(-r), t(height / 2), b(-t), nx(n_x), ny(n_y)
 {
+  r = width / 2.0;
+  l = -r;
+  nx = n_x;
+  ny = n_y;
+
+  float validateHeight = ny / nx * width;
+  if (abs(validateHeight - height) / height > 0.01) {
+    height = validateHeight;
+  }
+  t = height / 2.0;
+  b = -t;
+
+  name = camName;
+  position = pos;
+  coord = cs;
+  gaze = coord.get_w() * -1.0;
+}
+
+OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float width, float n_x, float n_y)
+{
+  r = width / 2.0;
+  l = -r;
+  nx = n_x;
+  ny = n_y;
+
+  float height = ny / nx * width;
+  t = height / 2.0;
+  b = -t;
+
   name = camName;
   position = pos;
   coord = cs;

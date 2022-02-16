@@ -2,8 +2,6 @@
 
 namespace renderer {
 
-
-
 std::string Camera::getName()
 {
   return name;

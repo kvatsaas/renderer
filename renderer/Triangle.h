@@ -4,7 +4,7 @@
 
 namespace renderer {
 
-class Triangle : Shape
+class Triangle : public Shape
 {
 public:
   /**
@@ -45,7 +45,7 @@ public:
    * @param r The Ray object
    * @return True if it intersects, otherwise false
   */
-  bool closestHit(const Ray &r, const float focalLength);
+  bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit);
 
   /**
    * @brief For now, returns the "average" color of all three vertices.

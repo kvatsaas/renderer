@@ -23,7 +23,7 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D 
   color = Vector3D(col_x, col_y, col_z);
 }
 
-bool Triangle::closestHit(const Ray &r, const float focalLength)
+bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
 {
   // The computations below are based on Section 4.2.2 of Fundamentals of Computer Graphics (Marschner/Shirley)
   float t, gamma, beta, M;
@@ -56,7 +56,7 @@ bool Triangle::closestHit(const Ray &r, const float focalLength)
 
   // compute t
   t = -((f * ak_jb) + (e * jc_al) + (d * bl_kc)) / M;
-  if (t < focalLength) return false;
+  if (t < tmin || t > tmax) return false;
 
   // compute gamma
   gamma = ((i * ak_jb) + (h * jc_al) + (g * bl_kc)) / M;
@@ -66,6 +66,11 @@ bool Triangle::closestHit(const Ray &r, const float focalLength)
   beta = ((j * ei_hf) + (k * gf_di) + (l * dh_eg)) / M;
   if (beta < 0 || beta > 1 - gamma) return false;
 
+  // hit confirmed
+  // add normal computation
+
+  tmax = t;
+  hit = HitStructure(shaderPtr, color, r, r, t);
   return true;
 }
 

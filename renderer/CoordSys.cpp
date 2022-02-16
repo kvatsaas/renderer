@@ -11,7 +11,8 @@ CoordSys::CoordSys(const Vector3D &u, const Vector3D &v, const Vector3D &w)
 CoordSys::CoordSys(const Vector3D& gazeDirection, Vector3D tempUp)
 {
   w = (-1.0 * gazeDirection).unitVector();
-  if (gazeDirection == tempUp || w == tempUp)
+  float dp = gazeDirection.unitVector().dotProduct(tempUp.unitVector());
+  if (dp == 1 || dp == -1)
     tempUp = Vector3D(1, 0, 0);
   u = tempUp.crossProduct(w).unitVector();
   v = w.crossProduct(u).unitVector();

@@ -12,6 +12,7 @@
 #include "Framebuffer.h"
 #include "Ray.h"
 #include "Triangle.h"
+#include "HitStructure.h"
 
 using namespace renderer;
 
@@ -27,6 +28,8 @@ void raytraceTriangle(Triangle *t_ptr, int nx, int ny, std::string outfile)
   float rightIP = imagePlaneWidth / 2.0;
   float bottomIP = -imagePlaneHeight / 2.0;
   float topIP = imagePlaneHeight / 2.0;
+  float tmax = 100.0;
+  HitStructure h;
 
   for (int i = 0; i < nx; i++)
     for (int j = 0; j < ny; j++) {
@@ -40,7 +43,7 @@ void raytraceTriangle(Triangle *t_ptr, int nx, int ny, std::string outfile)
       auto dir = Vector3D(-1.0 * focalLength * W + u * U + v * V);
       r.setDirection(dir);
 
-      if (t_ptr->closestHit(r, focalLength))
+      if (t_ptr->closestHit(r, focalLength, tmax, h))
         fb.setPixelColor(i, j, t_ptr->getColor());
       else
         fb.setPixelColor(i, j, bgdColor);
