@@ -55,3 +55,11 @@ target_link_libraries (test_Renderer renderer)
 target_link_libraries (test_Renderer ${Boost_LIBRARIES})
 target_link_libraries (test_Renderer ${PNG_LIBRARIES})
 target_link_libraries (test_Renderer ${ZLIB_LIBRARIES})
+
+add_executable (test_ColorRamp
+	test_ColorRamp.cpp
+)
+target_link_libraries (test_ColorRamp renderer)
+target_link_libraries (test_ColorRamp ${Boost_LIBRARIES})
+target_link_libraries (test_ColorRamp ${PNG_LIBRARIES})
+target_link_libraries (test_ColorRamp ${ZLIB_LIBRARIES})

@@ -17,6 +17,7 @@ public:
    * @param a The location of vertice a
    * @param b The location of vertice b
    * @param c The location of vertice c
+   * @param s A shader for the triangle
   */
   Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s);
 
@@ -26,6 +27,7 @@ public:
    * @param b The location of vertice b
    * @param c The location of vertice c
    * @param col The color of the triangle
+   * @param s A shader for the triangle
   */
   Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s);
 
@@ -37,12 +39,16 @@ public:
    * @param a_col The color of vertice a
    * @param b_col The color of vertice b
    * @param c_col The color of vertice c
+   * @param s A shader for the triangle
   */
   Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s);
 
   /**
    * @brief Determines whether the given ray intersects with this triangle
    * @param r The Ray object
+   * @param tmin The minimum tvalue that is considered a hit
+   * @param tmax The maximum tvalue that is considered a hit
+   * @param hit A HitStructure that will be filled in the event of a hit
    * @return True if it intersects, otherwise false
   */
   bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit);
@@ -54,8 +60,9 @@ public:
   const Vector3D &getColor();
 
   /**
-   * @brief Returns the direction of the normal to the vector 
-   * @return The color of the triangle
+   * @brief Returns the direction of the normal to the plane of the triangle. Note that the inverted
+   *        value is also normal to the plane.
+   * @return The normal direction
   */
   const Vector3D &getNormalDirection();
 

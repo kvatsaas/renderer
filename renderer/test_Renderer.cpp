@@ -26,8 +26,8 @@ void multiShapeRender()
   double startTime, endTime;
   boost::progress_timer ptimer;
 
-  int width = 136 / 4;
-  int height = 166 / 4;
+  int width = 136;
+  int height = 166;
 
   auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(width, height);
@@ -372,7 +372,7 @@ void normalShaderTriangles()
 
 int main(int argc, char *argv[])
 {
-  //multiShapeRender();
+  multiShapeRender();
   //normalShaderSphere();
-  normalShaderTriangles();
+  //normalShaderTriangles();
 }

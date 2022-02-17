@@ -25,8 +25,9 @@ public:
   CoordSys(const Vector3D &u, const Vector3D &v, const Vector3D &w);
 
   /**
-   * @brief Creates a coordinate system for a given gaze direction
+   * @brief Creates a coordinate system for a given gaze direction.
    * @param gazeDirection The gaze direction on which to base the coordinate system
+   * @param tempUp A temporary value to be used as up for the purposes of calculations.
   */
   CoordSys(const Vector3D &gazeDirection, Vector3D tempUp = Vector3D(0, 1, 0));
 

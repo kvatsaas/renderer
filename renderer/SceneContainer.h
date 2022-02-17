@@ -40,12 +40,28 @@ public:
   */
   void addShape(Shape *s);
 
+  /**
+   * @brief Getter for the cameras in the scene
+   * @return A vector of pointers to cameras
+  */
   const std::vector<Camera *> &getCameras();
 
+  /**
+   * @brief Getter for the lights in the scene
+   * @return A vector of pointers to lights
+  */
   const std::vector<Light *> &getLights();
 
+  /**
+   * @brief Getter for the shaders in the scene
+   * @return A map of shader pointers mapped by their names
+  */
   const std::map<std::string, Shader *> &getShaders();
 
+  /**
+   * @brief Getter for the shapes in the scene
+   * @return A vector of pointers to shapes
+  */
   const std::vector<Shape *> &getShapes();
 
 protected:

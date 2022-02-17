@@ -9,7 +9,19 @@ class Shader; // forward declaration
 class HitStructure
 {
 public:
+  /**
+   * @brief Creates an empty hit structure with null or default values.
+  */
   HitStructure();
+
+  /**
+   * @brief Creates a hit structure with the given values.
+   * @param s A pointer to a shader
+   * @param c A color
+   * @param h The ray that performed the hit
+   * @param n The normal at the hit point
+   * @param t The t-value for the hit
+  */
   HitStructure(Shader *s, Vector3D c, Ray h, Ray n, float t);
 
   const Shader *getShader() const;
@@ -24,7 +36,6 @@ protected:
   Ray hit;// ray that hit
   Ray normal;
   float t;// t value at collision point
-  // Vector3D hitLocation; // maybe?
 };
 
 }// namespace renderer
