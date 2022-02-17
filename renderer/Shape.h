@@ -23,8 +23,19 @@ public:
   */
   virtual bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit) = 0;
 
+  /**
+   * @brief Getter for the shader
+   * @return The shader
+  */
+  void setShader(Shader *s);
+
+  /**
+   * @brief Getter for the shader
+   * @return The shader
+  */
+  const Shader *getShader() const;
+
 protected:
   Shader *shaderPtr;
-
 };
 }// namespace renderer

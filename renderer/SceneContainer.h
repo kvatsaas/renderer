@@ -41,6 +41,12 @@ public:
   void addShape(Shape *s);
 
   /**
+   * @brief Sets a background color
+   * @param bg A color
+  */
+  void setBGColor(Vector3D bg);
+
+  /**
    * @brief Getter for the cameras in the scene
    * @return A vector of pointers to cameras
   */
@@ -51,6 +57,13 @@ public:
    * @return A vector of pointers to lights
   */
   const std::vector<Light *> &getLights();
+
+  /**
+   * @brief Getter for a single shader
+   * @param name The name of the shader
+   * @return The requested shader, or nullptr if it does not exist
+  */
+  const Shader *getShader(std::string name);
 
   /**
    * @brief Getter for the shaders in the scene
@@ -64,11 +77,18 @@ public:
   */
   const std::vector<Shape *> &getShapes();
 
+  /**
+   * @brief Getter for the background color
+   * @return The background color
+  */
+  const Vector3D &getBGColor();
+
 protected:
   std::vector<Camera *> cameras;
   std::vector<Light *> lights;
   std::map<std::string, Shader *> shaders;
   std::vector<Shape *> shapes;
+  Vector3D bgColor;
 };
 
 }// namespace renderer

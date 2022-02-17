@@ -166,6 +166,11 @@ Vector3D Vector3D::normalize() const
   return Vector3D(x / length, y / length, z / length);
 }
 
+std::string Vector3D::toString() const
+{
+  return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
+}
+
 const Vector3D operator+(const Vector3D &lhs, const Vector3D &rhs)
 {
   return Vector3D(lhs[0] + rhs[0], lhs[1] + rhs[1], lhs[2] + rhs[2]);

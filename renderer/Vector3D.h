@@ -1,3 +1,4 @@
+#include <string>
 #ifndef _VECTOR_3D
 #define _VECTOR_3D
 
@@ -134,6 +135,8 @@ public:
 	 * @return The unit vector
 	*/
   Vector3D normalize() const;
+
+  std::string toString() const;
 
 private:
   float x;

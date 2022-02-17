@@ -120,8 +120,8 @@ void normalShaderTriangles()
   auto sc = SceneContainer();
   auto bgColor = Vector3D();
   auto normal = new NormalShader();
-  //auto *camPtr = new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height);
-  auto *camPtr = new OrthographicCamera("cam", Vector3D(), CoordSys(), 2.0, width, height);
+  auto *camPtr = new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height);
+  //auto *camPtr = new OrthographicCamera("cam", Vector3D(), CoordSys(), 2.0, width, height);
 
   // could I do this with clever for loops? probably! will I? no!
 
@@ -361,10 +361,17 @@ void normalShaderTriangles()
         normal));
   }
 
+  // optional sphere for funsies
+  /*sc.addShape(
+    new Sphere(
+      Vector3D(0.0, 0.0, -5.0),
+      0.75,
+      normal));*/
+
   startTime = ptimer.elapsed();
 
   raytracer.render(fb, sc.getShapes(), camPtr, bgColor);
-  fb.exportAsPNG("nv_triangles_ortho.png");
+  fb.exportAsPNG("nv_triangles.png");
 
   endTime = ptimer.elapsed();
   std::cout << "Rendering time: " << endTime - startTime << std::endl;
@@ -373,6 +380,6 @@ void normalShaderTriangles()
 int main(int argc, char *argv[])
 {
   multiShapeRender();
-  //normalShaderSphere();
-  //normalShaderTriangles();
+  normalShaderSphere();
+  normalShaderTriangles();
 }

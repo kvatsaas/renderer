@@ -27,7 +27,17 @@ public:
   */
   virtual Vector3D apply(const HitStructure &h) const;
 
+  /**
+   * @brief Getter for the name
+   * @return The name of the shader
+  */
   std::string getName() const;
+
+  /**
+   * @brief Setter for the name
+   * @param n The name of the shader
+  */
+  void setName(std::string n);
 
 protected:
   std::string name;

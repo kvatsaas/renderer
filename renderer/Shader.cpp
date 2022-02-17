@@ -25,4 +25,8 @@ std::string Shader::getName() const
 {
   return name;
 }
+void Shader::setName(std::string n)
+{
+  name = n;
+}
 }// namespace renderer

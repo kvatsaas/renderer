@@ -3,6 +3,7 @@ add_library(renderer
 	CoordSys.cpp CoordSys.h
 	Framebuffer.cpp Framebuffer.h
 	HitStructure.cpp HitStructure.h
+	jsonParser.cpp
 	Light.h 
 	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h 
