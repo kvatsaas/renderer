@@ -4,7 +4,7 @@ namespace renderer {
 
 Shape::Shape()
 {
-  shaderPtr = nullptr;
+  shaderPtr = new Shader();
 }
 
 }// namespace renderer

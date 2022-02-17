@@ -18,7 +18,7 @@ public:
    * @param b The location of vertice b
    * @param c The location of vertice c
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s);
 
   /**
    * @brief Creates a triangle with the given vertices and a solid color
@@ -27,7 +27,7 @@ public:
    * @param c The location of vertice c
    * @param col The color of the triangle
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s);
 
   /**
    * @brief Creates a triangle with the given vertices and colors
@@ -38,7 +38,7 @@ public:
    * @param b_col The color of vertice b
    * @param c_col The color of vertice c
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s);
 
   /**
    * @brief Determines whether the given ray intersects with this triangle
@@ -51,9 +51,16 @@ public:
    * @brief For now, returns the "average" color of all three vertices.
    * @return The color of the triangle
   */
-  Vector3D getColor();
+  const Vector3D &getColor();
+
+  /**
+   * @brief Returns the direction of the normal to the vector 
+   * @return The color of the triangle
+  */
+  const Vector3D &getNormalDirection();
 
 protected:
   Vector3D v_a, v_b, v_c, a_rgb, b_rgb, c_rgb, color;
+  Vector3D normalDirection;
 };
 }// namespace renderer

@@ -12,7 +12,6 @@ class Shape
 {
 public:
   Shape();
-  ~Shape(){};
 
   /**
    * @brief Determines whether the given ray intersects with this shape

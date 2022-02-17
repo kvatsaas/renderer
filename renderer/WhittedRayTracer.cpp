@@ -22,7 +22,7 @@ void WhittedRayTracer::render(Framebuffer &fb, const std::vector<Shape *> shapes
       }
 
       if (hitOccurred)
-        fb.setPixelColor(i, j, h.getColor());
+        fb.setPixelColor(i, j, h.getShader()->apply(h));
       else
         fb.setPixelColor(i, j, bgColor);
     }

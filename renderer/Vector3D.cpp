@@ -159,7 +159,7 @@ const Vector3D Vector3D::crossProduct(const Vector3D &rhs) const
   return Vector3D(i, j, k);
 }
 
-Vector3D Vector3D::unitVector() const
+Vector3D Vector3D::normalize() const
 {
   float length = this->length();
 
@@ -189,6 +189,11 @@ const Vector3D operator*(const Vector3D &lhs, const float rhs)
 const Vector3D operator*(const Vector3D &lhs, const Vector3D &rhs)
 {
   return Vector3D(lhs[0] * rhs[0], lhs[1] * rhs[1], lhs[2] * rhs[2]);
+}
+
+const Vector3D operator/(const Vector3D &lhs, const float rhs)
+{
+  return lhs.scale(1.0 / rhs);
 }
 
 const Vector3D operator/(const Vector3D &lhs, const Vector3D &rhs)

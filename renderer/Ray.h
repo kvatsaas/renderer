@@ -48,7 +48,7 @@ public:
    * @brief Maps the direction vector to a color vector in the 0-1 space
    * @return The color vector
   */
-  Vector3D directionToColor();
+  Vector3D directionToColor() const;
 
 protected:
   Vector3D origin, direction;

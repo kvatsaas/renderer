@@ -133,7 +133,7 @@ public:
 	 * @brief Creates a unit vector in the direction of this vector
 	 * @return The unit vector
 	*/
-  Vector3D unitVector() const;
+  Vector3D normalize() const;
 
 private:
   float x;
@@ -180,6 +180,14 @@ const Vector3D operator*(const Vector3D &lhs, const float rhs);
  * @return The resulting vector
 */
 const Vector3D operator*(const Vector3D &lhs, const Vector3D &rhs);
+
+/**
+ * @brief Overrides the division operator for value-wise division by a constant (inverse scaling)
+ * @param lhs The left hand side of the equation
+ * @param rhs The right hand side of the equation
+ * @return The resulting vector
+*/
+const Vector3D operator/(const Vector3D &lhs, const float rhs);
 
 /**
  * @brief Overrides the division operator for value-wise division

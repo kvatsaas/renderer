@@ -1,9 +1,10 @@
 #pragma once
-#include "Shader.h"
 #include "Vector3D.h"
 #include "Ray.h"
 
 namespace renderer {
+
+class Shader; // forward declaration
 
 class HitStructure
 {
@@ -26,4 +27,4 @@ protected:
   // Vector3D hitLocation; // maybe?
 };
 
-}
+}// namespace renderer

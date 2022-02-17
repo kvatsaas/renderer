@@ -3,17 +3,29 @@
 namespace renderer {
 Triangle::Triangle()
   : v_a(0.5, 0.0, 0.0), v_b(-0.5, -0.5, 0.0), v_c(-0.5, 0.5, 0.0),
-    a_rgb(1.0, 1.0, 1.0), b_rgb(a_rgb), c_rgb(a_rgb), color(a_rgb) {}
+    a_rgb(1.0, 1.0, 1.0), b_rgb(a_rgb), c_rgb(a_rgb), color(a_rgb)
+{
+  shaderPtr = new Shader();
+  normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+}
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
   : v_a(a), v_b(b), v_c(c),
-    a_rgb(1.0, 1.0, 1.0), b_rgb(a_rgb), c_rgb(a_rgb), color(a_rgb) {}
+    a_rgb(1.0, 1.0, 1.0), b_rgb(a_rgb), c_rgb(a_rgb), color(a_rgb)
+{
+  shaderPtr = s;
+  normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+}
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s)
   : v_a(a), v_b(b), v_c(c),
-    a_rgb(col), b_rgb(col), c_rgb(col), color(col) {}
+    a_rgb(col), b_rgb(col), c_rgb(col), color(col)
+{
+  shaderPtr = s;
+  normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+}
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s)
   : v_a(a), v_b(b), v_c(c),
     a_rgb(a_col), b_rgb(b_col), c_rgb(c_col)
 {
@@ -21,6 +33,9 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D 
   float col_y = (v_a[1] + v_b[1] + v_c[1]) / 3;
   float col_z = (v_a[2] + v_b[2] + v_c[2]) / 3;
   color = Vector3D(col_x, col_y, col_z);
+
+  shaderPtr = s;
+  normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
 }
 
 bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
@@ -32,18 +47,18 @@ bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStruct
   Vector3D orig = r.getOrigin();
 
   // compute matrix values and derived values - written for readability; compiler should optimize this. probably.
-  a = v_a[0] - v_b[0];
-  b = v_a[1] - v_b[1];
-  c = v_a[2] - v_b[2];
-  d = v_a[0] - v_c[0];
-  e = v_a[1] - v_c[1];
-  f = v_a[2] - v_c[2];
-  g = dir[0];
-  h = dir[1];
-  i = dir[2];
-  j = v_a[0] - orig[0];
-  k = v_a[1] - orig[1];
-  l = v_a[2] - orig[2];
+  a = v_a['x'] - v_b['x'];
+  b = v_a['y'] - v_b['y'];
+  c = v_a['z'] - v_b['z'];
+  d = v_a['x'] - v_c['x'];
+  e = v_a['y'] - v_c['y'];
+  f = v_a['z'] - v_c['z'];
+  g = dir['x'];
+  h = dir['y'];
+  i = dir['z'];
+  j = v_a['x'] - orig['x'];
+  k = v_a['y'] - orig['y'];
+  l = v_a['z'] - orig['z'];
 
   ei_hf = (e * i) - (h * f);
   gf_di = (g * f) - (d * i);
@@ -67,16 +82,28 @@ bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStruct
   if (beta < 0 || beta > 1 - gamma) return false;
 
   // hit confirmed
-  // add normal computation
+  Vector3D hitPoint = r.getOrigin() + (t * r.getDirection());
+  Vector3D normalDir = normalDirection;
+
+  // check if it's the correct direction - this might be stupid
+  // dot product of normalDir and ray direction is positive if they face the same direction, so reverse
+  if (normalDir.dotProduct(r.getDirection()) > 0)
+    normalDir *= -1.0;
+  Ray normal = Ray(hitPoint, normalDir);
 
   tmax = t;
-  hit = HitStructure(shaderPtr, color, r, r, t);
+  hit = HitStructure(shaderPtr, color, r, normal, t);
   return true;
 }
 
-Vector3D Triangle::getColor()
+const Vector3D &Triangle::getColor()
 {
   return color;
+}
+
+const Vector3D &Triangle::getNormalDirection()
+{
+  return normalDirection;
 }
 
 }// namespace renderer

@@ -4,13 +4,14 @@ add_library(renderer
 	Framebuffer.cpp Framebuffer.h
 	HitStructure.cpp HitStructure.h
 	Light.h 
+	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h 
 	PerspectiveCamera.cpp PerspectiveCamera.h
 	PointLight.cpp PointLight.h
 	Ray.cpp Ray.h
 	Renderer.cpp Renderer.h
 	SceneContainer.cpp SceneContainer.h
-	Shader.h
+	Shader.cpp Shader.h
 	Shape.cpp Shape.h
 	Sphere.cpp Sphere.h
 	Triangle.cpp Triangle.h

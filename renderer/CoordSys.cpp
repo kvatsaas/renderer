@@ -10,12 +10,12 @@ CoordSys::CoordSys(const Vector3D &u, const Vector3D &v, const Vector3D &w)
 
 CoordSys::CoordSys(const Vector3D& gazeDirection, Vector3D tempUp)
 {
-  w = (-1.0 * gazeDirection).unitVector();
-  float dp = gazeDirection.unitVector().dotProduct(tempUp.unitVector());
+  w = (-1.0 * gazeDirection).normalize();
+  float dp = gazeDirection.normalize().dotProduct(tempUp.normalize());
   if (dp == 1 || dp == -1)
     tempUp = Vector3D(1, 0, 0);
-  u = tempUp.crossProduct(w).unitVector();
-  v = w.crossProduct(u).unitVector();
+  u = tempUp.crossProduct(w).normalize();
+  v = w.crossProduct(u).normalize();
 }
 
 Vector3D &CoordSys::get_u()

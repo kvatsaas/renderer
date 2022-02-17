@@ -54,9 +54,15 @@ void raytraceTriangle(Triangle *t_ptr, int nx, int ny, std::string outfile)
 
 int main(int argc, char *argv[])
 {
+  auto blue = new Shader(Vector3D(0, 0, 1));
+
   int startTime, endTime;
   boost::progress_timer ptimer;
-  Triangle *t_ptr = new Triangle(Vector3D(-1.0, -1.0, -5.0), Vector3D(1.0, -1.0, -5.0), Vector3D(0.0, 1.0, -5.0), Vector3D(0, 0, 1));
+  Triangle *t_ptr = new Triangle(
+    Vector3D(-1.0, -1.0, -5.0),
+    Vector3D(1.0, -1.0, -5.0),
+    Vector3D(0.0, 1.0, -5.0),
+    blue);
 
   startTime = ptimer.elapsed();
 

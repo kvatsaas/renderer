@@ -13,6 +13,7 @@ void testVector3D() {
   // test basic constructor
   Vector3D a(1, 2, 3);
   printVector3D("a", a);
+  printVector3D("a/3", a / 3);
   std::cout << std::endl;
 
   // test default constructor
@@ -105,11 +106,11 @@ void testVector3D() {
 
   // test unit vector
   printVector3D("a", a);
-  printVector3D("unit vector of a: ", a.unitVector());
+  printVector3D("unit vector of a: ", a.normalize());
   printVector3D("d", d);
-  printVector3D("unit vector of d: ", d.unitVector());
+  printVector3D("unit vector of d: ", d.normalize());
   printVector3D("e", e);
-  printVector3D("unit vector of e: ", e.unitVector());
+  printVector3D("unit vector of e: ", e.normalize());
   std::cout << std::endl;
 
   // test bound

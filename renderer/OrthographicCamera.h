@@ -47,7 +47,7 @@ public:
     u = l + (r - l) * (i + 0.5) / nx;
     v = b + (t - b) * (j + 0.5) / ny;
 
-    Vector3D origin = position + (u * coord.get_u()) + (v * coord.get_w());
+    Vector3D origin = position + (u * coord.get_u()) + (v * coord.get_v());
     Vector3D direction = coord.get_w() * -1.0;
 
     ray = Ray(origin, direction);
