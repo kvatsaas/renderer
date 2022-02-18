@@ -27,7 +27,7 @@ public:
    * @brief Getter for the shader
    * @return The shader
   */
-  void setShader(Shader *s);
+  virtual void setShader(Shader *s);
 
   /**
    * @brief Getter for the shader

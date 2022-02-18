@@ -18,6 +18,7 @@
 #include "Sphere.h"
 #include "PerspectiveCamera.h"
 #include "OrthographicCamera.h"
+#include "Box.h"
 
 using namespace renderer;
 
@@ -183,7 +184,7 @@ void normalShaderTriangles()
         Vector3D(0.5, 1.0, -4.5),
         normal));
   }
-  
+
   // Quadrant II
   {
     sc.addShape(
@@ -377,9 +378,47 @@ void normalShaderTriangles()
   std::cout << "Rendering time: " << endTime - startTime << std::endl;
 }
 
+void boxTests()
+{
+  int width = 1000;
+  int height = 1000;
+
+  auto raytracer = WhittedRayTracer();
+  auto fb = Framebuffer(width, height);
+  auto sc = SceneContainer();
+  auto bgColor = Vector3D();
+  auto ambient = new Shader();
+  auto normal = new NormalShader();
+  auto *camPtr = new PerspectiveCamera("cam", Vector3D(-8, 4, 4), CoordSys(Vector3D(2, -1, -1)), 1.0, 0.5, width, height);
+
+  sc.addShape(new Box(
+    Vector3D(-1.5, -1.5, -1.5),
+    Vector3D(-0.5, -0.5, -0.5),
+    ambient));
+
+  sc.addShape(new Box(
+    Vector3D(1.5, 1.5, 1.5),
+    Vector3D(0.5, 0.5, 0.5),
+    normal));
+
+  sc.addShape(new Box(
+    Vector3D(-1.5, 1.5, -1.5),
+    Vector3D(1.5, 0.5, -0.5),
+    normal));
+
+  sc.addShape(new Box(
+    Vector3D(1.5, -1.5, -1),
+    Vector3D(0.5, -0.5, 2),
+    normal));
+
+  raytracer.render(fb, sc.getShapes(), camPtr, bgColor);
+  fb.exportAsPNG("boxes.png");
+}
+
 int main(int argc, char *argv[])
 {
-  multiShapeRender();
-  normalShaderSphere();
-  normalShaderTriangles();
+  //multiShapeRender();
+  //normalShaderSphere();
+  //normalShaderTriangles();
+  boxTests();
 }
