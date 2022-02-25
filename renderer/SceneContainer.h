@@ -12,9 +12,16 @@ class SceneContainer
 {
 public:
   /**
-   * @brief Creates an empty SceneContainer
+   * @brief Creates an empty SceneContainer with default nx/ny of 100.
   */
   SceneContainer();
+
+  /**
+   * @brief 
+   * @param nx The default width for output images
+   * @param ny The default height for output images
+  */
+  SceneContainer(int nx, int ny);
 
   /**
    * @brief Adds a camera to the SceneContainer
@@ -47,6 +54,18 @@ public:
   void setBGColor(Vector3D bg);
 
   /**
+   * @brief Sets the default nx value
+   * @param ny The default width for output images
+  */
+  void set_nx(float nx);
+
+  /**
+   * @brief Sets the default ny value
+   * @param nx The default height for output images
+  */
+  void set_ny(float ny);
+
+  /**
    * @brief Getter for the cameras in the scene
    * @return A vector of pointers to cameras
   */
@@ -63,7 +82,7 @@ public:
    * @param name The name of the shader
    * @return The requested shader, or nullptr if it does not exist
   */
-  const Shader *getShader(std::string name);
+  Shader *getShader(std::string name);
 
   /**
    * @brief Getter for the shaders in the scene
@@ -83,12 +102,25 @@ public:
   */
   const Vector3D &getBGColor();
 
+  /**
+   * @brief Gets the default nx value
+   * @return The default width for output images
+  */
+  float get_nx() const;
+
+  /**
+   * @brief Gets the default ny value
+   * @return The default height for output images
+  */
+  float get_ny() const;
+
 protected:
   std::vector<Camera *> cameras;
   std::vector<Light *> lights;
   std::map<std::string, Shader *> shaders;
   std::vector<Shape *> shapes;
   Vector3D bgColor;
+  float default_nx, default_ny;
 };
 
 }// namespace renderer

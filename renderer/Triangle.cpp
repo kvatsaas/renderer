@@ -17,7 +17,7 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
 }
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s = nullptr)
   : v_a(a), v_b(b), v_c(c),
     a_rgb(col), b_rgb(col), c_rgb(col), color(col)
 {

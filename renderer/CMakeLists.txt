@@ -1,19 +1,25 @@
 add_library(renderer
+	BlinnPhongShader.cpp BlinnPhongShader.h
 	Box.cpp Box.h
 	Camera.cpp Camera.h
+	DiffuseShader.cpp DiffuseShader.h
 	CoordSys.cpp CoordSys.h
 	Framebuffer.cpp Framebuffer.h
 	HitStructure.cpp HitStructure.h
 	jsonParser.cpp
+	LambertianShader.cpp LambertianShader.h
 	Light.h 
+	MirrorShader.cpp MirrorShader.h
 	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h 
 	PerspectiveCamera.cpp PerspectiveCamera.h
+	PhongShader.cpp PhongShader.h
 	PointLight.cpp PointLight.h
 	Ray.cpp Ray.h
 	Renderer.cpp Renderer.h
 	SceneContainer.cpp SceneContainer.h
 	Shader.cpp Shader.h
+	Shaders.h
 	Shape.cpp Shape.h
 	Sphere.cpp Sphere.h
 	Triangle.cpp Triangle.h
@@ -57,6 +63,15 @@ target_link_libraries (test_Renderer renderer)
 target_link_libraries (test_Renderer ${Boost_LIBRARIES})
 target_link_libraries (test_Renderer ${PNG_LIBRARIES})
 target_link_libraries (test_Renderer ${ZLIB_LIBRARIES})
+
+add_executable (test_RenderJSON
+	test_RenderJSON.cpp
+)
+target_link_libraries (test_RenderJSON renderer)
+target_link_libraries (test_RenderJSON sive-util)
+target_link_libraries (test_RenderJSON ${Boost_LIBRARIES})
+target_link_libraries (test_RenderJSON ${PNG_LIBRARIES})
+target_link_libraries (test_RenderJSON ${ZLIB_LIBRARIES})
 
 add_executable (test_ColorRamp
 	test_ColorRamp.cpp

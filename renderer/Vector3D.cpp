@@ -1,6 +1,8 @@
 #include "Vector3D.h"
 #include <cmath>
 #include <stdexcept>
+#include <vector>
+#include <boost/algorithm/string.hpp>
 
 namespace renderer {
 
@@ -12,6 +14,15 @@ Vector3D::Vector3D(float a, float b, float c)
 
 Vector3D::Vector3D(const Vector3D &v)
   : x(v.x), y(v.y), z(v.z) {}
+
+Vector3D::Vector3D(const std::string str)
+{
+  std::vector<std::string> args;
+  boost::split(args, str, boost::is_any_of(" "));
+  x = std::stof(args[0]);
+  y = std::stof(args[1]);
+  z = std::stof(args[2]);
+}
 
 Vector3D Vector3D::scale(const float scalar) const
 {
@@ -137,6 +148,16 @@ const Vector3D &Vector3D::operator*=(const float &rhs)
   x *= rhs;
   y *= rhs;
   z *= rhs;
+  return *this;
+}
+
+Vector3D &Vector3D::operator=(const std::string str)
+{
+  std::vector<std::string> args;
+  boost::split(args, str, boost::is_any_of(" "));
+  x = std::stof(args[0]);
+  y = std::stof(args[1]);
+  z = std::stof(args[2]);
   return *this;
 }
 

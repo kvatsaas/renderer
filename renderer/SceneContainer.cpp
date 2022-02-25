@@ -2,7 +2,10 @@
 
 namespace renderer {
 SceneContainer::SceneContainer()
-  : cameras(), shaders(), shapes(), bgColor() {}
+  : cameras(), shaders(), shapes(), bgColor(), default_nx(100), default_ny(100) {}
+
+SceneContainer::SceneContainer(int nx, int ny)
+  : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny) {}
 
 void SceneContainer::addCamera(Camera *c)
 {
@@ -29,6 +32,16 @@ void SceneContainer::setBGColor(Vector3D bg)
   bgColor = bg;
 }
 
+void SceneContainer::set_nx(float nx)
+{
+  default_nx = nx;
+}
+
+void SceneContainer::set_ny(float ny)
+{
+  default_ny = ny;
+}
+
 const std::vector<Camera *> &SceneContainer::getCameras()
 {
   return cameras;
@@ -39,7 +52,7 @@ const std::vector<Light *> &SceneContainer::getLights()
   return lights;
 }
 
-const Shader *SceneContainer::getShader(std::string name)
+Shader *SceneContainer::getShader(std::string name)
 {
   if (shaders.count(name))
     return shaders[name];
@@ -60,6 +73,16 @@ const std::vector<Shape *> &SceneContainer::getShapes()
 const Vector3D &SceneContainer::getBGColor()
 {
   return bgColor;
+}
+
+float SceneContainer::get_nx() const
+{
+  return default_nx;
+}
+
+float SceneContainer::get_ny() const
+{
+  return default_ny;
 }
 
 }// namespace renderer

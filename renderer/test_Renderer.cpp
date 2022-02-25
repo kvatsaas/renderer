@@ -33,7 +33,8 @@ void multiShapeRender()
   auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(width, height);
   auto sc = SceneContainer();
-  auto bgColor = Vector3D(0.75, 0.75, 0.75);
+  sc.setBGColor(Vector3D(0.75, 0.75, 0.75));
+  sc.addCamera(new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height));
 
   auto red = new Shader(Vector3D(1, 0, 0));
   auto green = new Shader(Vector3D(0, 1, 0));
@@ -67,11 +68,9 @@ void multiShapeRender()
       Vector3D(0.2, -0.8, -5.0),
       def));
 
-  Camera *camPtr = new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height);
-
   startTime = ptimer.elapsed();
 
-  raytracer.render(fb, sc.getShapes(), camPtr, bgColor);
+  raytracer.render(fb, sc, 0);
   fb.exportAsPNG("missing.png");
 
   endTime = ptimer.elapsed();
@@ -89,9 +88,8 @@ void normalShaderSphere()
   auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(width, height);
   auto sc = SceneContainer();
-  auto bgColor = Vector3D();
+  sc.addCamera(new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height));
   auto normal = new NormalShader();
-  auto *camPtr = new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height);
 
   sc.addShape(
     new Sphere(
@@ -100,8 +98,8 @@ void normalShaderSphere()
       normal));
 
   startTime = ptimer.elapsed();
-
-  raytracer.render(fb, sc.getShapes(), camPtr, bgColor);
+  
+  raytracer.render(fb, sc, 0);
   fb.exportAsPNG("nv_sphere.png");
 
   endTime = ptimer.elapsed();
@@ -119,10 +117,9 @@ void normalShaderTriangles()
   auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(width, height);
   auto sc = SceneContainer();
-  auto bgColor = Vector3D();
+  sc.addCamera(new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height));
+  //sc.addCamera(new OrthographicCamera("cam", Vector3D(), CoordSys(), 2.0, width, height));
   auto normal = new NormalShader();
-  auto *camPtr = new PerspectiveCamera("cam", Vector3D(), CoordSys(), 1.0, 0.5, width, height);
-  //auto *camPtr = new OrthographicCamera("cam", Vector3D(), CoordSys(), 2.0, width, height);
 
   // could I do this with clever for loops? probably! will I? no!
 
@@ -371,8 +368,7 @@ void normalShaderTriangles()
 
   startTime = ptimer.elapsed();
 
-  raytracer.render(fb, sc.getShapes(), camPtr, bgColor);
-  fb.exportAsPNG("nv_triangles.png");
+  raytracer.render(fb, sc, 0);
 
   endTime = ptimer.elapsed();
   std::cout << "Rendering time: " << endTime - startTime << std::endl;
@@ -386,10 +382,9 @@ void boxTests()
   auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(width, height);
   auto sc = SceneContainer();
-  auto bgColor = Vector3D();
   auto ambient = new Shader();
   auto normal = new NormalShader();
-  auto *camPtr = new PerspectiveCamera("cam", Vector3D(-8, 4, 4), CoordSys(Vector3D(2, -1, -1)), 1.0, 0.5, width, height);
+  sc.addCamera(new PerspectiveCamera("cam", Vector3D(-8, 4, 4), CoordSys(Vector3D(2, -1, -1)), 1.0, 0.5, width, height));
 
   sc.addShape(new Box(
     Vector3D(-1.5, -1.5, -1.5),
@@ -411,14 +406,14 @@ void boxTests()
     Vector3D(0.5, -0.5, 2),
     normal));
 
-  raytracer.render(fb, sc.getShapes(), camPtr, bgColor);
+  raytracer.render(fb, sc, 0);
   fb.exportAsPNG("boxes.png");
 }
 
 int main(int argc, char *argv[])
 {
-  //multiShapeRender();
-  //normalShaderSphere();
-  //normalShaderTriangles();
+  multiShapeRender();
+  normalShaderSphere();
+  normalShaderTriangles();
   boxTests();
 }

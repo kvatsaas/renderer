@@ -19,7 +19,7 @@ public:
    * @param s A shader for the sphere
    * @param col The color of the sphere. Defaults to white
   */
-  Sphere(Vector3D c, float r, Shader *s, Vector3D col = Vector3D(1, 1, 1));
+  Sphere(Vector3D c, float r, Shader *s = nullptr, Vector3D col = Vector3D(1, 1, 1));
 
   /**
    * @brief Determines whether the given ray intersects with this sphere

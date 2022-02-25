@@ -3,8 +3,10 @@
 
 namespace renderer {
 
-void WhittedRayTracer::render(Framebuffer &fb, const std::vector<Shape *> shapes, Camera *camPtr, const Vector3D &bgColor, const float max_t)
+void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, const float max_t)
 {
+  auto shapes = sc.getShapes();
+  auto camPtr = sc.getCameras()[camIndex];
   for (int i = 0; i < fb.getWidth(); i++) {
     for (int j = 0; j < fb.getHeight(); j++) {
 
@@ -24,7 +26,7 @@ void WhittedRayTracer::render(Framebuffer &fb, const std::vector<Shape *> shapes
       if (hitOccurred)
         fb.setPixelColor(i, j, h.getShader()->apply(h));
       else
-        fb.setPixelColor(i, j, bgColor);
+        fb.setPixelColor(i, j, sc.getBGColor());
     }
   }
 }

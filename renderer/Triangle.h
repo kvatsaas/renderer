@@ -19,7 +19,7 @@ public:
    * @param c The location of vertice c
    * @param s A shader for the triangle
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s = nullptr);
 
   /**
    * @brief Creates a triangle with the given vertices and a solid color

@@ -14,7 +14,7 @@ public:
    * @param bgColor The background color. Defaults to black.
    * @param tmax The maximum view distance. Defaults to the max value.
   */
-  void render(Framebuffer &fb, const std::vector<Shape *> shapes, Camera *camPtr, const Vector3D &bgColor = Vector3D(), const float tmax = std::numeric_limits<float>::max());
+  void render(Framebuffer &fb, SceneContainer sc, int camIndex, const float max_t = std::numeric_limits<float>::max());
 };
 
 }// namespace renderer

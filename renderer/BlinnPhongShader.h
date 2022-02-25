@@ -1,8 +1,10 @@
 #pragma once
+#include "Shader.h"
 
 namespace renderer {
 
-class Light
+class BlinnPhongShader : public Shader
 {
 };
+
 }// namespace renderer

@@ -1,8 +1,10 @@
 #pragma once
+#include "Shader.h"
 
 namespace renderer {
 
-class Light
+class MirrorShader : public Shader
 {
 };
+
 }// namespace renderer

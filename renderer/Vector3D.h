@@ -27,6 +27,12 @@ public:
   Vector3D(const Vector3D &v);
 
   /**
+   * @brief Allows the creation of a vector from a string description of one
+   * @param str A string description of a vector; i.e. "1 -2 3" === Vector3D(1, -2, 3)
+  */
+  Vector3D(const std::string str);
+
+  /**
 	 * @brief Creates a new vector equal to this vector with each value multiplied by a given scalar
 	 * @param scalar The value to scale by
 	 * @return The scaled vector
@@ -109,6 +115,13 @@ public:
     * @return The updated Vector3D
     */
   const Vector3D &operator*=(const float &rhs);
+
+  /**
+   * @brief Allows use of the assignment operator as a shortcut for the string constructor
+   * @param str A string description of a vector; i.e. "1 -2 3" === Vector3D(1, -2, 3)
+   * @return The vector described
+  */
+  Vector3D &operator=(const std::string str);
 
   /**
 	 * @brief Calculates the length of the vector
