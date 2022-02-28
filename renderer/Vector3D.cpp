@@ -47,6 +47,29 @@ void Vector3D::bound(const float min, const float max)
     z = max;
 }
 
+void Vector3D::bound(const Vector3D &min, const Vector3D &max)
+{
+  if (x < min['x'])
+    x = min['x'];
+  else if (x > max['x'])
+    x = max['x'];
+
+  if (y < min['y'])
+    y = min['y'];
+  else if (y > max['y'])
+    y = max['y'];
+
+  if (z < min['z'])
+    z = min['z'];
+  else if (z > max['z'])
+    z = max['z'];
+}
+
+void Vector3D::bound(const Vector3D &max)
+{
+  bound(Vector3D(), max);
+}
+
 const float Vector3D::operator[](const int index) const
 {
   switch (index) {

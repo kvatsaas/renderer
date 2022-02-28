@@ -8,7 +8,7 @@ add_library(renderer
 	HitStructure.cpp HitStructure.h
 	jsonParser.cpp
 	LambertianShader.cpp LambertianShader.h
-	Light.h 
+	Light.cpp Light.h
 	MirrorShader.cpp MirrorShader.h
 	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h 

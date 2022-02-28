@@ -250,10 +250,10 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       diffuse = shaderInfo["diffuse"];
 
       if (shaderType == "Lambertian")
-        shaderPtr = new Shader(diffuse);//LambertianShader(diffuse);
+        shaderPtr = new LambertianShader(diffuse);
 
       else if (shaderType == "Diffuse")
-        shaderPtr = new Shader(diffuse);//DiffuseShader(diffuse);
+        shaderPtr = new LambertianShader(diffuse);//DiffuseShader(diffuse);
     }
 
 #if ADVSHADERS_READY
@@ -276,9 +276,9 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       phongExp = shaderInfo["phongExp"];
 
       if (shaderType == "BlinnPhong")
-        shaderPtr = new Shader(diffuse);// BlinnPhongShader(diffuse, specular, phongExp);
+        shaderPtr = new BlinnPhongShader(diffuse, specular, phongExp);
       else
-        shaderPtr = new Shader(diffuse);//PhongShader(diffuse, specular, phongExp);
+        shaderPtr = new BlinnPhongShader(diffuse, specular, phongExp);//PhongShader(diffuse, specular, phongExp);
     }
 #if ADVSHADERS_READY
     else if (shaderType == "Mirror") {

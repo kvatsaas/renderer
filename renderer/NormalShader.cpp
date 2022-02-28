@@ -3,7 +3,7 @@
 
 namespace renderer {
 
-Vector3D NormalShader::apply(const HitStructure &h) const
+Vector3D NormalShader::apply(const HitStructure &h, SceneContainer &sc) const
 {
   return h.getNormal().directionToColor();
 }

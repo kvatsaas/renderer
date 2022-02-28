@@ -1,9 +1,12 @@
 #pragma once
 #include <string>
-#include "Vector3D.h"
+#include <vector>
 #include "HitStructure.h"
+#include "Light.h"
 
 namespace renderer {
+
+class SceneContainer;// forward declaration
 
 class Shader
 {
@@ -21,11 +24,12 @@ public:
 
   /**
    * @brief Returns the color for the given hit structure.
-   *        For the basic shader, the value is constant and the hit structure is ignored.
+   *        For the basic shader, the value is constant and the parameters are ignored.
    * @param h The hit structure
+   * @param sc The scene container
    * @return The ambient color of this basic shader
   */
-  virtual Vector3D apply(const HitStructure &h) const;
+  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc) const;
 
   /**
    * @brief Getter for the name

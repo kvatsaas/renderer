@@ -52,6 +52,30 @@ const std::vector<Light *> &SceneContainer::getLights()
   return lights;
 }
 
+std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, const Shape *sPtr)
+{
+  auto visibleLights = std::vector<Light *>();
+
+  for (int i = 0; i < lights.size(); i++) {
+    bool blocked = false;
+    auto lightRayDir = (lights[i]->getPosition() - point);// light direction
+    float tmax = 1.0;
+    HitStructure dummy;
+    for (int j = 0; j < shapes.size(); j++) {
+      if (shapes[j] == sPtr)
+        continue;
+      if (shapes[j]->closestHit(Ray(point, lightRayDir), FLT_EPSILON, tmax, dummy)) {
+        blocked = true;
+        break;
+      }
+    }
+    if (!blocked)
+      visibleLights.push_back(lights[i]);
+  }
+
+  return visibleLights;
+}
+
 Shader *SceneContainer::getShader(std::string name)
 {
   if (shaders.count(name))

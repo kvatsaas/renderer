@@ -16,7 +16,7 @@ Shader::Shader()
 Shader::Shader(const Vector3D amb)
   : ambient(amb) {}
 
-Vector3D Shader::apply(const HitStructure &h) const
+Vector3D Shader::apply(const HitStructure &h, SceneContainer &sc) const
 {
   return ambient;
 }

@@ -17,7 +17,7 @@ public:
    * @param o The origin of the Ray
    * @param d The direction of the Ray
   */
-  Ray(Vector3D &o, Vector3D &d)
+  Ray(const Vector3D &o, const Vector3D &d)
     : origin(o), direction(d) {}
 
   /**

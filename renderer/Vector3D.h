@@ -47,6 +47,21 @@ public:
   void bound(const float min, const float max);
 
   /**
+	 * @brief Constrains each value in the vector to the associated values of given minimum and
+            maximum vectors by truncating
+	 * @param min The minimum vector
+	 * @param max The maximum vector
+	*/
+  void bound(const Vector3D &min, const Vector3D &max);
+
+  /**
+	 * @brief Constrains each value in the vector to the associated values of a given maximum vector
+            and a minimum of zero by truncating
+	 * @param max The maximum vector
+	*/
+  void bound(const Vector3D &max);
+
+  /**
 	 * @brief Allows access to the vector with the [] operator using an int as index
 	 * @param index The index of the value (0 for x, 1 for y, 2 for z)
 	 * @return The requested value
@@ -149,6 +164,10 @@ public:
 	*/
   Vector3D normalize() const;
 
+  /**
+   * @brief Converts the vector to a string representation
+   * @return A string representation of the vector
+  */
   std::string toString() const;
 
 private:

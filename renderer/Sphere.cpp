@@ -39,16 +39,16 @@ bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructur
   if (t > tmax) return false;
 
   //hit confirmed, compute normal
-  Vector3D hitPoint = r.getOrigin() + (t * r.getDirection());
+  Vector3D hitPos = r.getOrigin() + (t * r.getDirection());
   Vector3D normalDir;
   if (frontHit)
-    normalDir = (hitPoint - center) / radius;
+    normalDir = (hitPos - center) / radius;
   else
-    normalDir = (center - hitPoint) / radius;
-  Ray normal = Ray(hitPoint, normalDir);
+    normalDir = (center - hitPos) / radius;
+  Ray normal = Ray(hitPos, normalDir);
 
   tmax = t;
-  hit = HitStructure(shaderPtr, color, r, normal, t);
+  hit = HitStructure(shaderPtr, this, r, normal, t);
   return true;
 }
 

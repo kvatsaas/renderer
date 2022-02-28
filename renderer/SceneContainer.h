@@ -78,6 +78,14 @@ public:
   const std::vector<Light *> &getLights();
 
   /**
+   * @brief Gets all lights visible from a given point on a shape
+   * @param point The point in question
+   * @param sPtr A pointer to the shape in question
+   * @return A vector of pointers to lights
+  */
+  std::vector<Light *> getVisibleLights(Vector3D point, const Shape *sPtr);
+
+  /**
    * @brief Getter for a single shader
    * @param name The name of the shader
    * @return The requested shader, or nullptr if it does not exist

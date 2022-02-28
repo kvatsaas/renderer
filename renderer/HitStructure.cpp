@@ -3,19 +3,19 @@
 namespace renderer {
 
 HitStructure::HitStructure()
-  : shaderPtr(nullptr), color(), hit(), normal(), t(0.0) {}
+  : shaderPtr(nullptr), shapePtr(nullptr), hit(), normal(), t(0.0) {}
 
-HitStructure::HitStructure(Shader *s, Vector3D c, Ray h, Ray n, float t)
-  : shaderPtr(s), color(c), hit(h), normal(n), t(t) {}
+HitStructure::HitStructure(Shader *s, Shape *sp, Ray h, Ray n, float t)
+  : shaderPtr(s), shapePtr(sp), hit(h), normal(n), t(t) {}
 
 const Shader *HitStructure::getShader() const
 {
   return shaderPtr;
 }
 
-const Vector3D &HitStructure::getColor() const
+const Shape *HitStructure::getShape() const
 {
-  return color;
+  return shapePtr;
 }
 
 const Ray &HitStructure::getHit() const

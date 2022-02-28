@@ -82,17 +82,17 @@ bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStruct
   if (beta < 0 || beta > 1 - gamma) return false;
 
   // hit confirmed
-  Vector3D hitPoint = r.getOrigin() + (t * r.getDirection());
+  Vector3D hitPos = r.getOrigin() + (t * r.getDirection());
   Vector3D normalDir = normalDirection;
 
   // check if it's the correct direction - this might be stupid
   // dot product of normalDir and ray direction is positive if they face the same direction, so reverse
   if (normalDir.dotProduct(r.getDirection()) > 0)
     normalDir *= -1.0;
-  Ray normal = Ray(hitPoint, normalDir);
+  Ray normal = Ray(hitPos, normalDir);
 
   tmax = t;
-  hit = HitStructure(shaderPtr, color, r, normal, t);
+  hit = HitStructure(shaderPtr, this, r, normal, t);
   return true;
 }
 

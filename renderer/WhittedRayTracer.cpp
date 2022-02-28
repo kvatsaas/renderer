@@ -5,7 +5,7 @@ namespace renderer {
 
 void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, const float max_t)
 {
-  auto shapes = sc.getShapes();
+  auto &shapes = sc.getShapes();
   auto camPtr = sc.getCameras()[camIndex];
   for (int i = 0; i < fb.getWidth(); i++) {
     for (int j = 0; j < fb.getHeight(); j++) {
@@ -23,8 +23,9 @@ void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, 
           hitOccurred = true;
       }
 
-      if (hitOccurred)
-        fb.setPixelColor(i, j, h.getShader()->apply(h));
+      if (hitOccurred) {
+        fb.setPixelColor(i, j, h.getShader()->apply(h, sc));
+      }
       else
         fb.setPixelColor(i, j, sc.getBGColor());
     }

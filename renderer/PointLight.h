@@ -17,10 +17,7 @@ public:
    * @param pos The position of the PointLight
    * @param inten The intensity of the PointLight
   */
-  PointLight(Vector3D pos, Vector3D inten);
-
-protected:
-  Vector3D position, intensity;
+  PointLight(Vector3D p, Vector3D i);
 };
 
 }// namespace renderer
