@@ -1,3 +1,4 @@
+#include <cfloat>
 #include "SceneContainer.h"
 
 namespace renderer {

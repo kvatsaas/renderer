@@ -11,7 +11,7 @@ add_library(renderer
 	Light.cpp Light.h
 	MirrorShader.cpp MirrorShader.h
 	NormalShader.cpp NormalShader.h
-	OrthographicCamera.cpp OrthographicCamera.h 
+	OrthographicCamera.cpp OrthographicCamera.h
 	PerspectiveCamera.cpp PerspectiveCamera.h
 	PhongShader.cpp PhongShader.h
 	PointLight.cpp PointLight.h
@@ -19,7 +19,7 @@ add_library(renderer
 	Renderer.cpp Renderer.h
 	SceneContainer.cpp SceneContainer.h
 	Shader.cpp Shader.h
-	Shaders.h
+	shaders.h
 	Shape.cpp Shape.h
 	Sphere.cpp Sphere.h
 	Triangle.cpp Triangle.h

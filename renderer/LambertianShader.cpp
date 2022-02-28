@@ -11,7 +11,7 @@ Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc) cons
 {
   auto diffColor = Vector3D();
   auto normal = h.getNormal();
-  auto &visibleLights = sc.getVisibleLights(normal.getOrigin(), h.getShape());
+  auto visibleLights = sc.getVisibleLights(normal.getOrigin(), h.getShape());
 
   auto n = normal.getDirection();
   for (int i = 0; i < visibleLights.size(); i++) {
