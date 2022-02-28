@@ -28,7 +28,6 @@ Vector3D BlinnPhongShader::apply(const HitStructure &h, SceneContainer &sc) cons
       specColor += (specular * visibleLights[i]->getIntensity()) * pow(n_dot_h, exp);
   }
 
-  diffColor.bound(diffuse);
   return diffColor + specColor;
 }
 

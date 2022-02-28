@@ -21,7 +21,6 @@ Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc) cons
       diffColor += (diffuse * visibleLights[i]->getIntensity()) * lambert;
   }
 
-  diffColor.bound(diffuse);
   return diffColor;
 }
 }// namespace renderer
