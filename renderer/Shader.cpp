@@ -1,5 +1,6 @@
-#include "Shader.h"
 #include <ctime>
+#include "Shader.h"
+#include "SceneContainer.h"
 
 namespace renderer {
 
@@ -16,7 +17,7 @@ Shader::Shader()
 Shader::Shader(const Vector3D amb)
   : ambient(amb) {}
 
-Vector3D Shader::apply(const HitStructure &h, SceneContainer &sc) const
+Vector3D Shader::apply(const HitStructure &h, SceneContainer &sc, int depth) const
 {
   return ambient;
 }

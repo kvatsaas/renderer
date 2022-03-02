@@ -27,9 +27,10 @@ public:
    *        For the basic shader, the value is constant and the parameters are ignored.
    * @param h The hit structure
    * @param sc The scene container
+   * @param depth The current recursive depth of the ray
    * @return The ambient color of this basic shader
   */
-  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc) const;
+  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc, int depth) const;
 
   /**
    * @brief Getter for the name

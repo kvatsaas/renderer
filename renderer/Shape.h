@@ -14,7 +14,8 @@ public:
   Shape();
 
   /**
-   * @brief Determines whether the given ray intersects with this shape
+   * @brief Determines whether the given ray intersects with this shape and modifies the given hit
+   *        structure if it does
    * @param r The Ray object
    * @param tmin The minimum tvalue that is considered a hit
    * @param tmax The maximum tvalue that is considered a hit
@@ -22,6 +23,15 @@ public:
    * @return True if it intersects, otherwise false
   */
   virtual bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit) = 0;
+
+  /**
+   * @brief Determines whether the given ray intersects with this shape
+   * @param r The Ray object
+   * @param tmin The minimum tvalue that is considered a hit
+   * @param tmax The maximum tvalue that is considered a hit
+   * @return True if it intersects, otherwise false
+  */
+  virtual bool hit(const Ray &r, float tmin, float tmax) = 0;
 
   /**
    * @brief Setter for the shader pointer

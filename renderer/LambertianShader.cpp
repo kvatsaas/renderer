@@ -7,7 +7,7 @@ LambertianShader::LambertianShader()
 LambertianShader::LambertianShader(Vector3D d)
   : diffuse(d) {}
 
-Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc) const
+Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc, int depth) const
 {
   auto diffColor = Vector3D();
   auto normal = h.getNormal();

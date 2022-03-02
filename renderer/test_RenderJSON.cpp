@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
   auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(args.width, args.height);
   auto sc = SceneContainer(args.width, args.height);
+  if (args.isSet("recursionDepth"))
+    sc.setMaxDepth(args.recursionDepth);
 
   startTime = ptimer.elapsed();
   parseJSONData(args.inputFileName, sc);

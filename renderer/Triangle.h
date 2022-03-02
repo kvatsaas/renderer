@@ -44,7 +44,8 @@ public:
   Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s);
 
   /**
-   * @brief Determines whether the given ray intersects with this triangle
+   * @brief Determines whether the given ray intersects with this triangle and modifies the given hit
+   *        structure if it does
    * @param r The Ray object
    * @param tmin The minimum tvalue that is considered a hit
    * @param tmax The maximum tvalue that is considered a hit
@@ -52,6 +53,15 @@ public:
    * @return True if it intersects, otherwise false
   */
   bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit);
+
+  /**
+   * @brief Determines whether the given ray intersects with this triangle
+   * @param r The Ray object
+   * @param tmin The minimum tvalue that is considered a hit
+   * @param tmax The maximum tvalue that is considered a hit
+   * @return True if it intersects, otherwise false
+  */
+  virtual bool hit(const Ray &r, float tmin, float tmax);
 
   /**
    * @brief For now, returns the "average" color of all three vertices.

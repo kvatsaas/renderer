@@ -8,7 +8,7 @@ BlinnPhongShader::BlinnPhongShader()
 BlinnPhongShader::BlinnPhongShader(Vector3D d, Vector3D s, float e)
   : diffuse(d), specular(s), exp(e) {}
 
-Vector3D BlinnPhongShader::apply(const HitStructure &h, SceneContainer &sc) const
+Vector3D BlinnPhongShader::apply(const HitStructure &h, SceneContainer &sc, int depth) const
 {
   auto diffColor = Vector3D();
   auto specColor = Vector3D();

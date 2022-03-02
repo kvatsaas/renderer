@@ -280,10 +280,12 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       else
         shaderPtr = new BlinnPhongShader(diffuse, specular, phongExp);//PhongShader(diffuse, specular, phongExp);
     }
-#if ADVSHADERS_READY
+
     else if (shaderType == "Mirror") {
-      shaderPtr = new sivelab::Mirror();
-    } else if (shaderType == "Glaze") {
+      shaderPtr = new MirrorShader();
+    }
+#if ADVSHADERS_READY
+    else if (shaderType == "Glaze") {
       Vector3D kd;
       kd = shaderInfo["diffuse"];
 
@@ -416,8 +418,8 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       // pos - aLight->binormal()*width/2.0 - aLight->tangent()*length/2.0;
 
       Vector3D v0 = position - aLight->binormal() * width / 2.0 - aLight->tangent() * length / 2.0,
-                        v1 = position - aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0,
-                        v2 = position + aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0;
+               v1 = position - aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0,
+               v2 = position + aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0;
 
       sivelab::Emission *eSPtr = new sivelab::Emission(radiantEnergy);
 

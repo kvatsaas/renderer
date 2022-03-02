@@ -17,11 +17,13 @@ public:
   SceneContainer();
 
   /**
-   * @brief 
+   * @brief Creates an empty SceneContainer with the given nx/ny and a maximum depth
+   *        that specifies the number of times a ray can be reflected
    * @param nx The default width for output images
    * @param ny The default height for output images
+   * @param d The maximum recursive depth; defaults to 3
   */
-  SceneContainer(int nx, int ny);
+  SceneContainer(int nx, int ny, int d = 3);
 
   /**
    * @brief Adds a camera to the SceneContainer
@@ -66,6 +68,12 @@ public:
   void set_ny(float ny);
 
   /**
+   * @brief Sets the max recursive depth for rayColor
+   * @param nx The max depth
+  */
+  void setMaxDepth(int d);
+
+  /**
    * @brief Getter for the cameras in the scene
    * @return A vector of pointers to cameras
   */
@@ -83,7 +91,7 @@ public:
    * @param sPtr A pointer to the shape in question
    * @return A vector of pointers to lights
   */
-  std::vector<Light *> getVisibleLights(Vector3D point, const Shape *sPtr);
+  std::vector<Light *> getVisibleLights(Vector3D point, const Shape *sPtr = nullptr);
 
   /**
    * @brief Getter for a single shader
@@ -122,6 +130,32 @@ public:
   */
   float get_ny() const;
 
+  /**
+   * @brief Gets the max recursive depth for rayColor
+   * @return The max depth
+  */
+  int getMaxDepth(int d);
+
+  /**
+   * @brief Determines whether the given ray hits any shape in the scene
+   * @param r The ray
+   * @param tmin The minimum tvalue
+   * @param tmax The maximum tvalue
+   * @param sPtr An optional pointer to a shape to be ignored 
+   * @return 
+  */
+  bool anyHit(Ray r, float tmin, float tmax, const Shape *sPtr = nullptr);
+
+  /**
+   * @brief Determines the color hit by the given ray in this scene
+   * @param r The ray
+   * @param tmin The minimum tvalue
+   * @param tmax The maximum tvalue
+   * @param depth The current recursive depth
+   * @return The color
+  */
+  Vector3D rayColor(Ray &r, float tmin, float tmax, int depth);
+
 protected:
   std::vector<Camera *> cameras;
   std::vector<Light *> lights;
@@ -129,6 +163,7 @@ protected:
   std::vector<Shape *> shapes;
   Vector3D bgColor;
   float default_nx, default_ny;
+  int maxDepth;
 };
 
 }// namespace renderer

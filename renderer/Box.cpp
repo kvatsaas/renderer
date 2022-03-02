@@ -102,6 +102,15 @@ bool Box::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &
 
   return hitOccurred;
 }
+
+bool Box::hit(const Ray &r, float tmin, float tmax)
+{
+  for (int i = 0; i < triangles.size(); i++)
+    if (triangles[i].hit(r, tmin, tmax))
+      return true;
+  return false;
+}
+
 void Box::setShader(Shader *s)
 {
   shaderPtr = s;

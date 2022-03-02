@@ -3,10 +3,10 @@
 
 namespace renderer {
 SceneContainer::SceneContainer()
-  : cameras(), shaders(), shapes(), bgColor(), default_nx(100), default_ny(100) {}
+  : cameras(), shaders(), shapes(), bgColor(), default_nx(100), default_ny(100), maxDepth(3) {}
 
-SceneContainer::SceneContainer(int nx, int ny)
-  : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny) {}
+SceneContainer::SceneContainer(int nx, int ny, int d)
+  : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny), maxDepth(d) {}
 
 void SceneContainer::addCamera(Camera *c)
 {
@@ -43,6 +43,11 @@ void SceneContainer::set_ny(float ny)
   default_ny = ny;
 }
 
+void SceneContainer::setMaxDepth(int d)
+{
+  maxDepth = d;
+}
+
 const std::vector<Camera *> &SceneContainer::getCameras()
 {
   return cameras;
@@ -60,17 +65,7 @@ std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, const Shap
   for (int i = 0; i < lights.size(); i++) {
     bool blocked = false;
     auto lightRayDir = (lights[i]->getPosition() - point);// light direction
-    float tmax = 1.0;
-    HitStructure dummy;
-    for (int j = 0; j < shapes.size(); j++) {
-      if (shapes[j] == sPtr)
-        continue;
-      if (shapes[j]->closestHit(Ray(point, lightRayDir), FLT_EPSILON, tmax, dummy)) {
-        blocked = true;
-        break;
-      }
-    }
-    if (!blocked)
+    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, sPtr))
       visibleLights.push_back(lights[i]);
   }
 
@@ -108,6 +103,39 @@ float SceneContainer::get_nx() const
 float SceneContainer::get_ny() const
 {
   return default_ny;
+}
+
+int SceneContainer::getMaxDepth(int d)
+{
+  return maxDepth;
+}
+
+bool SceneContainer::anyHit(Ray r, float tmin, float tmax, const Shape *sPtr)
+{
+  for (int j = 0; j < shapes.size(); j++) {
+    if (shapes[j] == sPtr)
+      continue;
+    if (shapes[j]->hit(r, tmin, tmax))
+      return true;
+  }
+  return false;
+}
+
+Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
+{
+  if (depth >= maxDepth)
+    return bgColor;
+
+  HitStructure h;
+  bool hitOccurred = false;
+  for (int s = 0; s < shapes.size(); s++)
+    if (shapes[s]->closestHit(r, tmin, tmax, h))
+      hitOccurred = true;
+
+  if (hitOccurred)
+    return h.getShader()->apply(h, *this, depth + 1);
+  else
+    return bgColor;
 }
 
 }// namespace renderer

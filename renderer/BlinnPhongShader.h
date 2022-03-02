@@ -25,9 +25,10 @@ public:
    * @brief Returns the color for the given hit structure.
    * @param h The hit structure
    * @param sc The scene container
+   * @param depth The current recursive depth of the ray
    * @return The color for the hit structure
   */
-  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc) const;
+  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc, int depth) const;
 
 protected:
   Vector3D diffuse, specular;
