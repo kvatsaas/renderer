@@ -1,4 +1,6 @@
-#pragma once 
+#pragma once
+
+#include <ctime>
 #include "Camera.h"
 #include "Ray.h"
 
@@ -44,7 +46,7 @@ public:
    * @param j The y-coordinate of the pixel
    * @param ray A reference to the Ray object being generated
   */
-  void generateRay(int i, int j, Ray &ray)
+  virtual void generateRay(int i, int j, Ray &ray)
   {
     float u, v;
     u = l + (r - l) * (i + 0.5) / nx;
@@ -53,6 +55,30 @@ public:
     Vector3D direction = -1.0 * focalLength * coord.get_w() + u * coord.get_u() + v * coord.get_v();
 
     ray = Ray(position, direction);
+  }
+
+  /**
+   * @brief Creates a stratified sample of rays for the given pixel on the image
+   * @param i The x-coordinate of the pixel
+   * @param j The y-coordinate of the pixel
+   * @param n An integer that represents the dimension of the sample grid
+   * @param ray A reference to a vector to store the generated rays
+  */
+  virtual void generateSampleRays(int i, int j, int n, std::vector<Ray>& rays) {
+    srand(static_cast<unsigned>(time(0)));
+    float u, v, p_xi, q_xi;
+    Vector3D direction;
+
+    for (int p = 0; p < n; p++) {
+      for (int q = 0; q < n; q++) {
+        p_xi = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        q_xi = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        u = l + (r - l) * (i + (p + p_xi) / n) / nx;
+        v = b + (t - b) * (j + (q + q_xi) / n) / ny;
+        direction = -1.0 * focalLength * coord.get_w() + u * coord.get_u() + v * coord.get_v();
+        rays.push_back(Ray(position, direction));
+      }
+    }
   }
 
 //protected:

@@ -1,4 +1,5 @@
-#pragma once 
+#pragma once
+#include <ctime>
 #include "Camera.h"
 
 namespace renderer {
@@ -22,7 +23,7 @@ public:
    * @param n_y The pixel height of the output
   */
   OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float width, float height, float n_x, float n_y);
-  
+
   /**
    * @brief Creates an orthographic camera with the given specifications and calculates image plane height.
    * @param camName The name of the camera
@@ -41,9 +42,9 @@ public:
    * @param j The y-coordinate of the pixel
    * @param ray A reference to the Ray object being generated
   */
-  void generateRay(int i, int j, Ray &ray)
+  virtual void generateRay(int i, int j, Ray &ray)
   {
-    float u, v, w;
+    float u, v;
     u = l + (r - l) * (i + 0.5) / nx;
     v = b + (t - b) * (j + 0.5) / ny;
 
@@ -51,6 +52,32 @@ public:
     Vector3D direction = coord.get_w() * -1.0;
 
     ray = Ray(origin, direction);
+  }
+
+  /**
+   * @brief Creates a stratified sample of rays for the given pixel on the image
+   * @param i The x-coordinate of the pixel
+   * @param j The y-coordinate of the pixel
+   * @param n An integer that represents the dimension of the sample grid
+   * @param ray A reference to a vector to store the generated rays
+  */
+  virtual void generateSampleRays(int i, int j, int n, std::vector<Ray> &rays)
+  {
+    srand(static_cast<unsigned>(time(0)));
+    float u, v, p_xi, q_xi;
+    Vector3D origin;
+    Vector3D direction = coord.get_w() * -1.0;
+
+    for (int p = 0; p < n; p++) {
+      for (int q = 0; q < n; q++) {
+        p_xi = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        q_xi = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+        u = l + (r - l) * (i + (p + p_xi) / n) / nx;
+        v = b + (t - b) * (j + (q + q_xi) / n) / ny;
+        origin = position + (u * coord.get_u()) + (v * coord.get_v());
+        rays.push_back(Ray(origin, direction));
+      }
+    }
   }
 
 protected:

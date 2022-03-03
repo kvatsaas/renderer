@@ -19,4 +19,25 @@ void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, 
   }
 }
 
+void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, int rpp, const float max_t)
+{
+  int n = sqrt(rpp);
+  auto camPtr = sc.getCameras()[camIndex];
+  for (int i = 0; i < fb.getWidth(); i++) {
+    for (int j = 0; j < fb.getHeight(); j++) {
+      auto rays = std::vector<Ray>();
+      camPtr->generateSampleRays(i, j, n, rays);
+
+      auto color = Vector3D();
+      for (int r = 0; r < rays.size(); r++)
+        color += sc.rayColor(rays[r], 1.0, max_t, 0);
+      color /= n * n;
+
+      fb.setPixelColor(i, j, color);
+    }
+
+    if (DEBUG) std::cout << i << std::endl;// tracking progress for slow renders
+  }
+}
+
 }// namespace renderer

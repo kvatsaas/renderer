@@ -174,6 +174,14 @@ const Vector3D &Vector3D::operator*=(const float &rhs)
   return *this;
 }
 
+const Vector3D &Vector3D::operator/=(const float &rhs)
+{
+  x /= rhs;
+  y /= rhs;
+  z /= rhs;
+  return *this;
+}
+
 Vector3D &Vector3D::operator=(const std::string str)
 {
   std::vector<std::string> args;

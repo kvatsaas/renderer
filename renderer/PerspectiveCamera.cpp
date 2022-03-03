@@ -9,7 +9,6 @@ PerspectiveCamera::PerspectiveCamera()
   name = "default";
   position = Vector3D(0.0, 0.0, 0.0);
   coord = CoordSys();
-  gaze = coord.get_w() * -1.0;
 }
 
 PerspectiveCamera::PerspectiveCamera(std::string camName, Vector3D pos, CoordSys cs, float fl, float width, float height, float n_x, float n_y)
@@ -31,7 +30,6 @@ PerspectiveCamera::PerspectiveCamera(std::string camName, Vector3D pos, CoordSys
   name = camName;
   position = pos;
   coord = cs;
-  gaze = coord.get_w() * -1.0;
 }
 
 PerspectiveCamera::PerspectiveCamera(std::string camName, Vector3D pos, CoordSys cs, float fl, float width, float n_x, float n_y)
@@ -50,7 +48,6 @@ PerspectiveCamera::PerspectiveCamera(std::string camName, Vector3D pos, CoordSys
   name = camName;
   position = pos;
   coord = cs;
-  gaze = coord.get_w() * -1.0;
 }
 
 }// namespace renderer

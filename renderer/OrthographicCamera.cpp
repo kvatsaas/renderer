@@ -8,7 +8,6 @@ OrthographicCamera::OrthographicCamera()
   name = "default";
   position = Vector3D(0.0, 0.0, 0.0);
   coord = CoordSys();
-  gaze = coord.get_w() * -1.0;
 }
 
 OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float width, float height, float n_x, float n_y)
@@ -28,7 +27,6 @@ OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordS
   name = camName;
   position = pos;
   coord = cs;
-  gaze = coord.get_w() * -1.0;
 }
 
 OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordSys cs, float width, float n_x, float n_y)
@@ -45,7 +43,6 @@ OrthographicCamera::OrthographicCamera(std::string camName, Vector3D pos, CoordS
   name = camName;
   position = pos;
   coord = cs;
-  gaze = coord.get_w() * -1.0;
 }
 
 }// namespace renderer

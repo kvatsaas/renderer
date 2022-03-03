@@ -132,6 +132,13 @@ public:
   const Vector3D &operator*=(const float &rhs);
 
   /**
+    * @brief Allows use of the /= operator for scalar division
+    * @param rhs The right hand side of the equation
+    * @return The updated Vector3D
+    */
+  const Vector3D &operator/=(const float &rhs);
+
+  /**
    * @brief Allows use of the assignment operator as a shortcut for the string constructor
    * @param str A string description of a vector; i.e. "1 -2 3" === Vector3D(1, -2, 3)
    * @return The vector described

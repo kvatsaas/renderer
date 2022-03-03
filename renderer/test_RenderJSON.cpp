@@ -35,7 +35,10 @@ int main(int argc, char *argv[])
   std::cout << "JSON parsing time: " << endTime - startTime << std::endl;
 
   startTime = ptimer.elapsed();
-  raytracer.render(fb, sc, 0);
+  if (args.isSet("rpp"))
+    raytracer.render(fb, sc, 0, args.rpp);
+  else
+    raytracer.render(fb, sc, 0);
   endTime = ptimer.elapsed();
   std::cout << "Render time: " << endTime - startTime << std::endl;
 
