@@ -7,12 +7,30 @@ Sphere::Sphere()
   : center(), radius(1.0), color(1, 1, 1)
 {
   shaderPtr = new Shader();
+  bound = AABoundingBox(
+    Vector3D(
+      center['x'] - radius,
+      center['y'] - radius,
+      center['z'] - radius),
+    Vector3D(
+      center['x'] + radius,
+      center['y'] + radius,
+      center['z'] + radius));
 }
 
 Sphere::Sphere(Vector3D c, float r, Shader *s, Vector3D col)
   : center(c), radius(r), color(col)
 {
   shaderPtr = s;
+  bound = AABoundingBox(
+    Vector3D(
+      center['x'] - radius,
+      center['y'] - radius,
+      center['z'] - radius),
+    Vector3D(
+      center['x'] + radius,
+      center['y'] + radius,
+      center['z'] + radius));
 }
 
 bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
@@ -28,7 +46,7 @@ bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructur
   if (discriminant < 0)
     return false;
 
-  bool frontHit = true; // keep track for normal computation
+  bool frontHit = true;// keep track for normal computation
   float t = (-B - sqrt(discriminant)) / (2 * A);
   if (t < tmin)// if the first hit is in front of the image plane, try the "back" of the sphere
   {
@@ -73,8 +91,10 @@ bool Sphere::hit(const Ray &r, float tmin, float tmax)
     if (t < tmin) return false;
     frontHit = false;
   }
-  if (t > tmax) return false;
-  else return true;
+  if (t > tmax)
+    return false;
+  else
+    return true;
 }
 
 Vector3D Sphere::getColor()

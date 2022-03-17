@@ -5,6 +5,7 @@
 #include "Ray.h"
 #include "Shader.h"
 #include "HitStructure.h"
+#include "AABoundingBox.h"
 
 namespace renderer {
 
@@ -46,19 +47,28 @@ public:
   virtual void setName(std::string s);
 
   /**
+   * @brief Setter for the bounding box
+   * @param b The bounding box
+  */
+  virtual void setBoundingBox(AABoundingBox &b);
+
+  /**
    * @brief Getter for the shader pointer
    * @return The shader pointer
   */
   virtual const Shader *getShader() const;
 
   /**
-   * @brief Getter for the name
-   * @return The name
+   * @brief Getter for the bounding box
+   * @return The bounding box
   */
   virtual const std::string &getName() const;
+
+  virtual AABoundingBox &getBoundingBox();
 
 protected:
   Shader *shaderPtr;
   std::string name;
+  AABoundingBox bound;
 };
 }// namespace renderer

@@ -41,7 +41,7 @@ public:
   virtual bool hit(const Ray &r, float tmin, float tmax);
 
   /**
-   * @brief Getter for the shader
+   * @brief Setter for the shader
    * @return The shader
   */
   virtual void setShader(Shader *s);

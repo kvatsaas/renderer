@@ -17,6 +17,11 @@ void Shape::setName(std::string s)
   name = s;
 }
 
+void Shape::setBoundingBox(AABoundingBox &b)
+{
+  bound = b;
+}
+
 const Shader *Shape::getShader() const
 {
   return shaderPtr;
@@ -25,6 +30,11 @@ const Shader *Shape::getShader() const
 const std::string &Shape::getName() const
 {
   return name;
+}
+
+AABoundingBox &Shape::getBoundingBox()
+{
+  return bound;
 }
 
 }// namespace renderer

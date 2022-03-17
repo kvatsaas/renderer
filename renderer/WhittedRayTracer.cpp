@@ -31,7 +31,7 @@ void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, 
       auto color = Vector3D();
       for (int r = 0; r < rays.size(); r++)
         color += sc.rayColor(rays[r], 1.0, max_t, 0);
-      color /= n * n;
+      color /= rpp;
 
       fb.setPixelColor(i, j, color);
     }

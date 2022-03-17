@@ -1,3 +1,4 @@
+#include <cmath>;
 #include "Triangle.h"
 
 namespace renderer {
@@ -7,6 +8,16 @@ Triangle::Triangle()
 {
   shaderPtr = new Shader();
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+
+  bound = AABoundingBox(
+    Vector3D(
+      std::min(v_a['x'], v_b['x'], v_c['x']),
+      std::min(v_a['y'], v_b['y'], v_c['y']),
+      std::min(v_a['z'], v_b['z'], v_c['z'])),
+    Vector3D(
+      std::max(v_a['x'], v_b['x'], v_c['x']),
+      std::max(v_a['y'], v_b['y'], v_c['y']),
+      std::max(v_a['z'], v_b['z'], v_c['z'])));
 }
 
 Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
@@ -15,6 +26,16 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
 {
   shaderPtr = s;
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+
+  bound = AABoundingBox(
+    Vector3D(
+      std::min(v_a['x'], v_b['x'], v_c['x']),
+      std::min(v_a['y'], v_b['y'], v_c['y']),
+      std::min(v_a['z'], v_b['z'], v_c['z'])),
+    Vector3D(
+      std::max(v_a['x'], v_b['x'], v_c['x']),
+      std::max(v_a['y'], v_b['y'], v_c['y']),
+      std::max(v_a['z'], v_b['z'], v_c['z'])));
 }
 
 Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s = nullptr)
@@ -23,6 +44,16 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s =
 {
   shaderPtr = s;
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+
+  bound = AABoundingBox(
+    Vector3D(
+      std::min(v_a['x'], v_b['x'], v_c['x']),
+      std::min(v_a['y'], v_b['y'], v_c['y']),
+      std::min(v_a['z'], v_b['z'], v_c['z'])),
+    Vector3D(
+      std::max(v_a['x'], v_b['x'], v_c['x']),
+      std::max(v_a['y'], v_b['y'], v_c['y']),
+      std::max(v_a['z'], v_b['z'], v_c['z'])));
 }
 
 Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s)
@@ -36,6 +67,16 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D 
 
   shaderPtr = s;
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
+
+  bound = AABoundingBox(
+    Vector3D(
+      std::min(v_a['x'], v_b['x'], v_c['x']),
+      std::min(v_a['y'], v_b['y'], v_c['y']),
+      std::min(v_a['z'], v_b['z'], v_c['z'])),
+    Vector3D(
+      std::max(v_a['x'], v_b['x'], v_c['x']),
+      std::max(v_a['y'], v_b['y'], v_c['y']),
+      std::max(v_a['z'], v_b['z'], v_c['z'])));
 }
 
 bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
@@ -137,8 +178,10 @@ bool Triangle::hit(const Ray &r, float tmin, float tmax)
 
   // compute beta
   beta = ((j * ei_hf) + (k * gf_di) + (l * dh_eg)) / M;
-  if (beta < 0 || beta > 1 - gamma) return false;
-  else return true;
+  if (beta < 0 || beta > 1 - gamma)
+    return false;
+  else
+    return true;
 }
 
 const Vector3D &Triangle::getColor()

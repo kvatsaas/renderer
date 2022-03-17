@@ -2,12 +2,16 @@
 
 namespace renderer {
 Box::Box()
-  : Box(Vector3D(0, 0, 0), Vector3D(1, 1, 1)) {}
+  : Box(Vector3D(0, 0, 0), Vector3D(1, 1, 1))
+{
+  bound = AABoundingBox(Vector3D(0, 0, 0), Vector3D(1, 1, 1));
+}
 
 Box::Box(Vector3D minPoint, Vector3D maxPoint, Shader *s)
 {
   triangles = std::vector<Triangle>();
   shaderPtr = s;
+  bound = AABoundingBox(minPoint, maxPoint);
 
   // Triangles form sides; each side description assumes max is above and in front of min.
   {

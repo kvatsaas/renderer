@@ -1,6 +1,8 @@
 add_library(renderer
+	AABoundingBox.cpp AABoundingBox.h
 	BlinnPhongShader.cpp BlinnPhongShader.h
 	Box.cpp Box.h
+	BVHNode.cpp BVHNode.h
 	Camera.cpp Camera.h
 	DiffuseShader.cpp DiffuseShader.h
 	CoordSys.cpp CoordSys.h
