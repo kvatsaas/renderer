@@ -37,4 +37,9 @@ AABoundingBox &Shape::getBoundingBox()
   return bound;
 }
 
+Vector3D Shape::getCenter() const
+{
+  return center;
+}
+
 }// namespace renderer

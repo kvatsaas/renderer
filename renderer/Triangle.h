@@ -79,5 +79,15 @@ public:
 protected:
   Vector3D v_a, v_b, v_c, a_rgb, b_rgb, c_rgb, color;
   Vector3D normalDirection;
+
+  /**
+   * @brief Calculates the bounding box and assigns it to bound
+  */
+  void calculateBoundingBox();
+
+  /**
+   * @brief Calculates the centroid and assigns it to center
+  */
+  void calculateCentroid();
 };
 }// namespace renderer

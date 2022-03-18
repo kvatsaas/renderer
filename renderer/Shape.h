@@ -59,16 +59,27 @@ public:
   virtual const Shader *getShader() const;
 
   /**
-   * @brief Getter for the bounding box
-   * @return The bounding box
+   * @brief Getter for the name
+   * @return name
   */
   virtual const std::string &getName() const;
 
+  /**
+   * @brief Getter for the bounding box
+   * @return The bounding box
+  */
   virtual AABoundingBox &getBoundingBox();
+
+  /**
+   * @brief Getter for the center
+   * @return The center
+  */
+  virtual Vector3D getCenter() const;
 
 protected:
   Shader *shaderPtr;
   std::string name;
   AABoundingBox bound;
+  Vector3D center;
 };
 }// namespace renderer

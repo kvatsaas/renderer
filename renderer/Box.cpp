@@ -4,6 +4,7 @@ namespace renderer {
 Box::Box()
   : Box(Vector3D(0, 0, 0), Vector3D(1, 1, 1))
 {
+  center = Vector3D(0.5, 0.5, 0.5);
   bound = AABoundingBox(Vector3D(0, 0, 0), Vector3D(1, 1, 1));
 }
 
@@ -11,6 +12,7 @@ Box::Box(Vector3D minPoint, Vector3D maxPoint, Shader *s)
 {
   triangles = std::vector<Triangle>();
   shaderPtr = s;
+  center = (maxPoint - minPoint) / 2;
   bound = AABoundingBox(minPoint, maxPoint);
 
   // Triangles form sides; each side description assumes max is above and in front of min.

@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "Shape.h"
 #include "AABoundingBox.h"
 
@@ -26,6 +27,13 @@ public:
    * @param right The right child
   */
   BVHNode(AABoundingBox b, Shape *left, Shape *right);
+
+  /**
+   * @brief Creates a BVH tree for the given shapes with this node as the root
+   * @param shapes A vector of pointers to the shapes in the scene
+   * @param axis The current axis (0 = x, 1 = y, 2 = z) on which to sort. Defaults to 0 (x).
+  */
+  BVHNode(std::vector<Shape *> shapes, int axis = 0);
 
   /**
    * @brief Setter for the left child
@@ -72,8 +80,8 @@ public:
   virtual bool hit(const Ray &r, float tmin, float tmax);
 
 protected:
-  Shape *leftChild;
-  Shape *rightChild;
+  Shape *leftChild = nullptr;
+  Shape *rightChild = nullptr;
 };
 
 }// namespace renderer

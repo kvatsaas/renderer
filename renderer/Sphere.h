@@ -48,7 +48,7 @@ public:
   Vector3D getColor();
 
 protected:
-  Vector3D center, color;
+  Vector3D color;
   float radius;
 };
 }// namespace renderer

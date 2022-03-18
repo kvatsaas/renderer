@@ -89,7 +89,7 @@ bool AABoundingBox::intersect(const Ray &r)
     return true;
 }
 
-AABoundingBox AABoundingBox::merge(const AABoundingBox &b)
+AABoundingBox AABoundingBox::merge(const AABoundingBox &b) const
 {
   float xmin, xmax, ymin, ymax, zmin, zmax;
 

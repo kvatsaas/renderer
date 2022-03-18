@@ -67,7 +67,7 @@ public:
    * @param b The bounding box to merge with this one
    * @return The union of the two bounding boxes
   */
-  AABoundingBox merge(const AABoundingBox &b);
+  AABoundingBox merge(const AABoundingBox &b) const;
 
 private:
   Vector3D minPt, maxPt;

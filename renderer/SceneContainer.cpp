@@ -8,6 +8,11 @@ SceneContainer::SceneContainer()
 SceneContainer::SceneContainer(int nx, int ny, int d)
   : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny), maxDepth(d) {}
 
+void SceneContainer::buildBVHTree()
+{
+  rootNode = BVHNode(shapes);
+}
+
 void SceneContainer::addCamera(Camera *c)
 {
   cameras.push_back(c);
@@ -65,7 +70,7 @@ std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, const Shap
   for (int i = 0; i < lights.size(); i++) {
     bool blocked = false;
     auto lightRayDir = (lights[i]->getPosition() - point);// light direction
-    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, sPtr))
+    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f))
       visibleLights.push_back(lights[i]);
   }
 
@@ -110,15 +115,17 @@ int SceneContainer::getMaxDepth(int d)
   return maxDepth;
 }
 
-bool SceneContainer::anyHit(Ray r, float tmin, float tmax, const Shape *sPtr)
+bool SceneContainer::anyHit(Ray r, float tmin, float tmax)
 {
-  for (int j = 0; j < shapes.size(); j++) {
+  /*for (int j = 0; j < shapes.size(); j++) {
     if (shapes[j] == sPtr)
       continue;
     if (shapes[j]->hit(r, tmin, tmax))
       return true;
   }
-  return false;
+  return false;*/
+
+  return rootNode.hit(r, tmin, tmax);
 }
 
 Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
@@ -127,10 +134,10 @@ Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
     return bgColor;
 
   HitStructure h;
-  bool hitOccurred = false;
-  for (int s = 0; s < shapes.size(); s++)
+  bool hitOccurred = rootNode.closestHit(r, tmin, tmax, h);
+  /*for (int s = 0; s < shapes.size(); s++)
     if (shapes[s]->closestHit(r, tmin, tmax, h))
-      hitOccurred = true;
+      hitOccurred = true;*/
 
   if (hitOccurred)
     return h.getShader()->apply(h, *this, depth + 1);

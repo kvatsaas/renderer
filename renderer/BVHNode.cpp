@@ -1,16 +1,15 @@
+#include <algorithm>
 #include "BVHNode.h"
 
 namespace renderer {
 
 
 BVHNode::BVHNode()
-  : leftChild(nullptr), rightChild(nullptr)
 {
   bound = AABoundingBox();
 }
 
 BVHNode::BVHNode(AABoundingBox b)
-  : leftChild(nullptr), rightChild(nullptr)
 {
   bound = b;
 }
@@ -19,6 +18,35 @@ BVHNode::BVHNode(AABoundingBox b, Shape *left, Shape *right)
   : leftChild(left), rightChild(right)
 {
   bound = b;
+}
+
+BVHNode::BVHNode(std::vector<Shape *> shapes, int axis)
+{
+  if (shapes.size() == 0) {
+    leftChild = shapes[0];
+    bound = leftChild->getBoundingBox();
+
+  } else if (shapes.size() == 2) {
+    leftChild = shapes[0];
+    rightChild = shapes[1];
+    bound = leftChild->getBoundingBox().merge(rightChild->getBoundingBox());
+
+  } else {
+    std::sort(shapes.begin(),
+      shapes.end(),
+      [axis](const Shape *lhs, const Shape *rhs) {
+        auto lhsCenter = lhs->getCenter();
+        auto rhsCenter = rhs->getCenter();
+        return lhsCenter[axis] < rhsCenter[axis];
+      });
+
+    int mid = shapes.size() / 2;
+    int nextAxis = (axis + 1) % 3;
+    leftChild = new BVHNode({ shapes.begin(), shapes.begin() + mid - 1 }, nextAxis);
+    rightChild = new BVHNode({ shapes.begin() + mid, shapes.end() }, nextAxis);
+
+    bound = leftChild->getBoundingBox().merge(rightChild->getBoundingBox());
+  }
 }
 
 void BVHNode::setLeftChild(Shape *s)

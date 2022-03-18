@@ -5,6 +5,7 @@
 #include "Light.h"
 #include "Shader.h"
 #include "Shape.h"
+#include "BVHNode.h"
 
 namespace renderer {
 
@@ -24,6 +25,11 @@ public:
    * @param d The maximum recursive depth; defaults to 3
   */
   SceneContainer(int nx, int ny, int d = 3);
+
+  /**
+   * @brief Builds the tree of BVHNodes. Should only be called once all shapes are added.
+  */
+  void buildBVHTree();
 
   /**
    * @brief Adds a camera to the SceneContainer
@@ -141,10 +147,9 @@ public:
    * @param r The ray
    * @param tmin The minimum tvalue
    * @param tmax The maximum tvalue
-   * @param sPtr An optional pointer to a shape to be ignored 
    * @return 
   */
-  bool anyHit(Ray r, float tmin, float tmax, const Shape *sPtr = nullptr);
+  bool anyHit(Ray r, float tmin, float tmax);
 
   /**
    * @brief Determines the color hit by the given ray in this scene
@@ -161,6 +166,7 @@ protected:
   std::vector<Light *> lights;
   std::map<std::string, Shader *> shaders;
   std::vector<Shape *> shapes;
+  BVHNode rootNode;
   Vector3D bgColor;
   float default_nx, default_ny;
   int maxDepth;

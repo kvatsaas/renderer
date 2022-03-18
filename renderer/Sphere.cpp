@@ -4,8 +4,9 @@
 namespace renderer {
 
 Sphere::Sphere()
-  : center(), radius(1.0), color(1, 1, 1)
+  : radius(1.0), color(1, 1, 1)
 {
+  center = Vector3D();
   shaderPtr = new Shader();
   bound = AABoundingBox(
     Vector3D(
@@ -19,8 +20,9 @@ Sphere::Sphere()
 }
 
 Sphere::Sphere(Vector3D c, float r, Shader *s, Vector3D col)
-  : center(c), radius(r), color(col)
+  : radius(r), color(col)
 {
+  center = c;
   shaderPtr = s;
   bound = AABoundingBox(
     Vector3D(
