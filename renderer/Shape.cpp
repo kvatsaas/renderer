@@ -4,7 +4,7 @@ namespace renderer {
 
 Shape::Shape()
 {
-  shaderPtr = new Shader();
+  shaderPtr = nullptr;
 }
 
 void Shape::setShader(Shader *s)

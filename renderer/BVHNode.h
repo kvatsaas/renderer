@@ -60,6 +60,18 @@ public:
   Shape *getRightChild();
 
   /**
+   * @brief Getter for number of children, grandchildren, etc
+   * @return The number of children
+  */
+  int getChildren();
+
+  /**
+   * @brief Getter for the number of leaves that are somewhere under this node
+   * @return The number of leaves
+  */
+  int getLeaves();
+
+  /**
    * @brief Determines whether the given ray intersects with the box at this node and modifies
    *        the given hit structure if it does
    * @param r The Ray object
@@ -82,6 +94,8 @@ public:
 protected:
   Shape *leftChild = nullptr;
   Shape *rightChild = nullptr;
+  int children;
+  int leaves;
 };
 
 }// namespace renderer

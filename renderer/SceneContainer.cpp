@@ -110,6 +110,11 @@ float SceneContainer::get_ny() const
   return default_ny;
 }
 
+BVHNode SceneContainer::getRoot()
+{
+  return rootNode;
+}
+
 int SceneContainer::getMaxDepth(int d)
 {
   return maxDepth;

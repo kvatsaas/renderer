@@ -93,29 +93,14 @@ AABoundingBox AABoundingBox::merge(const AABoundingBox &b) const
 {
   float xmin, xmax, ymin, ymax, zmin, zmax;
 
-  if (this->minPt['x'] < b.minPt['x']) {
-    xmin = this->minPt['x'];
-    xmax = b.minPt['x'];
-  } else {
-    xmin = b.minPt['x'];
-    xmax = this->minPt['x'];
-  }
 
-  if (this->minPt['y'] < b.minPt['y']) {
-    ymin = this->minPt['y'];
-    ymax = b.minPt['y'];
-  } else {
-    ymin = b.minPt['y'];
-    ymax = this->minPt['y'];
-  }
+  xmin = std::min(this->minPt['x'], b.minPt['x']);
+  ymin = std::min(this->minPt['y'], b.minPt['y']);
+  zmin = std::min(this->minPt['z'], b.minPt['z']);
 
-  if (this->minPt['z'] < b.minPt['z']) {
-    zmin = this->minPt['z'];
-    zmax = b.minPt['z'];
-  } else {
-    zmin = b.minPt['z'];
-    zmax = this->minPt['z'];
-  }
+  xmax = std::max(this->maxPt['x'], b.maxPt['x']);
+  ymax = std::max(this->maxPt['y'], b.maxPt['y']);
+  zmax = std::max(this->maxPt['z'], b.maxPt['z']);
 
   return AABoundingBox(
     Vector3D(xmin, ymin, zmin),

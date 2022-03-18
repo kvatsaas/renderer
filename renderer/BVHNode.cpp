@@ -22,14 +22,18 @@ BVHNode::BVHNode(AABoundingBox b, Shape *left, Shape *right)
 
 BVHNode::BVHNode(std::vector<Shape *> shapes, int axis)
 {
-  if (shapes.size() == 0) {
+  if (shapes.size() == 1) {
     leftChild = shapes[0];
     bound = leftChild->getBoundingBox();
+    children = 1;
+    leaves = 1;
 
   } else if (shapes.size() == 2) {
     leftChild = shapes[0];
     rightChild = shapes[1];
     bound = leftChild->getBoundingBox().merge(rightChild->getBoundingBox());
+    children = 2;
+    leaves = 2;
 
   } else {
     std::sort(shapes.begin(),
@@ -40,12 +44,16 @@ BVHNode::BVHNode(std::vector<Shape *> shapes, int axis)
         return lhsCenter[axis] < rhsCenter[axis];
       });
 
-    int mid = shapes.size() / 2;
     int nextAxis = (axis + 1) % 3;
-    leftChild = new BVHNode({ shapes.begin(), shapes.begin() + mid - 1 }, nextAxis);
-    rightChild = new BVHNode({ shapes.begin() + mid, shapes.end() }, nextAxis);
+    int mid = shapes.size() / 2;
+    std::vector<Shape *> leftVec = { shapes.begin(), shapes.begin() + mid };
+    std::vector<Shape *> rightVec = { shapes.begin() + mid, shapes.end() };
+    leftChild = new BVHNode(leftVec, nextAxis);
+    rightChild = new BVHNode(rightVec, nextAxis);
 
     bound = leftChild->getBoundingBox().merge(rightChild->getBoundingBox());
+    children = ((BVHNode *)leftChild)->getChildren() + ((BVHNode *)rightChild)->getChildren() + 2;
+    leaves = ((BVHNode *)leftChild)->getLeaves() + ((BVHNode *)rightChild)->getLeaves();
   }
 }
 
@@ -67,6 +75,16 @@ Shape *BVHNode::getLeftChild()
 Shape *BVHNode::getRightChild()
 {
   return rightChild;
+}
+
+int BVHNode::getChildren()
+{
+  return children;
+}
+
+int BVHNode::getLeaves()
+{
+  return leaves;
 }
 
 bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)

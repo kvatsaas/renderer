@@ -137,6 +137,12 @@ public:
   float get_ny() const;
 
   /**
+   * @brief Getter for the root BVH node
+   * @return The root BVH node
+  */
+  BVHNode getRoot();
+
+  /**
    * @brief Gets the max recursive depth for rayColor
    * @return The max depth
   */

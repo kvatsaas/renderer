@@ -378,6 +378,12 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
   }
   std::cout << "Completed parsing shapes." << std::endl;
 
+  // Construct BVH tree
+  scene.buildBVHTree();
+  std::cout << "Completed BVH tree." << std::endl;
+  std::cout << "Number of leaves: " << scene.getRoot().getLeaves() << std::endl;
+  std::cout << "Number of nodes: " << scene.getRoot().getChildren() + 1 << std::endl;
+
   // Walk over all ligths
   std::cout << "Number of lights: " << j["scene"]["light"].size() << std::endl;
   for (auto i = 0; i < j["scene"]["light"].size(); i++) {
