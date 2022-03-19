@@ -1,5 +1,6 @@
 #define DEBUG 0
 #include <iostream>
+#include <cmath>
 #include "WhittedRayTracer.h"
 #include "HitStructure.h"
 
