@@ -168,15 +168,19 @@ const Vector3D &Triangle::getNormalDirection()
 
 void Triangle::calculateBoundingBox()
 {
+  float xmin, xmax, ymin, ymax, zmin, zmax;
+
+  xmin = std::min(v_a['x'], std::min(v_b['x'], v_c['x']));
+  ymin = std::min(v_a['y'], std::min(v_b['y'], v_c['y']));
+  zmin = std::min(v_a['z'], std::min(v_b['z'], v_c['z']));
+
+  xmax = std::max(v_a['x'], std::max(v_b['x'], v_c['x']));
+  ymax = std::max(v_a['y'], std::max(v_b['y'], v_c['y']));
+  zmax = std::max(v_a['z'], std::max(v_b['z'], v_c['z']));
+
   bound = AABoundingBox(
-    Vector3D(
-      std::min(v_a['x'], std::min(v_b['x'], v_c['x'])),
-      std::min(v_a['y'], std::min(v_b['y'], v_c['y'])),
-      std::min(v_a['z'], std::min(v_b['z'], v_c['z']))),
-    Vector3D(
-      std::max(v_a['x'], std::min(v_b['x'], v_c['x'])),
-      std::max(v_a['y'], std::min(v_b['y'], v_c['y'])),
-      std::max(v_a['z'], std::min(v_b['z'], v_c['z']))));
+    Vector3D(xmin, ymin, zmin),
+    Vector3D(xmax, ymax, zmax));
 }
 
 void Triangle::calculateCentroid()

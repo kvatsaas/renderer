@@ -121,10 +121,10 @@ bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructu
 
 bool BVHNode::hit(const Ray &r, float tmin, float tmax)
 {
-  if (!bound.intersect(r))
-    return false;
+  if (bound.intersect(r))
+    return ((leftChild) && leftChild->hit(r, tmin, tmax)) || ((rightChild) && rightChild->hit(r, tmin, tmax));
 
-  return ((leftChild) && leftChild->hit(r, tmin, tmax)) || ((rightChild) && rightChild->hit(r, tmin, tmax));
+  return false;
 }
 
 }// namespace renderer

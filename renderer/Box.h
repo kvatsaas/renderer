@@ -18,7 +18,7 @@ public:
    * @param maxPoint The maximum point of the cube (opposite minPoint)
    * @param s 
   */
-  Box(Vector3D minPoint, Vector3D maxPoint, Shader *s = nullptr);
+  Box(Vector3D min, Vector3D max, Shader *s = nullptr);
 
   /**
    * @brief Determines whether the given ray intersects with this box and modifies the given hit
@@ -48,5 +48,6 @@ public:
 
 protected:
   std::vector<Triangle> triangles;
+  Vector3D minPoint, maxPoint;
 };
 }// namespace renderer

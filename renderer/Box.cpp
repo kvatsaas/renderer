@@ -8,7 +8,8 @@ Box::Box()
   bound = AABoundingBox(Vector3D(0, 0, 0), Vector3D(1, 1, 1));
 }
 
-Box::Box(Vector3D minPoint, Vector3D maxPoint, Shader *s)
+Box::Box(Vector3D min, Vector3D max, Shader *s)
+  : minPoint(min), maxPoint(max)
 {
   triangles = std::vector<Triangle>();
   shaderPtr = s;
@@ -124,4 +125,5 @@ void Box::setShader(Shader *s)
   for (int i = 0; i < triangles.size(); i++)
     triangles[i].setShader(shaderPtr);
 }
+
 }// namespace renderer
