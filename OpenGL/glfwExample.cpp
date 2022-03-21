@@ -43,9 +43,17 @@ int main(void)
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   /* Create a windowed mode window and its OpenGL context */
-  int winWidth = 800;
+  int winWidth = 1200;
   float aspectRatio = 16.0 / 9.0;// winWidth / (float)winHeight;
   int winHeight = winWidth / aspectRatio;
+
+  // non-canonical coordinate setup
+  float left = -7.5f;
+  float right = 7.5f;
+  float bottom = -4.2f;
+  float top = 4.2f;
+  float near = -10.0f;
+  float far = 10.0f;
 
   GLFWwindow *window = glfwCreateWindow(winWidth, winHeight, "OpenGL Example", NULL, NULL);
   if (!window) {
@@ -103,15 +111,24 @@ int main(void)
 
   // create 3D vertex data as a vector of floats
   std::vector<float> host_VertexBuffer{
-    -0.5f,  // vertex 0
-    -0.5f,
+    0.0f,   // vertex 0
+    3.0f,
     0.0f,
-    0.5f,   // vertex 1
-    -0.5f,
+    0.149f, // vertex 0 color
+    0.514f,
+    0.310f,
+    -3.0f,  // vertex 1
+    -3.0f,
     0.0f,
-    0.0f,   // vertex 2
-    0.5f,
-    0.0f
+    0.514f, // vertex 1 color
+    0.310f,
+    0.149f,
+    3.0f,   // vertex 2
+    -3.0f,
+    0.0f,
+    0.310f, // vertex 2 color
+    0.149f,
+    0.514f
   };
   int numBytes = host_VertexBuffer.size() * sizeof(float);
 
@@ -126,28 +143,39 @@ int main(void)
   glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
 
-  // enable attrib 0
+  // enable attributes 0 (position) and 1 (color)
   glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(1);
 
   // bind VBO to VAO and associate its vertex data
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);  // position
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const GLvoid *)12);  // color
 
   // unbind VAO
   glBindVertexArray(0);
 
   // set up shaders using Prof. Willemsen's provided GLSLObject class
   sivelab::GLSLObject shader;
-  shader.addShader("vertexShader_passthrough.glsl", sivelab::GLSLObject::VERTEX_SHADER);
-  shader.addShader("fragmentShader_passthrough.glsl", sivelab::GLSLObject::FRAGMENT_SHADER);
+  shader.addShader("vertexShader_perVertexColor.glsl", sivelab::GLSLObject::VERTEX_SHADER);
+  shader.addShader("fragmentShader_perVertexColor.glsl", sivelab::GLSLObject::FRAGMENT_SHADER);
   shader.createProgram();
+
+  // create reference to projMatrix variable in shader
+  GLuint projMatrixID = shader.createUniform("projMatrix");
+
+  //activate shader so we can set uniform variable data, then deactivate
+  shader.activate();
+  glm::mat4 projMatrix = glm::ortho(left, right, bottom, top, near, far);
+  glUniformMatrix4fv(projMatrixID, 1, GL_FALSE, glm::value_ptr(projMatrix));
+  shader.deactivate();
   /********************/
   /* End VBO/VAO demo */
   /********************/
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
-  glClearColor(0.310, 0.149, 0.514, 1.0);
+  glClearColor(0.5f, 0.5f, 0.5f, 1.0);
   glfwSetKeyCallback(window, tPressPrintFPS);
 
   int fb_width, fb_height;
