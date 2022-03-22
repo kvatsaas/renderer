@@ -111,22 +111,40 @@ int main(void)
 
   // create 3D vertex data as a vector of floats
   std::vector<float> host_VertexBuffer{
-    0.0f,   // vertex 0
+    -3.0f,// vertex 0
     3.0f,
     0.0f,
-    0.149f, // vertex 0 color
-    0.514f,
-    0.310f,
-    -3.0f,  // vertex 1
+    1.0f,// vertex 0 color
+    0.0f,
+    0.0f,
+    -6.0f,// vertex 1
     -3.0f,
     0.0f,
-    0.514f, // vertex 1 color
+    0.0f,// vertex 1 color
+    1.0f,
+    0.0f,
+    0.0f,// vertex 2
+    -3.0f,
+    0.0f,
+    0.0f,// vertex 2 color
+    0.0f,
+    1.0f,
+    1.5f,// triangle 2 vertex 0
+    0.0f,
+    0.0f,
+    0.514f,// vertex 0 color
     0.310f,
     0.149f,
-    3.0f,   // vertex 2
+    3.0f,// vertex 1
     -3.0f,
     0.0f,
-    0.310f, // vertex 2 color
+    0.149f,// vertex 1 color
+    0.514f,
+    0.310f,
+    4.5f,// vertex 2
+    0.0f,
+    0.0f,
+    0.310f,// vertex 2 color
     0.149f,
     0.514f
   };
@@ -149,8 +167,8 @@ int main(void)
 
   // bind VBO to VAO and associate its vertex data
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);  // position
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const GLvoid *)12);  // color
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);// position
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const GLvoid *)12);// color
 
   // unbind VAO
   glBindVertexArray(0);
@@ -199,11 +217,11 @@ int main(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /* Begin render VBO/VAO demo */
-    shader.activate();                // bind shader
-    glBindVertexArray(VAO);           // bind VAO
-    glDrawArrays(GL_TRIANGLES, 0, 3); // tell OpenGL to render
-    glBindVertexArray(0);             // unbind VAO
-    shader.deactivate();              // unbind shader
+    shader.activate();// bind shader
+    glBindVertexArray(VAO);// bind VAO
+    glDrawArrays(GL_TRIANGLES, 0, 6);// tell OpenGL to render
+    glBindVertexArray(0);// unbind VAO
+    shader.deactivate();// unbind shader
     /* End render VBO/VAO demo */
 
     // Swap the front and back buffers
