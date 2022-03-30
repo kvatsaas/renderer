@@ -1,10 +1,11 @@
 #include <cmath>
+#include <iostream>
 #include "Triangle.h"
 
 namespace renderer {
 Triangle::Triangle()
   : v_a(0.5, 0.0, 0.0), v_b(-0.5, -0.5, 0.0), v_c(-0.5, 0.5, 0.0),
-    a_rgb(1.0, 1.0, 1.0), b_rgb(a_rgb), c_rgb(a_rgb), color(a_rgb)
+    a_col(1.0, 1.0, 1.0), b_col(a_col), c_col(a_col)
 {
   shaderPtr = new Shader();
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
@@ -15,7 +16,7 @@ Triangle::Triangle()
 
 Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
   : v_a(a), v_b(b), v_c(c),
-    a_rgb(1.0, 1.0, 1.0), b_rgb(a_rgb), c_rgb(a_rgb), color(a_rgb)
+    a_col(1.0, 1.0, 1.0), b_col(a_col), c_col(a_col)
 {
   shaderPtr = s;
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
@@ -26,7 +27,7 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
 
 Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s = nullptr)
   : v_a(a), v_b(b), v_c(c),
-    a_rgb(col), b_rgb(col), c_rgb(col), color(col)
+    a_col(col), b_col(col), c_col(col)
 {
   shaderPtr = s;
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
@@ -35,16 +36,11 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s =
   calculateCentroid();
 }
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D b_rgb, Vector3D c_rgb)
   : v_a(a), v_b(b), v_c(c),
-    a_rgb(a_col), b_rgb(b_col), c_rgb(c_col)
+    a_col(a_rgb), b_col(b_rgb), c_col(c_rgb)
 {
-  float col_x = (v_a[0] + v_b[0] + v_c[0]) / 3;
-  float col_y = (v_a[1] + v_b[1] + v_c[1]) / 3;
-  float col_z = (v_a[2] + v_b[2] + v_c[2]) / 3;
-  color = Vector3D(col_x, col_y, col_z);
-
-  shaderPtr = s;
+  shaderPtr = nullptr;
   normalDirection = (v_a - v_b).crossProduct(v_c - v_a).normalize();
 
   calculateBoundingBox();
@@ -156,9 +152,23 @@ bool Triangle::hit(const Ray &r, float tmin, float tmax)
     return true;
 }
 
-const Vector3D &Triangle::getColor()
+void Triangle::rasterize2D(Framebuffer &fb)
 {
-  return color;
+  float alpha, beta, gamma;
+  auto minPt = bound.getMinPoint();
+  auto maxPt = bound.getMaxPoint();
+
+  for (int y = minPt['y']; y <= maxPt['y']; y++) {
+    for (int x = minPt['x']; x <= maxPt['x']; x++) {
+      alpha = implicitLine(x, y, v_b, v_c) / implicitLine(v_a['x'], v_a['y'], v_b, v_c);
+      beta = implicitLine(x, y, v_a, v_c) / implicitLine(v_b['x'], v_b['y'], v_a, v_c);
+      gamma = implicitLine(x, y, v_a, v_b) / implicitLine(v_c['x'], v_c['y'], v_a, v_b);
+
+      if (alpha > 0 && beta > 0 && gamma > 0) {
+        fb.setPixelColor(x, y, alpha * a_col + beta * b_col + gamma * c_col);
+      }
+    }
+  }
 }
 
 const Vector3D &Triangle::getNormalDirection()
@@ -187,6 +197,11 @@ void Triangle::calculateCentroid()
 {
   //not 100% sure on this
   center = (v_a + v_b + v_c) / 3;
+}
+
+float implicitLine(float x, float y, Vector3D v0, Vector3D v1)
+{
+  return (v0['y'] - v1['y']) * x + (v1['x'] - v0['x']) * y + v0['x'] * v1['y'] - v1['x'] * v0['y'];
 }
 
 }// namespace renderer

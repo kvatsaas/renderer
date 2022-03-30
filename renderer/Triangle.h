@@ -1,6 +1,7 @@
 #pragma once
 #include "Shape.h"
 #include "Ray.h"
+#include "Framebuffer.h"
 
 namespace renderer {
 
@@ -41,7 +42,7 @@ public:
    * @param c_col The color of vertice c
    * @param s A shader for the triangle
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_col, Vector3D b_col, Vector3D c_col, Shader *s);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D b_rgb, Vector3D c_rgb);
 
   /**
    * @brief Determines whether the given ray intersects with this triangle and modifies the given hit
@@ -64,10 +65,10 @@ public:
   virtual bool hit(const Ray &r, float tmin, float tmax);
 
   /**
-   * @brief For now, returns the "average" color of all three vertices.
-   * @return The color of the triangle
+   * @brief Rasterizes a triangle in a 2D scene on the given framebuffer
+   * @param fb The framebuffer to use
   */
-  const Vector3D &getColor();
+  void rasterize2D(Framebuffer &fb);
 
   /**
    * @brief Returns the direction of the normal to the plane of the triangle. Note that the inverted
@@ -77,7 +78,7 @@ public:
   const Vector3D &getNormalDirection();
 
 protected:
-  Vector3D v_a, v_b, v_c, a_rgb, b_rgb, c_rgb, color;
+  Vector3D v_a, v_b, v_c, a_col, b_col, c_col;
   Vector3D normalDirection;
 
   /**
@@ -89,5 +90,9 @@ protected:
    * @brief Calculates the centroid and assigns it to center
   */
   void calculateCentroid();
+
+  void calculateBarycentricCoordinates(float x, float y, float &alpha, float &beta, float &gamma);
 };
+
+float implicitLine(float x, float y, Vector3D v0, Vector3D v1);
 }// namespace renderer

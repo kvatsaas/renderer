@@ -17,6 +17,7 @@ Sphere::Sphere()
       center['x'] + radius,
       center['y'] + radius,
       center['z'] + radius));
+  color = Vector3D();
 }
 
 Sphere::Sphere(Vector3D c, float r, Shader *s, Vector3D col)
@@ -33,6 +34,7 @@ Sphere::Sphere(Vector3D c, float r, Shader *s, Vector3D col)
       center['x'] + radius,
       center['y'] + radius,
       center['z'] + radius));
+  color = Vector3D();
 }
 
 bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
@@ -97,11 +99,6 @@ bool Sphere::hit(const Ray &r, float tmin, float tmax)
     return false;
   else
     return true;
-}
-
-Vector3D Sphere::getColor()
-{
-  return color;
 }
 
 }// namespace renderer

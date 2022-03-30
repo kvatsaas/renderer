@@ -62,7 +62,7 @@ public:
   * 
   * @param rgb - the RGB value to set all the pixels to
   */
-  void clearToColor(const Vector3D &rgb);
+  void clearToColor(Vector3D rgb);
 
   /** \brief Returns the width
   * 

@@ -33,7 +33,7 @@ void Framebuffer::forEachPixel(std::function<void(Vector3D &)> func)
   }
 }
 
-void Framebuffer::clearToColor(const Vector3D &rgb)
+void Framebuffer::clearToColor(Vector3D rgb)
 {
   std::function<void(Vector3D &)> func = [rgb](Vector3D &v) { v = rgb; };
   forEachPixel(func);

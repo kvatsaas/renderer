@@ -75,6 +75,14 @@ target_link_libraries (test_RenderJSON ${Boost_LIBRARIES})
 target_link_libraries (test_RenderJSON ${PNG_LIBRARIES})
 target_link_libraries (test_RenderJSON ${ZLIB_LIBRARIES})
 
+add_executable (test_RasterizeTriangle
+	test_RasterizeTriangle.cpp
+)
+target_link_libraries (test_RasterizeTriangle renderer)
+target_link_libraries (test_RasterizeTriangle ${Boost_LIBRARIES})
+target_link_libraries (test_RasterizeTriangle ${PNG_LIBRARIES})
+target_link_libraries (test_RasterizeTriangle ${ZLIB_LIBRARIES})
+
 add_executable (test_ColorRamp
 	test_ColorRamp.cpp
 )

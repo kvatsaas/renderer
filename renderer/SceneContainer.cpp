@@ -122,6 +122,7 @@ int SceneContainer::getMaxDepth(int d)
 
 bool SceneContainer::anyHit(Ray r, float tmin, float tmax)
 {
+  //pre-BVH logic
   /*for (int j = 0; j < shapes.size(); j++) {
     if (shapes[j] == sPtr)
       continue;
@@ -140,6 +141,7 @@ Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
 
   HitStructure h;
   bool hitOccurred = rootNode.closestHit(r, tmin, tmax, h);
+  //pre-BVH logic
   /*for (int s = 0; s < shapes.size(); s++)
     if (shapes[s]->closestHit(r, tmin, tmax, h))
       hitOccurred = true;*/

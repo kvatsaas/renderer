@@ -44,7 +44,7 @@ void raytraceTriangle(Triangle *t_ptr, int nx, int ny, std::string outfile)
       r.setDirection(dir);
 
       if (t_ptr->closestHit(r, focalLength, tmax, h))
-        fb.setPixelColor(i, j, t_ptr->getColor());
+        fb.setPixelColor(i, j, Vector3D(0, 0, 1));
       else
         fb.setPixelColor(i, j, bgdColor);
     }
