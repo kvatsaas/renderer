@@ -27,6 +27,16 @@ public:
   */
   Framebuffer(int w, int h);
 
+  /** \brief Parameterized constructor
+  * 
+  * Creates framebuffer with the given dimensions and fills it with the given color.
+  * 
+  * @param w - the width of the framebuffer in pixels
+  * @param h - the height of the framebuffer in pixels
+  * @param color - The fill color
+  */
+  Framebuffer(int w, int h, Vector3D color);
+
   /** \brief Set the color of a pixel
   * 
   * Sets the pixel at the given location to a given RGB value (as a Vector3D).

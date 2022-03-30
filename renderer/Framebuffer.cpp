@@ -16,6 +16,13 @@ Framebuffer::Framebuffer(int w, int h)
   std::fill(m_pixels.begin(), m_pixels.end(), Vector3D(0.0f, 0.0f, 0.0f));
 }
 
+Framebuffer::Framebuffer(int w, int h, Vector3D color)
+  : m_width(w), m_height(h),
+    m_pixels(m_width * m_height)
+{
+  std::fill(m_pixels.begin(), m_pixels.end(), color);
+}
+
 void Framebuffer::setPixelColor(int row, int col, Vector3D rgb)
 {
   m_pixels[row * m_height + col] = rgb;

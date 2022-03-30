@@ -90,3 +90,11 @@ target_link_libraries (test_ColorRamp renderer)
 target_link_libraries (test_ColorRamp ${Boost_LIBRARIES})
 target_link_libraries (test_ColorRamp ${PNG_LIBRARIES})
 target_link_libraries (test_ColorRamp ${ZLIB_LIBRARIES})
+
+add_executable (patterns
+	patterns.cpp
+)
+target_link_libraries (patterns renderer)
+target_link_libraries (patterns ${Boost_LIBRARIES})
+target_link_libraries (patterns ${PNG_LIBRARIES})
+target_link_libraries (patterns ${ZLIB_LIBRARIES})
