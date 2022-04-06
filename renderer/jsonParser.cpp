@@ -5,10 +5,12 @@
 #define TRANSFORMS_READY 0
 #define MESHES_READY 0
 #define ADVSHADERS_READY 0
+#define MONSTERSHADERS_READY 1
 #define ADVLIGHTS_READY 0
 
 #include <iostream>
 #include <fstream>
+#include <boost/filesystem.hpp>
 #include <glm/gtx/string_cast.hpp>
 #include <nlohmann/json.hpp>
 #include <stack>
@@ -20,6 +22,7 @@
 #include "Sphere.h"
 #include "Triangle.h"
 #include "Box.h"
+#include "Mesh.h"
 #include "PointLight.h"
 #include "shaders.h"
 //#include "Constants.h"// contains a static PI
@@ -99,7 +102,7 @@ glm::mat4 parseTransformData(json &transformData)
 }
 
 
-Shape *extractAndCreateShapeFromJSONData(json &shapeData)
+Shape *extractAndCreateShapeFromJSONData(json &shapeData, SceneContainer &scene)
 {
   Shape *sPtr = nullptr;
 
@@ -143,8 +146,8 @@ Shape *extractAndCreateShapeFromJSONData(json &shapeData)
     std::string mesh_filename = shapeData["file"];
     std::string meshFile_fullPath(getFilePath() + "/" + mesh_filename);
 
-    Shader *defaultShader = locateShader(shapeData["shader"]["_ref"]);
-    sPtr = new OBJMesh(meshFile_fullPath, defaultShader, m_useBVH);
+    Shader *defaultShader = scene.getShader(shapeData["shader"]["_ref"]);
+    sPtr = new Mesh(meshFile_fullPath, defaultShader);
   } else if (type == "instance") {
 
     // Need to instance an object
@@ -163,7 +166,7 @@ Shape *extractAndCreateShapeFromJSONData(json &shapeData)
       sPtr = new InstancedObject(robj, m, minv);
 
       if (!shapeData["shader"]["_ref"].empty()) {
-        sPtr->provideShader(locateShader(shapeData["shader"]["_ref"]));
+        sPtr->setShader(scene.getShader(shapeData["shader"]["_ref"]));
       }
     }
   }

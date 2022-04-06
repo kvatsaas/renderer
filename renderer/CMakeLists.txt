@@ -8,9 +8,11 @@ add_library(renderer
 	CoordSys.cpp CoordSys.h
 	Framebuffer.cpp Framebuffer.h
 	HitStructure.cpp HitStructure.h
+	InstancedObject.cpp InstancedObject.h
 	jsonParser.cpp
 	LambertianShader.cpp LambertianShader.h
 	Light.cpp Light.h
+	Mesh.cpp Mesh.h
 	MirrorShader.cpp MirrorShader.h
 	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h

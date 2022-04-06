@@ -25,7 +25,7 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Shader *s)
   calculateCentroid();
 }
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s = nullptr)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s)
   : v_a(a), v_b(b), v_c(c),
     a_col(col), b_col(col), c_col(col)
 {
@@ -36,7 +36,7 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s =
   calculateCentroid();
 }
 
-Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D b_rgb, Vector3D c_rgb)
+Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D b_rgb, Vector3D c_rgb, Shader *s)
   : v_a(a), v_b(b), v_c(c),
     a_col(a_rgb), b_col(b_rgb), c_col(c_rgb)
 {

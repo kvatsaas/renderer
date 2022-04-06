@@ -7,7 +7,7 @@ using namespace renderer;
 using namespace std;
 
 string input, filepath = "patterns\\pattern.png";
-int blockSize = 1, width = 100, height;
+int scale = 1, width = 100, height;
 double x_val, y_val;
 Framebuffer fb;
 Vector3D bgColor, patternColor;
@@ -36,10 +36,10 @@ void setupPrompts()
     height = width;
   }
 
-  cout << "Enter block size, or leave blank for default (1):" << endl;
+  cout << "Enter scale, or leave blank for default (1):" << endl;
   getline(cin, input);
   if (input != "") {
-    blockSize = stoi(input);
+    scale = stoi(input);
   }
 
   cout << "Enter background color, or leave blank for default (black):" << endl;
@@ -85,8 +85,8 @@ void executeStep()
   for (double x = x_val - 1; x < width; x += x_val) {
     for (double y = y_val - 1; y < height; y += y_val) {
 
-      blockLocation_x = floor(x) * blockSize;
-      blockLocation_y = floor(y) * blockSize;
+      blockLocation_x = floor(x) * scale;
+      blockLocation_y = floor(y) * scale;
 
       if (fb.getPixelColor(blockLocation_x, blockLocation_y) == bgColor) {
         toggle = patternColor;
@@ -94,8 +94,8 @@ void executeStep()
         toggle = bgColor;
       }
       
-      for (int block_x = 0; block_x < blockSize; block_x++) {
-        for (int block_y = 0; block_y < blockSize; block_y++) {
+      for (int block_x = 0; block_x < scale; block_x++) {
+        for (int block_y = 0; block_y < scale; block_y++) {
           fb.setPixelColor(blockLocation_x + block_x, blockLocation_y + block_y, toggle);
         }
       }
@@ -107,7 +107,7 @@ void executeStep()
 int main(int argc, char *argv[])
 {
   setupPrompts();
-  fb = Framebuffer(width * blockSize, height * blockSize, bgColor);
+  fb = Framebuffer(width * scale, height * scale, bgColor);
 
   while (true) {
     stepPrompts();

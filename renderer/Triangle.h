@@ -30,7 +30,7 @@ public:
    * @param col The color of the triangle
    * @param s A shader for the triangle
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D col, Shader *s = nullptr);
 
   /**
    * @brief Creates a triangle with the given vertices and colors
@@ -42,7 +42,7 @@ public:
    * @param c_col The color of vertice c
    * @param s A shader for the triangle
   */
-  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D b_rgb, Vector3D c_rgb);
+  Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D b_rgb, Vector3D c_rgb, Shader *s = nullptr);
 
   /**
    * @brief Determines whether the given ray intersects with this triangle and modifies the given hit
