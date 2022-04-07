@@ -47,8 +47,11 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D 
   calculateCentroid();
 }
 
-bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
+bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
+  if (!bound.intersect(r, depth, true))
+    return false;
+
   // The computations below are based on Section 4.2.2 of Fundamentals of Computer Graphics (Marschner/Shirley)
   float t, gamma, beta, M;
   float a, b, c, d, e, f, g, h, i, j, k, l, ei_hf, gf_di, dh_eg, ak_jb, jc_al, bl_kc;
@@ -105,8 +108,11 @@ bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStruct
   return true;
 }
 
-bool Triangle::hit(const Ray &r, float tmin, float tmax)
+bool Triangle::hit(const Ray &r, float tmin, float tmax, int depth)
 {
+  if (!bound.intersect(r, depth, false))
+    return false;
+
   // The computations below are based on Section 4.2.2 of Fundamentals of Computer Graphics (Marschner/Shirley)
   float t, gamma, beta, M;
   float a, b, c, d, e, f, g, h, i, j, k, l, ei_hf, gf_di, dh_eg, ak_jb, jc_al, bl_kc;

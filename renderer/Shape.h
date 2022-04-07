@@ -23,7 +23,7 @@ public:
    * @param hit A HitStructure that will be filled in the event of a hit
    * @return True if it intersects, otherwise false
   */
-  virtual bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit) = 0;
+  virtual bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth) = 0;
 
   /**
    * @brief Determines whether the given ray intersects with this shape
@@ -32,7 +32,7 @@ public:
    * @param tmax The maximum tvalue that is considered a hit
    * @return True if it intersects, otherwise false
   */
-  virtual bool hit(const Ray &r, float tmin, float tmax) = 0;
+  virtual bool hit(const Ray &r, float tmin, float tmax, int depth) = 0;
 
   /**
    * @brief Setter for the shader pointer
@@ -51,6 +51,20 @@ public:
    * @param b The bounding box
   */
   virtual void setBoundingBox(AABoundingBox &b);
+
+  /**
+   * @brief Sets the minimum and maximum reflection depths at which the shape is visible
+   * @param min The minimum
+   * @param max The maximum
+  */
+  virtual void setVisibleDepthBounds(int min, int max);
+
+  /**
+   * @brief Sets the minimum and maximum reflection depths at which the shape casts a shadow
+   * @param min The minimum
+   * @param max The maximum
+  */
+  virtual void setShadowDepthBounds(int min, int max);
 
   /**
    * @brief Getter for the shader pointer

@@ -99,21 +99,27 @@ Box::Box(Vector3D min, Vector3D max, Shader *s)
 }
 
 
-bool Box::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
+bool Box::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
+  if (!bound.intersect(r, depth, true))
+    return false;
+
   bool hitOccurred = false;
 
   for (int i = 0; i < triangles.size(); i++)
-    if (triangles[i].closestHit(r, tmin, tmax, hit))
+    if (triangles[i].closestHit(r, tmin, tmax, hit, depth))
       hitOccurred = true;
 
   return hitOccurred;
 }
 
-bool Box::hit(const Ray &r, float tmin, float tmax)
+bool Box::hit(const Ray &r, float tmin, float tmax, int depth)
 {
+  if (!bound.intersect(r, depth, false))
+    return false;
+
   for (int i = 0; i < triangles.size(); i++)
-    if (triangles[i].hit(r, tmin, tmax))
+    if (triangles[i].hit(r, tmin, tmax, depth))
       return true;
   return false;
 }

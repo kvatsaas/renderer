@@ -91,14 +91,20 @@ Mesh::Mesh(const std::string &filename, Shader *defaultShader)
   meshRoot = new BVHNode(bvhNodeList, 0);
 }
 
-bool Mesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
+bool Mesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
-  return meshRoot->closestHit(r, tmin, tmax, hit);
+  if (!bound.intersect(r, depth, true))
+    return false;
+
+  return meshRoot->closestHit(r, tmin, tmax, hit, depth);
 }
 
-bool Mesh::hit(const Ray &r, float tmin, float tmax)
+bool Mesh::hit(const Ray &r, float tmin, float tmax, int depth)
 {
-  return meshRoot->hit(r, tmin, tmax);
+  if (!bound.intersect(r, depth, false))
+    return false;
+
+  return meshRoot->hit(r, tmin, tmax, depth);
 }
 
 }// namespace renderer

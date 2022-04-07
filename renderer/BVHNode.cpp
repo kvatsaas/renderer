@@ -87,9 +87,9 @@ int BVHNode::getLeaves()
   return leaves;
 }
 
-bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
+bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
-  if (!bound.intersect(r))
+  if (!bound.intersect(r, depth, true))
     return false;
 
   bool leftHit = false, rightHit = false;
@@ -97,9 +97,9 @@ bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructu
   auto leftHitStruct = HitStructure();
   auto rightHitStruct = HitStructure();
   if (leftChild)
-    leftHit = leftChild->closestHit(r, tmin, local_tmax, leftHitStruct);
+    leftHit = leftChild->closestHit(r, tmin, local_tmax, leftHitStruct, depth);
   if (rightChild)
-    rightHit = rightChild->closestHit(r, tmin, local_tmax, rightHitStruct);
+    rightHit = rightChild->closestHit(r, tmin, local_tmax, rightHitStruct, depth);
 
   if (leftHit) {
     if (rightHit && rightHitStruct.get_t() < leftHitStruct.get_t()) {//if both hit
@@ -119,12 +119,12 @@ bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructu
   return false;
 }
 
-bool BVHNode::hit(const Ray &r, float tmin, float tmax)
+bool BVHNode::hit(const Ray &r, float tmin, float tmax, int depth)
 {
-  if (bound.intersect(r))
-    return ((leftChild) && leftChild->hit(r, tmin, tmax)) || ((rightChild) && rightChild->hit(r, tmin, tmax));
+  if (!bound.intersect(r, depth, false))
+    return false;
 
-  return false;
+  return ((leftChild) && leftChild->hit(r, tmin, tmax, depth)) || ((rightChild) && rightChild->hit(r, tmin, tmax, depth));
 }
 
 }// namespace renderer

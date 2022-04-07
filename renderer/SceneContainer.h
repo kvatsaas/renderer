@@ -94,10 +94,10 @@ public:
   /**
    * @brief Gets all lights visible from a given point on a shape
    * @param point The point in question
-   * @param sPtr A pointer to the shape in question
+   * @param depth The current reflection depth
    * @return A vector of pointers to lights
   */
-  std::vector<Light *> getVisibleLights(Vector3D point, const Shape *sPtr = nullptr);
+  std::vector<Light *> getVisibleLights(Vector3D point, int depth);
 
   /**
    * @brief Getter for a single shader
@@ -153,9 +153,10 @@ public:
    * @param r The ray
    * @param tmin The minimum tvalue
    * @param tmax The maximum tvalue
+   * @param depth The current reflection depth
    * @return 
   */
-  bool anyHit(Ray r, float tmin, float tmax);
+  bool anyHit(Ray r, float tmin, float tmax, int depth);
 
   /**
    * @brief Determines the color hit by the given ray in this scene

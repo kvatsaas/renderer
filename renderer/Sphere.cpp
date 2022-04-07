@@ -37,8 +37,11 @@ Sphere::Sphere(Vector3D c, float r, Shader *s, Vector3D col)
   color = Vector3D();
 }
 
-bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit)
+bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
+  if (!bound.intersect(r, depth, true))
+    return false;
+
   Vector3D d = r.getDirection();
   Vector3D e_c = r.getOrigin() - center;// diff of ray origin and circle center
 
@@ -74,8 +77,11 @@ bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructur
   return true;
 }
 
-bool Sphere::hit(const Ray &r, float tmin, float tmax)
+bool Sphere::hit(const Ray &r, float tmin, float tmax, int depth)
 {
+  if (!bound.intersect(r, depth, false))
+    return false;
+
   Vector3D d = r.getDirection();
   Vector3D e_c = r.getOrigin() - center;// diff of ray origin and circle center
 

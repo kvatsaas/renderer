@@ -30,7 +30,7 @@ public:
    * @param hit A HitStructure that will be filled in the event of a hit
    * @return True if it intersects, otherwise false
   */
-  bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit);
+  bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth);
 
    /**
    * @brief Determines whether the given ray intersects with this sphere
@@ -39,13 +39,7 @@ public:
    * @param tmax The maximum tvalue that is considered a hit
    * @return True if it intersects, otherwise false
   */
-  virtual bool hit(const Ray &r, float tmin, float tmax);
-
-  /**
-   * @brief Returns the color of the sphere
-   * @return The color of the sphere
-  */
-  Vector3D getColor();
+  virtual bool hit(const Ray &r, float tmin, float tmax, int depth);
 
 protected:
   Vector3D color;

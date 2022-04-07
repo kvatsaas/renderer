@@ -4,8 +4,8 @@
 #define EXTRACT_ROTATION_READY 0
 #define TRANSFORMS_READY 0
 #define MESHES_READY 0
+#define MONSTERS_READY 1
 #define ADVSHADERS_READY 0
-#define MONSTERSHADERS_READY 1
 #define ADVLIGHTS_READY 0
 
 #include <iostream>
@@ -15,6 +15,7 @@
 #include <nlohmann/json.hpp>
 #include <stack>
 #include <assert.h>
+#include <boost/algorithm/string.hpp>
 
 #include "SceneContainer.h"
 #include "PerspectiveCamera.h"
@@ -172,6 +173,15 @@ Shape *extractAndCreateShapeFromJSONData(json &shapeData, SceneContainer &scene)
   }
 #endif
 
+#if MONSTERS_READY
+  if (!shapeData["monster"].empty()) {
+    std::string monster = shapeData["monster"];
+    std::vector<std::string> monsterData;
+    boost::split(monsterData, monster, boost::is_any_of(" "));
+    sPtr->setVisibleDepthBounds(std::stoi(monsterData[0]), std::stoi(monsterData[1]));
+    sPtr->setShadowDepthBounds(std::stoi(monsterData[2]), std::stoi(monsterData[3]));
+  }
+#endif
 
   assert(sPtr);// must have one
   sPtr->setName(name);
@@ -371,7 +381,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 
     json shapeInfo = j["scene"]["shape"][i];
 
-    Shape *sPtr = extractAndCreateShapeFromJSONData(shapeInfo);
+    Shape *sPtr = extractAndCreateShapeFromJSONData(shapeInfo, scene);
 
     if (!shapeInfo["shader"]["_ref"].empty()) {
       sPtr->setShader(scene.getShader(shapeInfo["shader"]["_ref"]));

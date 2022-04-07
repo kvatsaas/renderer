@@ -32,6 +32,18 @@ Vector3D &AABoundingBox::getMaxPoint()
   return maxPt;
 }
 
+void AABoundingBox::setVisibleDepthBounds(int min, int max)
+{
+  minDepthVisible = min;
+  maxDepthVisible = max;
+}
+
+void AABoundingBox::setShadowDepthBounds(int min, int max)
+{
+  minDepthShadow = min;
+  maxDepthShadow = max;
+}
+
 void AABoundingBox::addPoint(Vector3D p)
 {
   if (p['x'] < minPt['x'])
@@ -50,8 +62,16 @@ void AABoundingBox::addPoint(Vector3D p)
     maxPt['z'] = p['z'];
 }
 
-bool AABoundingBox::intersect(const Ray &r)
+bool AABoundingBox::intersect(const Ray &r, int depth, bool closest)
 {
+  if (closest)
+    if (depth < minDepthVisible || depth > maxDepthVisible)
+      return false;
+  else
+    if (depth < minDepthShadow || depth > maxDepthShadow)
+      return false;
+
+
   auto origin = r.getOrigin();
   auto direction = r.getDirection();
   float txmin, txmax, tymin, tymax, tzmin, tzmax;
@@ -92,7 +112,7 @@ bool AABoundingBox::intersect(const Ray &r)
 AABoundingBox AABoundingBox::merge(const AABoundingBox &b) const
 {
   float xmin, xmax, ymin, ymax, zmin, zmax;
-
+  AABoundingBox bound;
 
   xmin = std::min(this->minPt['x'], b.minPt['x']);
   ymin = std::min(this->minPt['y'], b.minPt['y']);
@@ -102,10 +122,12 @@ AABoundingBox AABoundingBox::merge(const AABoundingBox &b) const
   ymax = std::max(this->maxPt['y'], b.maxPt['y']);
   zmax = std::max(this->maxPt['z'], b.maxPt['z']);
 
-  return AABoundingBox(
+  bound = AABoundingBox(
     Vector3D(xmin, ymin, zmin),
-    Vector3D(xmax, ymax, zmax)
-  );
+    Vector3D(xmax, ymax, zmax));
+  bound.setVisibleDepthBounds(std::min(this->minDepthVisible, b.minDepthVisible), std::max(this->maxDepthVisible, b.maxDepthVisible));
+  bound.setShadowDepthBounds(std::min(this->minDepthShadow, b.minDepthShadow), std::max(this->maxDepthShadow, b.maxDepthShadow));
+  return bound;
 }
 
 }// namespace renderer

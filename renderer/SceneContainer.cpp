@@ -63,14 +63,14 @@ const std::vector<Light *> &SceneContainer::getLights()
   return lights;
 }
 
-std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, const Shape *sPtr)
+std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth)
 {
   auto visibleLights = std::vector<Light *>();
 
   for (int i = 0; i < lights.size(); i++) {
     bool blocked = false;
     auto lightRayDir = (lights[i]->getPosition() - point);// light direction
-    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f))
+    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth))
       visibleLights.push_back(lights[i]);
   }
 
@@ -120,7 +120,7 @@ int SceneContainer::getMaxDepth(int d)
   return maxDepth;
 }
 
-bool SceneContainer::anyHit(Ray r, float tmin, float tmax)
+bool SceneContainer::anyHit(Ray r, float tmin, float tmax, int depth)
 {
   //pre-BVH logic
   /*for (int j = 0; j < shapes.size(); j++) {
@@ -131,7 +131,7 @@ bool SceneContainer::anyHit(Ray r, float tmin, float tmax)
   }
   return false;*/
 
-  return rootNode.hit(r, tmin, tmax);
+  return rootNode.hit(r, tmin, tmax, depth);
 }
 
 Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
@@ -140,7 +140,7 @@ Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
     return bgColor;
 
   HitStructure h;
-  bool hitOccurred = rootNode.closestHit(r, tmin, tmax, h);
+  bool hitOccurred = rootNode.closestHit(r, tmin, tmax, h, depth);
   //pre-BVH logic
   /*for (int s = 0; s < shapes.size(); s++)
     if (shapes[s]->closestHit(r, tmin, tmax, h))

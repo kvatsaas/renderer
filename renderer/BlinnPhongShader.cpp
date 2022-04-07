@@ -13,7 +13,7 @@ Vector3D BlinnPhongShader::apply(const HitStructure &h, SceneContainer &sc, int 
   auto diffColor = Vector3D();
   auto specColor = Vector3D();
   auto normal = h.getNormal();
-  auto visibleLights = sc.getVisibleLights(normal.getOrigin(), h.getShape());
+  auto visibleLights = sc.getVisibleLights(normal.getOrigin(), depth);
 
   auto n = normal.getDirection();
   auto v = -1.0 * h.getHit().getDirection().normalize();

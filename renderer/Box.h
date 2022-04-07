@@ -29,7 +29,7 @@ public:
    * @param hit A HitStructure that will be filled in the event of a hit
    * @return True if it intersects, otherwise false
   */
-  virtual bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit);
+  virtual bool closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth);
 
   /**
    * @brief Determines whether the given ray intersects with this box
@@ -38,7 +38,7 @@ public:
    * @param tmax The maximum tvalue that is considered a hit
    * @return True if it intersects, otherwise false
   */
-  virtual bool hit(const Ray &r, float tmin, float tmax);
+  virtual bool hit(const Ray &r, float tmin, float tmax, int depth);
 
   /**
    * @brief Setter for the shader

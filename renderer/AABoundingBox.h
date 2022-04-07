@@ -38,6 +38,20 @@ public:
   void setMaxPoint(Vector3D max);
 
   /**
+   * @brief Sets the minimum and maximum reflection depths at which the shape is visible
+   * @param min The minimum
+   * @param max The maximum
+  */
+  virtual void setVisibleDepthBounds(int min, int max);
+
+  /**
+   * @brief Sets the minimum and maximum reflection depths at which the shape casts a shadow
+   * @param min The minimum
+   * @param max The maximum
+  */
+  virtual void setShadowDepthBounds(int min, int max);
+
+  /**
    * @brief Getter for the minimum point
    * @return The minimum point
   */
@@ -58,9 +72,11 @@ public:
   /**
    * @brief Checks if the given ray intersects the bounding box
    * @param r The ray
+   * @param depth The current reflection depth
+   * @param closest A crude marker that determines whether this was called from closestHit or hit
    * @return True if the ray intersects the bounding box
   */
-  bool intersect(const Ray &r);
+  bool intersect(const Ray &r, int depth, bool closest);
 
   /**
    * @brief Creates a new bounding box that is the union of two others
@@ -71,5 +87,9 @@ public:
 
 private:
   Vector3D minPt, maxPt;
+  int minDepthVisible = 0;
+  int maxDepthVisible = INT_MAX;
+  int minDepthShadow = 0;
+  int maxDepthShadow = INT_MAX;
 };
 }// namespace renderer

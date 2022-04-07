@@ -22,6 +22,16 @@ void Shape::setBoundingBox(AABoundingBox &b)
   bound = b;
 }
 
+void Shape::setVisibleDepthBounds(int min, int max)
+{
+  bound.setVisibleDepthBounds(min, max);
+}
+
+void Shape::setShadowDepthBounds(int min, int max)
+{
+  bound.setShadowDepthBounds(min, max);
+}
+
 const Shader *Shape::getShader() const
 {
   return shaderPtr;
