@@ -73,10 +73,25 @@ public:
    * @brief Checks if the given ray intersects the bounding box
    * @param r The ray
    * @param depth The current reflection depth
-   * @param closest A crude marker that determines whether this was called from closestHit or hit
    * @return True if the ray intersects the bounding box
   */
-  bool intersect(const Ray &r, int depth, bool closest);
+  bool intersect(const Ray &r, int depth);
+
+  /**
+   * @brief Checks if the given ray intersects the bounding box. To be used with hit/anyHit
+   * @param r The ray
+   * @param depth The current reflection depth
+   * @return True if the ray intersects the bounding box
+  */
+  bool intersectAny(const Ray &r, int depth);
+
+  /**
+   * @brief Checks if the given ray intersects the bounding box. To be used with closestHit
+   * @param r The ray
+   * @param depth The current reflection depth
+   * @return True if the ray intersects the bounding box
+  */
+  bool intersectClosest(const Ray &r, int depth);
 
   /**
    * @brief Creates a new bounding box that is the union of two others

@@ -49,7 +49,7 @@ Triangle::Triangle(Vector3D a, Vector3D b, Vector3D c, Vector3D a_rgb, Vector3D 
 
 bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
-  if (!bound.intersect(r, depth, true))
+  if (!bound.intersectClosest(r, depth))
     return false;
 
   // The computations below are based on Section 4.2.2 of Fundamentals of Computer Graphics (Marschner/Shirley)
@@ -110,7 +110,7 @@ bool Triangle::closestHit(const Ray &r, const float tmin, float &tmax, HitStruct
 
 bool Triangle::hit(const Ray &r, float tmin, float tmax, int depth)
 {
-  if (!bound.intersect(r, depth, false))
+  if (!bound.intersectAny(r, depth))
     return false;
 
   // The computations below are based on Section 4.2.2 of Fundamentals of Computer Graphics (Marschner/Shirley)

@@ -93,7 +93,7 @@ Mesh::Mesh(const std::string &filename, Shader *defaultShader)
 
 bool Mesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
-  if (!bound.intersect(r, depth, true))
+  if (!bound.intersectClosest(r, depth))
     return false;
 
   return meshRoot->closestHit(r, tmin, tmax, hit, depth);
@@ -101,7 +101,7 @@ bool Mesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure 
 
 bool Mesh::hit(const Ray &r, float tmin, float tmax, int depth)
 {
-  if (!bound.intersect(r, depth, false))
+  if (!bound.intersectAny(r, depth))
     return false;
 
   return meshRoot->hit(r, tmin, tmax, depth);

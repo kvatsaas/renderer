@@ -39,7 +39,7 @@ Sphere::Sphere(Vector3D c, float r, Shader *s, Vector3D col)
 
 bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
-  if (!bound.intersect(r, depth, true))
+  if (!bound.intersectClosest(r, depth))
     return false;
 
   Vector3D d = r.getDirection();
@@ -79,7 +79,7 @@ bool Sphere::closestHit(const Ray &r, const float tmin, float &tmax, HitStructur
 
 bool Sphere::hit(const Ray &r, float tmin, float tmax, int depth)
 {
-  if (!bound.intersect(r, depth, false))
+  if (!bound.intersectAny(r, depth))
     return false;
 
   Vector3D d = r.getDirection();

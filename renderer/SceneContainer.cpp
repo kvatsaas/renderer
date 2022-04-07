@@ -68,7 +68,6 @@ std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth)
   auto visibleLights = std::vector<Light *>();
 
   for (int i = 0; i < lights.size(); i++) {
-    bool blocked = false;
     auto lightRayDir = (lights[i]->getPosition() - point);// light direction
     if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth))
       visibleLights.push_back(lights[i]);
@@ -147,7 +146,7 @@ Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
       hitOccurred = true;*/
 
   if (hitOccurred)
-    return h.getShader()->apply(h, *this, depth + 1);
+    return h.getShader()->apply(h, *this, depth);
   else
     return bgColor;
 }

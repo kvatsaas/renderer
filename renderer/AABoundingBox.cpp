@@ -1,5 +1,6 @@
 #include <cmath>
 #include "AABoundingBox.h"
+#include <iostream>
 
 namespace renderer {
 
@@ -62,16 +63,8 @@ void AABoundingBox::addPoint(Vector3D p)
     maxPt['z'] = p['z'];
 }
 
-bool AABoundingBox::intersect(const Ray &r, int depth, bool closest)
+bool AABoundingBox::intersect(const Ray &r, int depth)
 {
-  if (closest)
-    if (depth < minDepthVisible || depth > maxDepthVisible)
-      return false;
-  else
-    if (depth < minDepthShadow || depth > maxDepthShadow)
-      return false;
-
-
   auto origin = r.getOrigin();
   auto direction = r.getDirection();
   float txmin, txmax, tymin, tymax, tzmin, tzmax;
@@ -107,6 +100,22 @@ bool AABoundingBox::intersect(const Ray &r, int depth, bool closest)
     return false;
   else
     return true;
+}
+
+bool AABoundingBox::intersectClosest(const Ray &r, int depth)
+{
+  if (depth < minDepthVisible || depth > maxDepthVisible)
+    return false;
+  else
+    return intersect(r, depth);
+}
+
+bool AABoundingBox::intersectAny(const Ray &r, int depth)
+{
+  if (depth < minDepthShadow || depth > maxDepthShadow)
+    return false;
+  else
+    return intersect(r, depth);
 }
 
 AABoundingBox AABoundingBox::merge(const AABoundingBox &b) const

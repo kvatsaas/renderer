@@ -89,7 +89,7 @@ int BVHNode::getLeaves()
 
 bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
-  if (!bound.intersect(r, depth, true))
+  if (!bound.intersectClosest(r, depth))
     return false;
 
   bool leftHit = false, rightHit = false;
@@ -121,7 +121,7 @@ bool BVHNode::closestHit(const Ray &r, const float tmin, float &tmax, HitStructu
 
 bool BVHNode::hit(const Ray &r, float tmin, float tmax, int depth)
 {
-  if (!bound.intersect(r, depth, false))
+  if (!bound.intersectAny(r, depth))
     return false;
 
   return ((leftChild) && leftChild->hit(r, tmin, tmax, depth)) || ((rightChild) && rightChild->hit(r, tmin, tmax, depth));
