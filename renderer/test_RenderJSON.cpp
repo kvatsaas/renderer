@@ -10,6 +10,7 @@
 //#include "png++/png.hpp"
 
 #include "WhittedRayTracer.h"
+#include "ParallelWhittedRayTracer.h"
 #include "Framebuffer.h"
 #include "jsonParser.cpp"
 #include "../src/handleGraphicsArgs.h"
@@ -22,10 +23,15 @@ int main(int argc, char *argv[])
   args.process(argc, argv);
   boost::progress_timer ptimer;
   float startTime, endTime;
-
-  auto raytracer = WhittedRayTracer();
   auto fb = Framebuffer(args.width, args.height);
   auto sc = SceneContainer(args.width, args.height);
+
+  Renderer *raytracer;
+  if (args.isSet("numcpus"))
+    raytracer = new ParallelWhittedRayTracer(args.numCpus);
+  else
+    raytracer = new WhittedRayTracer();
+
   if (args.isSet("recursionDepth"))
     sc.setMaxDepth(args.recursionDepth);
 
@@ -36,9 +42,9 @@ int main(int argc, char *argv[])
 
   startTime = ptimer.elapsed();
   if (args.isSet("rpp"))
-    raytracer.render(fb, sc, 0, args.rpp);
+    raytracer->renderAA(fb, sc, 0, args.rpp);
   else
-    raytracer.render(fb, sc, 0);
+    raytracer->render(fb, sc, 0);
   endTime = ptimer.elapsed();
   std::cout << "Render time: " << endTime - startTime << std::endl;
 

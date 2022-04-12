@@ -13,7 +13,7 @@ public:
    * @param camIndex The index of the camera from the scene to be used
    * @param max_t The maximum view distance. Defaults to the max value.
   */
-  void render(Framebuffer &fb, SceneContainer sc, int camIndex, const float max_t = std::numeric_limits<float>::max());
+  virtual void render(Framebuffer &fb, SceneContainer sc, int camIndex, const float max_t = std::numeric_limits<float>::max());
 
   /**
    * @brief Renders an image in the framebuffer for the given scene and camera using stratified sampling.
@@ -23,7 +23,7 @@ public:
    * @param rpp The number of rays per pixel
    * @param max_t The maximum view distance. Defaults to the max value.
   */
-  void render(Framebuffer &fb, SceneContainer sc, int camIndex, int rpp, const float max_t = std::numeric_limits<float>::max());
+  virtual void renderAA(Framebuffer &fb, SceneContainer sc, int camIndex, int rpp, const float max_t = std::numeric_limits<float>::max());
 };
 
 }// namespace renderer

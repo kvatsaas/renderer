@@ -16,6 +16,7 @@ add_library(renderer
 	MirrorShader.cpp MirrorShader.h
 	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h
+	ParallelWhittedRayTracer.cpp ParallelWhittedRayTracer.h
 	PerspectiveCamera.cpp PerspectiveCamera.h
 	PhongShader.cpp PhongShader.h
 	PointLight.cpp PointLight.h

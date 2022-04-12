@@ -20,7 +20,7 @@ void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, 
   }
 }
 
-void WhittedRayTracer::render(Framebuffer &fb, SceneContainer sc, int camIndex, int rpp, const float max_t)
+void WhittedRayTracer::renderAA(Framebuffer &fb, SceneContainer sc, int camIndex, int rpp, const float max_t)
 {
   int n = sqrt(rpp);
   auto camPtr = sc.getCameras()[camIndex];
