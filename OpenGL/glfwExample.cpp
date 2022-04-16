@@ -12,6 +12,8 @@
 
 #include "GLSL.h"
 
+#include "ExampleTriangles.h"
+
 double FPS = 0.0;
 
 int CheckGLErrors(const char *s)
@@ -44,14 +46,14 @@ int main(void)
 
   /* Create a windowed mode window and its OpenGL context */
   int winWidth = 1200;
-  float aspectRatio = 16.0 / 9.0;// winWidth / (float)winHeight;
+  float aspectRatio = 1.00f;// winWidth / (float)winHeight;
   int winHeight = winWidth / aspectRatio;
 
   // non-canonical coordinate setup
-  float left = -7.5f;
-  float right = 7.5f;
-  float bottom = -4.2f;
-  float top = 4.2f;
+  float left = -7.0f;
+  float right = 7.0f;
+  float bottom = -7.0f;
+  float top = 7.0f;
   float near = -10.0f;
   float far = 10.0f;
 
@@ -110,45 +112,10 @@ int main(void)
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
 
   // create 3D vertex data as a vector of floats
-  std::vector<float> host_VertexBuffer{
-    -3.0f,// vertex 0
-    3.0f,
-    0.0f,
-    1.0f,// vertex 0 color
-    0.0f,
-    0.0f,
-    -6.0f,// vertex 1
-    -3.0f,
-    0.0f,
-    0.0f,// vertex 1 color
-    1.0f,
-    0.0f,
-    0.0f,// vertex 2
-    -3.0f,
-    0.0f,
-    0.0f,// vertex 2 color
-    0.0f,
-    1.0f,
-    1.5f,// triangle 2 vertex 0
-    0.0f,
-    0.0f,
-    0.514f,// vertex 0 color
-    0.310f,
-    0.149f,
-    3.0f,// vertex 1
-    -3.0f,
-    0.0f,
-    0.149f,// vertex 1 color
-    0.514f,
-    0.310f,
-    4.5f,// vertex 2
-    0.0f,
-    0.0f,
-    0.310f,// vertex 2 color
-    0.149f,
-    0.514f
-  };
+  std::vector<float> host_VertexBuffer = CentralTriangle;
   int numBytes = host_VertexBuffer.size() * sizeof(float);
+  int stride = 9; // use 9 for lambertian, otherwise 6
+  int attribCount = host_VertexBuffer.size() / stride;
 
   // copy vertex data from host to device (CPU memory to GPU memory)
   glBufferData(GL_ARRAY_BUFFER, numBytes, host_VertexBuffer.data(), GL_STATIC_DRAW);
@@ -161,21 +128,23 @@ int main(void)
   glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
 
-  // enable attributes 0 (position) and 1 (color)
+  // enable attributes 0 (position), 1 (color or normal), and 2 (normal for lambertian
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
+  glEnableVertexAttribArray(2);// comment out when not using lambertion
 
   // bind VBO to VAO and associate its vertex data
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);// position
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const GLvoid *)12);// color
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), 0);// position
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)12);// color or normals
+  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)24);// normals for lambertian - comment out when not in use
 
   // unbind VAO
   glBindVertexArray(0);
 
   // set up shaders using Prof. Willemsen's provided GLSLObject class
   sivelab::GLSLObject shader;
-  shader.addShader("vertexShader_perVertexColor.glsl", sivelab::GLSLObject::VERTEX_SHADER);
+  shader.addShader("vertexShader_perVertexLambertianShading.glsl", sivelab::GLSLObject::VERTEX_SHADER);
   shader.addShader("fragmentShader_perVertexColor.glsl", sivelab::GLSLObject::FRAGMENT_SHADER);
   shader.createProgram();
 
@@ -219,7 +188,7 @@ int main(void)
     /* Begin render VBO/VAO demo */
     shader.activate();// bind shader
     glBindVertexArray(VAO);// bind VAO
-    glDrawArrays(GL_TRIANGLES, 0, 6);// tell OpenGL to render
+    glDrawArrays(GL_TRIANGLES, 0, attribCount);// tell OpenGL to render
     glBindVertexArray(0);// unbind VAO
     shader.deactivate();// unbind shader
     /* End render VBO/VAO demo */
