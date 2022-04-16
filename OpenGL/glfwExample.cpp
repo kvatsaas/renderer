@@ -8,11 +8,29 @@
 #define GLM_FORCE_RADIANS
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
 #include "GLSL.h"
 
+#include "ExampleTriangles.h"
+
 double FPS = 0.0;
+
+glm::mat4 modelMatrix;
+
+double xRotation = 0.0;
+double yRotation = 0.0;
+double zRotation = 0.0;
+double rotationRate = 1.0;
+bool rotationChange = false;
+
+const std::string f_passthrough = "fragmentShader_passthrough.glsl";
+const std::string f_perVertex = "fragmentShader_perVertex.glsl";
+const std::string v_passthrough = "vertexShader_passthrough.glsl";
+const std::string v_perVertexColor = "vertexShader_perVertexColor.glsl";
+const std::string v_perVertexLambertian = "vertexShader_perVertexLambertianShading.glsl";
+const std::string v_perVertexNormal = "vertexShader_perVertexNormalShading.glsl";
 
 int CheckGLErrors(const char *s)
 {
@@ -21,11 +39,46 @@ int CheckGLErrors(const char *s)
   return errCount;
 }
 
-// Handler for t key that prints current FPS to console
-void tPressPrintFPS(GLFWwindow *window, int key, int scancode, int action, int mods)
+/* Handler for key presses
+ * t: print FPS
+ * m: rotate +x
+ * n: rotate -x
+ * k: rotate +y
+ * j: rotate -y
+ * o: rotate +z
+ * i: rotate -z
+ * l: reset all to 0
+ */
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-  if (key == GLFW_KEY_T && action == GLFW_PRESS)
-    std::cout << "FPS: " << FPS << std::endl;
+  {
+    if (key == GLFW_KEY_T && action == GLFW_PRESS) {
+      std::cout << "FPS: " << FPS << std::endl;
+    } else if (key == GLFW_KEY_M && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      xRotation += rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_N && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      xRotation -= rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_K && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      yRotation += rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_J && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      yRotation -= rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_O && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      zRotation += rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_I && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      zRotation -= rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_L && action == GLFW_PRESS) {
+      xRotation = 0;
+      yRotation = 0;
+      zRotation = 0;
+      rotationChange = true;
+    }
+  }
 }
 
 int main(void)
@@ -44,14 +97,14 @@ int main(void)
 
   /* Create a windowed mode window and its OpenGL context */
   int winWidth = 1200;
-  float aspectRatio = 16.0 / 9.0;// winWidth / (float)winHeight;
+  float aspectRatio = 1.00f;// winWidth / (float)winHeight;
   int winHeight = winWidth / aspectRatio;
 
   // non-canonical coordinate setup
-  float left = -7.5f;
-  float right = 7.5f;
-  float bottom = -4.2f;
-  float top = 4.2f;
+  float left = -7.0f;
+  float right = 7.0f;
+  float bottom = -7.0f;
+  float top = 7.0f;
   float near = -10.0f;
   float far = 10.0f;
 
@@ -72,7 +125,6 @@ int main(void)
     std::cerr << "GLEW Error! glewInit failed, exiting." << std::endl;
     exit(EXIT_FAILURE);
   }
-
 
   /********************/
   /* Begin glGet demo */
@@ -110,45 +162,18 @@ int main(void)
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
 
   // create 3D vertex data as a vector of floats
-  std::vector<float> host_VertexBuffer{
-    -3.0f,// vertex 0
-    3.0f,
-    0.0f,
-    1.0f,// vertex 0 color
-    0.0f,
-    0.0f,
-    -6.0f,// vertex 1
-    -3.0f,
-    0.0f,
-    0.0f,// vertex 1 color
-    1.0f,
-    0.0f,
-    0.0f,// vertex 2
-    -3.0f,
-    0.0f,
-    0.0f,// vertex 2 color
-    0.0f,
-    1.0f,
-    1.5f,// triangle 2 vertex 0
-    0.0f,
-    0.0f,
-    0.514f,// vertex 0 color
-    0.310f,
-    0.149f,
-    3.0f,// vertex 1
-    -3.0f,
-    0.0f,
-    0.149f,// vertex 1 color
-    0.514f,
-    0.310f,
-    4.5f,// vertex 2
-    0.0f,
-    0.0f,
-    0.310f,// vertex 2 color
-    0.149f,
-    0.514f
-  };
+  std::vector<float> host_VertexBuffer = MiniMesh();
   int numBytes = host_VertexBuffer.size() * sizeof(float);
+  int stride = 9;
+  int attribCount = host_VertexBuffer.size() / stride;
+
+  // set up uniform variables
+  glm::mat4 projMatrix = glm::ortho(left, right, bottom, top, near, far);
+  glm::vec3 light(0.0f, 0.0f, -10.0f);
+  glm::vec3 xAxis(1.0f, 0.0f, 0.0f);
+  glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
+  glm::vec3 zAxis(0.0f, 0.0f, 1.0f);
+  modelMatrix = glm::rotate((glm::mediump_f32)glm::radians(xRotation), yAxis);
 
   // copy vertex data from host to device (CPU memory to GPU memory)
   glBufferData(GL_ARRAY_BUFFER, numBytes, host_VertexBuffer.data(), GL_STATIC_DRAW);
@@ -161,31 +186,38 @@ int main(void)
   glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
 
-  // enable attributes 0 (position) and 1 (color)
+  // enable attributes 0 (position), 1 (color), and 2 (normal)
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
+  glEnableVertexAttribArray(2);
 
   // bind VBO to VAO and associate its vertex data
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);// position
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const GLvoid *)12);// color
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), 0);// position
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)12);// color
+  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)24);// normal
 
   // unbind VAO
   glBindVertexArray(0);
 
   // set up shaders using Prof. Willemsen's provided GLSLObject class
   sivelab::GLSLObject shader;
-  shader.addShader("vertexShader_perVertexColor.glsl", sivelab::GLSLObject::VERTEX_SHADER);
-  shader.addShader("fragmentShader_perVertexColor.glsl", sivelab::GLSLObject::FRAGMENT_SHADER);
+  shader.addShader(v_perVertexNormal, sivelab::GLSLObject::VERTEX_SHADER);
+  shader.addShader(f_perVertex, sivelab::GLSLObject::FRAGMENT_SHADER);
   shader.createProgram();
 
   // create reference to projMatrix variable in shader
   GLuint projMatrixID = shader.createUniform("projMatrix");
+  GLuint modelMatrixID = shader.createUniform("modelMatrix");
+  GLuint lightID = shader.createUniform("light");
 
   //activate shader so we can set uniform variable data, then deactivate
   shader.activate();
-  glm::mat4 projMatrix = glm::ortho(left, right, bottom, top, near, far);
+
   glUniformMatrix4fv(projMatrixID, 1, GL_FALSE, glm::value_ptr(projMatrix));
+  glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+  glUniform3fv(lightID, 1, glm::value_ptr(light));
+
   shader.deactivate();
   /********************/
   /* End VBO/VAO demo */
@@ -194,7 +226,7 @@ int main(void)
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
   glClearColor(0.5f, 0.5f, 0.5f, 1.0);
-  glfwSetKeyCallback(window, tPressPrintFPS);
+  glfwSetKeyCallback(window, key_callback);
 
   int fb_width, fb_height;
   glfwGetFramebufferSize(window, &fb_width, &fb_height);
@@ -218,8 +250,23 @@ int main(void)
 
     /* Begin render VBO/VAO demo */
     shader.activate();// bind shader
+    //update rotation if needed
+    if (rotationChange) {
+      modelMatrix = glm::rotate(
+        glm::rotate(
+          glm::rotate(
+            (glm::mediump_f32)glm::radians(zRotation),
+            zAxis),
+          (glm::mediump_f32)glm::radians(yRotation), 
+          yAxis),
+        (glm::mediump_f32)glm::radians(xRotation),
+        xAxis);
+      glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+      rotationChange = false;
+    }
+
     glBindVertexArray(VAO);// bind VAO
-    glDrawArrays(GL_TRIANGLES, 0, 6);// tell OpenGL to render
+    glDrawArrays(GL_TRIANGLES, 0, attribCount);// tell OpenGL to render
     glBindVertexArray(0);// unbind VAO
     shader.deactivate();// unbind shader
     /* End render VBO/VAO demo */
