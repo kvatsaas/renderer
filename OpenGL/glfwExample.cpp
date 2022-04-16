@@ -15,6 +15,12 @@
 #include "ExampleTriangles.h"
 
 double FPS = 0.0;
+const std::string f_passthrough = "fragmentShader_passthrough.glsl";
+const std::string f_perVertex = "fragmentShader_perVertex.glsl";
+const std::string v_passthrough = "vertexShader_passthrough.glsl";
+const std::string v_perVertexColor = "vertexShader_perVertexColor.glsl";
+const std::string v_perVertexLambertian = "vertexShader_perVertexLambertianShading.glsl";
+const std::string v_perVertexNormal = "vertexShader_perVertexNormalShading.glsl";
 
 int CheckGLErrors(const char *s)
 {
@@ -114,12 +120,12 @@ int main(void)
   // create 3D vertex data as a vector of floats
   std::vector<float> host_VertexBuffer = CentralTriangle;
   int numBytes = host_VertexBuffer.size() * sizeof(float);
-  int stride = 9; // use 9 for lambertian, otherwise 6
+  int stride = 9;
   int attribCount = host_VertexBuffer.size() / stride;
 
   // copy vertex data from host to device (CPU memory to GPU memory)
   glBufferData(GL_ARRAY_BUFFER, numBytes, host_VertexBuffer.data(), GL_STATIC_DRAW);
-
+  
   // clear data from host
   host_VertexBuffer.clear();
 
@@ -128,24 +134,24 @@ int main(void)
   glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
 
-  // enable attributes 0 (position), 1 (color or normal), and 2 (normal for lambertian
+  // enable attributes 0 (position), 1 (color), and 2 (normal)
   glEnableVertexAttribArray(0);
   glEnableVertexAttribArray(1);
-  glEnableVertexAttribArray(2);// comment out when not using lambertion
+  glEnableVertexAttribArray(2);
 
   // bind VBO to VAO and associate its vertex data
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), 0);// position
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)12);// color or normals
-  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)24);// normals for lambertian - comment out when not in use
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)12);// color
+  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid *)24);// normal
 
   // unbind VAO
   glBindVertexArray(0);
 
   // set up shaders using Prof. Willemsen's provided GLSLObject class
   sivelab::GLSLObject shader;
-  shader.addShader("vertexShader_perVertexLambertianShading.glsl", sivelab::GLSLObject::VERTEX_SHADER);
-  shader.addShader("fragmentShader_perVertexColor.glsl", sivelab::GLSLObject::FRAGMENT_SHADER);
+  shader.addShader(v_perVertexLambertian, sivelab::GLSLObject::VERTEX_SHADER);
+  shader.addShader(f_perVertex, sivelab::GLSLObject::FRAGMENT_SHADER);
   shader.createProgram();
 
   // create reference to projMatrix variable in shader

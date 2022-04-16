@@ -28,36 +28,54 @@ vector<float> TwoTriangles{
   1.0f,// vertex 0 color
   0.0f,
   0.0f,
+  0.0f,// vertex 0 normal
+  0.0f,
+  -1.0f,
   -6.0f,// vertex 1
   -3.0f,
   0.0f,
   0.0f,// vertex 1 color
   1.0f,
   0.0f,
+  0.0f,// vertex 1 normal
+  0.0f,
+  -1.0f,
   0.0f,// vertex 2
   -3.0f,
   0.0f,
   0.0f,// vertex 2 color
   0.0f,
   1.0f,
+  0.0f,// vertex 2 normal
+  0.0f,
+  -1.0f,
   1.5f,// triangle 2 vertex 0
   0.0f,
   0.0f,
   0.514f,// vertex 0 color
   0.310f,
   0.149f,
+  0.0f,// vertex 0 normal
+  0.0f,
+  -1.0f,
   3.0f,// vertex 1
   -3.0f,
   0.0f,
   0.149f,// vertex 1 color
   0.514f,
   0.310f,
+  0.0f,// vertex 1 normal
+  0.0f,
+  -1.0f,
   4.5f,// vertex 2
   0.0f,
   0.0f,
   0.310f,// vertex 2 color
   0.149f,
-  0.514f
+  0.514f,
+  0.0f,// vertex 2 normal
+  0.0f,
+  -1.0f,
 };
 
 /* The same as the above, but using the half-space mapping on normals of the vertices. These two
@@ -77,11 +95,17 @@ vector<float> TwoOrthogonalTriangles{
   -3.0f,// vertex 0
   3.0f,
   0.0f,
+  0.0f,// vertex 0 color
+  0.0f,
+  0.0f,
   0.0f,// vertex 0 normal
   0.0f,
   -1.0f,
   -6.0f,// vertex 1
   -3.0f,
+  0.0f,
+  0.0f,// vertex 1 color
+  0.0f,
   0.0f,
   0.0f,// vertex 1 normal
   0.0f,
@@ -89,10 +113,16 @@ vector<float> TwoOrthogonalTriangles{
   0.0f,// vertex 2
   -3.0f,
   0.0f,
+  0.0f,// vertex 2 color
+  0.0f,
+  0.0f,
   0.0f,// vertex 2 normal
   0.0f,
   -1.0f,
   1.5f,// triangle 2 vertex 0
+  0.0f,
+  0.0f,
+  0.0f,// vertex 0 color
   0.0f,
   0.0f,
   0.0f,// vertex 0 normal
@@ -101,10 +131,16 @@ vector<float> TwoOrthogonalTriangles{
   3.0f,// vertex 1
   -3.0f,
   0.0f,
+  0.0f,// vertex 1 color
+  0.0f,
+  0.0f,
   0.0f,// vertex 1 normal
   0.0f,
   -1.0f,
   4.5f,// vertex 2
+  0.0f,
+  0.0f,
+  0.0f,// vertex 2 color
   0.0f,
   0.0f,
   0.0f,// vertex 2 normal
@@ -128,11 +164,17 @@ vector<float> TwoAngledTriangles{
   -3.0f,// vertex 0
   3.0f,
   -9.0f,
+  0.0f,// vertex 0 color
+  0.0f,
+  0.0f,
   -0.577f,// vertex 0 normal
   -0.577f,
   -0.577f,
   -6.0f,// vertex 1
   -3.0f,
+  0.0f,
+  0.0f,// vertex 1 color
+  0.0f,
   0.0f,
   -0.707f,// vertex 1 normal
   0.0f,
@@ -140,17 +182,26 @@ vector<float> TwoAngledTriangles{
   0.0f,// vertex 2
   -3.0f,
   9.0f,
+  0.0f,// vertex 2 color
+  0.0f,
+  0.0f,
   0.0f,// vertex 2 normal
   -0.707f,
   -0.707f,
   1.5f,// triangle 2 vertex 0
   0.0f,
   9.0f,
+  0.0f,// vertex 0 color
+  0.0f,
+  0.0f,
   0.577f,// vertex 0 normal
   0.577f,
   -0.577f,
   3.0f,// vertex 1
   -3.0f,
+  0.0f,
+  0.0f,// vertex 1 color
+  0.0f,
   0.0f,
   0.707f,// vertex 1 normal
   0.0f,
@@ -158,6 +209,9 @@ vector<float> TwoAngledTriangles{
   4.5f,// vertex 2
   0.0f,
   -9.0f,
+  0.0f,// vertex 2 color
+  0.0f,
+  0.0f,
   0.0f,// vertex 2 normal
   0.707f,
   -0.707f,
@@ -181,19 +235,19 @@ vector<float> TwoAngledTriangles{
 vector<float> FlatMiniMesh()
 {
   auto vertices = map<char, vector<float>>();
-  vertices.emplace('a', vector<float>{ -3.0f, 3.0f, 0.0f, -0.707f, 0.707f, 0.0f });
-  vertices.emplace('b', vector<float>{ 0.0f, 3.0f, 0.0f, 0.0f, 1.0f, 0.0f });
-  vertices.emplace('c', vector<float>{ 3.0f, 3.0f, 0.0f, 0.707f, 0.707f, 0.0f });
-  vertices.emplace('d', vector<float>{ -3.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f });
-  vertices.emplace('e', vector<float>{ 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f });
-  vertices.emplace('f', vector<float>{ 3.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f });
-  vertices.emplace('g', vector<float>{ -3.0f, -3.0f, 0.0f, -0.707f, -0.707f, 0.0f });
-  vertices.emplace('h', vector<float>{ 0.0f, -3.0f, 0.0f, 0.0f, -1.0f, 0.0f });
-  vertices.emplace('i', vector<float>{ 3.0f, -3.0f, 0.0f, 0.707f, -0.707f, 0.0f });
-  vertices.emplace('j', vector<float>{ -6.0f, 0.0f, 0.0f, 0.707f, 0.0f, -0.707f });
-  vertices.emplace('k', vector<float>{ 6.0f, 0.0f, 0.0f, -0.707f, 0.0f, -0.707f });
-  vertices.emplace('l', vector<float>{ 0.0f, 6.0f, 0.0f, 0.0f, -0.707f, -0.707f });
-  vertices.emplace('m', vector<float>{ 0.0f, -6.0f, 0.0f, 0.0f, 0.707f, -0.707f });
+  vertices.emplace('a', vector<float>{ -3.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, 0.707f, 0.0f });
+  vertices.emplace('b', vector<float>{ 0.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f });
+  vertices.emplace('c', vector<float>{ 3.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, 0.707f, 0.0f });
+  vertices.emplace('d', vector<float>{ -3.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f });
+  vertices.emplace('e', vector<float>{ 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f });
+  vertices.emplace('f', vector<float>{ 3.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f });
+  vertices.emplace('g', vector<float>{ -3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, -0.707f, 0.0f });
+  vertices.emplace('h', vector<float>{ 0.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f });
+  vertices.emplace('i', vector<float>{ 3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, -0.707f, 0.0f });
+  vertices.emplace('j', vector<float>{ -6.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, 0.0f, -0.707f });
+  vertices.emplace('k', vector<float>{ 6.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, 0.0f, -0.707f });
+  vertices.emplace('l', vector<float>{ 0.0f, 6.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, -0.707f, -0.707f });
+  vertices.emplace('m', vector<float>{ 0.0f, -6.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.707f, -0.707f });
 
   auto flatMiniMesh = vector<float>();
 
@@ -280,19 +334,19 @@ vector<float> FlatMiniMesh()
 vector<float> MiniMesh()
 {
   auto vertices = map<char, vector<float>>();
-  vertices.emplace('a', vector<float>{ -3.0f, 3.0f, 0.0f, -0.707f, 0.707f, 0.0f });
-  vertices.emplace('b', vector<float>{ 0.0f, 3.0f, -9.0f, 0.0f, 1.0f, 0.0f });
-  vertices.emplace('c', vector<float>{ 3.0f, 3.0f, 0.0f, 0.707f, 0.707f, 0.0f });
-  vertices.emplace('d', vector<float>{ -3.0f, 0.0f, -9.0f, -1.0f, 0.0f, 0.0f });
-  vertices.emplace('e', vector<float>{ 0.0f, 0.0f, 9.0f, 0.0f, 0.0f, -1.0f });
-  vertices.emplace('f', vector<float>{ 3.0f, 0.0f, -9.0f, 1.0f, 0.0f, 0.0f });
-  vertices.emplace('g', vector<float>{ -3.0f, -3.0f, 0.0f, -0.707f, -0.707f, 0.0f });
-  vertices.emplace('h', vector<float>{ 0.0f, -3.0f, -9.0f, 0.0f, -1.0f, 0.0f });
-  vertices.emplace('i', vector<float>{ 3.0f, -3.0f, 0.0f, 0.707f, -0.707f, 0.0f });
-  vertices.emplace('j', vector<float>{ -6.0f, 0.0f, 9.0f, 0.707f, 0.0f, -0.707f });
-  vertices.emplace('k', vector<float>{ 6.0f, 0.0f, 9.0f, -0.707f, 0.0f, -0.707f });
-  vertices.emplace('l', vector<float>{ 0.0f, 6.0f, 9.0f, 0.0f, -0.707f, -0.707f });
-  vertices.emplace('m', vector<float>{ 0.0f, -6.0f, 9.0f, 0.0f, 0.707f, -0.707f });
+  vertices.emplace('a', vector<float>{ -3.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, 0.707f, 0.0f });
+  vertices.emplace('b', vector<float>{ 0.0f, 3.0f, -9.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f });
+  vertices.emplace('c', vector<float>{ 3.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, 0.707f, 0.0f });
+  vertices.emplace('d', vector<float>{ -3.0f, 0.0f, -9.0f, 1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f });
+  vertices.emplace('e', vector<float>{ 0.0f, 0.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f });
+  vertices.emplace('f', vector<float>{ 3.0f, 0.0f, -9.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f });
+  vertices.emplace('g', vector<float>{ -3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, -0.707f, 0.0f });
+  vertices.emplace('h', vector<float>{ 0.0f, -3.0f, -9.0f, 1.0f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f });
+  vertices.emplace('i', vector<float>{ 3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, -0.707f, 0.0f });
+  vertices.emplace('j', vector<float>{ -6.0f, 0.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.707f, 0.0f, -0.707f });
+  vertices.emplace('k', vector<float>{ 6.0f, 0.0f, 9.0f, 1.0f, 1.0f, 1.0f, -0.707f, 0.0f, -0.707f });
+  vertices.emplace('l', vector<float>{ 0.0f, 6.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.0f, -0.707f, -0.707f });
+  vertices.emplace('m', vector<float>{ 0.0f, -6.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.707f, -0.707f });
 
   auto miniMesh = vector<float>();
 
