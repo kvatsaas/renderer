@@ -6,15 +6,10 @@ layout(location=1) in vec3 in_Color;
 out vec3 vColor;
 
 uniform mat4 projMatrix;
+uniform mat4 modelMatrix;
 
 void main(void)
 {
-  mat4 modelMatrix;
-  modelMatrix[0] = vec4( 1.0, 0.0, 0.0, 0.0 );
-  modelMatrix[1] = vec4( 0.0, 1.0, 0.0, 0.0 );
-  modelMatrix[2] = vec4( 0.0, 0.0, 1.0, 0.0 );
-  modelMatrix[3] = vec4( 0.0, 0.0, 0.0, 1.0 );
-
   mat4 viewMatrix;
   viewMatrix[0] = vec4( 1.0, 0.0, 0.0, 0.0 );
   viewMatrix[1] = vec4( 0.0, 1.0, 0.0, 0.0 );

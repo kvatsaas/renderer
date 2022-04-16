@@ -334,19 +334,19 @@ vector<float> FlatMiniMesh()
 vector<float> MiniMesh()
 {
   auto vertices = map<char, vector<float>>();
-  vertices.emplace('a', vector<float>{ -3.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, 0.707f, 0.0f });
-  vertices.emplace('b', vector<float>{ 0.0f, 3.0f, -9.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f });
-  vertices.emplace('c', vector<float>{ 3.0f, 3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, 0.707f, 0.0f });
-  vertices.emplace('d', vector<float>{ -3.0f, 0.0f, -9.0f, 1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f });
-  vertices.emplace('e', vector<float>{ 0.0f, 0.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f });
-  vertices.emplace('f', vector<float>{ 3.0f, 0.0f, -9.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f });
-  vertices.emplace('g', vector<float>{ -3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, -0.707f, -0.707f, 0.0f });
-  vertices.emplace('h', vector<float>{ 0.0f, -3.0f, -9.0f, 1.0f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f });
-  vertices.emplace('i', vector<float>{ 3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.707f, -0.707f, 0.0f });
-  vertices.emplace('j', vector<float>{ -6.0f, 0.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.707f, 0.0f, -0.707f });
-  vertices.emplace('k', vector<float>{ 6.0f, 0.0f, 9.0f, 1.0f, 1.0f, 1.0f, -0.707f, 0.0f, -0.707f });
-  vertices.emplace('l', vector<float>{ 0.0f, 6.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.0f, -0.707f, -0.707f });
-  vertices.emplace('m', vector<float>{ 0.0f, -6.0f, 9.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.707f, -0.707f });
+  vertices.emplace('a', vector<float>{ -3.0f, 3.0f, 0.0f, 0.0f, 1.0f, 1.0f, -0.707f, 0.707f, 0.0f });
+  vertices.emplace('b', vector<float>{ 0.0f, 3.0f, -6.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f });
+  vertices.emplace('c', vector<float>{ 3.0f, 3.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.707f, 0.707f, 0.0f });
+  vertices.emplace('d', vector<float>{ -3.0f, 0.0f, -6.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f });
+  vertices.emplace('e', vector<float>{ 0.0f, 0.0f, 6.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f });
+  vertices.emplace('f', vector<float>{ 3.0f, 0.0f, -6.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f });
+  vertices.emplace('g', vector<float>{ -3.0f, -3.0f, 0.0f, 0.0f, 1.0f, 1.0f, -0.707f, -0.707f, 0.0f });
+  vertices.emplace('h', vector<float>{ 0.0f, -3.0f, -6.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f });
+  vertices.emplace('i', vector<float>{ 3.0f, -3.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.707f, -0.707f, 0.0f });
+  vertices.emplace('j', vector<float>{ -6.0f, 0.0f, 6.0f, 1.0f, 1.0f, 0.0f, 0.707f, 0.0f, -0.707f });
+  vertices.emplace('k', vector<float>{ 6.0f, 0.0f, 6.0f, 1.0f, 1.0f, 0.0f, -0.707f, 0.0f, -0.707f });
+  vertices.emplace('l', vector<float>{ 0.0f, 6.0f, 6.0f, 1.0f, 1.0f, 0.0f, 0.0f, -0.707f, -0.707f });
+  vertices.emplace('m', vector<float>{ 0.0f, -6.0f, 6.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.707f, -0.707f });
 
   auto miniMesh = vector<float>();
 

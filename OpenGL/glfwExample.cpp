@@ -8,6 +8,7 @@
 #define GLM_FORCE_RADIANS
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
 #include "GLSL.h"
@@ -15,6 +16,15 @@
 #include "ExampleTriangles.h"
 
 double FPS = 0.0;
+
+glm::mat4 modelMatrix;
+
+double xRotation = 0.0;
+double yRotation = 0.0;
+double zRotation = 0.0;
+double rotationRate = 1.0;
+bool rotationChange = false;
+
 const std::string f_passthrough = "fragmentShader_passthrough.glsl";
 const std::string f_perVertex = "fragmentShader_perVertex.glsl";
 const std::string v_passthrough = "vertexShader_passthrough.glsl";
@@ -29,11 +39,46 @@ int CheckGLErrors(const char *s)
   return errCount;
 }
 
-// Handler for t key that prints current FPS to console
-void tPressPrintFPS(GLFWwindow *window, int key, int scancode, int action, int mods)
+/* Handler for key presses
+ * t: print FPS
+ * m: rotate +x
+ * n: rotate -x
+ * k: rotate +y
+ * j: rotate -y
+ * o: rotate +z
+ * i: rotate -z
+ * l: reset all to 0
+ */
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-  if (key == GLFW_KEY_T && action == GLFW_PRESS)
-    std::cout << "FPS: " << FPS << std::endl;
+  {
+    if (key == GLFW_KEY_T && action == GLFW_PRESS) {
+      std::cout << "FPS: " << FPS << std::endl;
+    } else if (key == GLFW_KEY_M && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      xRotation += rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_N && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      xRotation -= rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_K && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      yRotation += rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_J && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      yRotation -= rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_O && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      zRotation += rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_I && (action == GLFW_PRESS || action == GLFW_REPEAT)) {
+      zRotation -= rotationRate;
+      rotationChange = true;
+    } else if (key == GLFW_KEY_L && action == GLFW_PRESS) {
+      xRotation = 0;
+      yRotation = 0;
+      zRotation = 0;
+      rotationChange = true;
+    }
+  }
 }
 
 int main(void)
@@ -81,7 +126,6 @@ int main(void)
     exit(EXIT_FAILURE);
   }
 
-
   /********************/
   /* Begin glGet demo */
   /********************/
@@ -118,14 +162,22 @@ int main(void)
   glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
 
   // create 3D vertex data as a vector of floats
-  std::vector<float> host_VertexBuffer = CentralTriangle;
+  std::vector<float> host_VertexBuffer = MiniMesh();
   int numBytes = host_VertexBuffer.size() * sizeof(float);
   int stride = 9;
   int attribCount = host_VertexBuffer.size() / stride;
 
+  // set up uniform variables
+  glm::mat4 projMatrix = glm::ortho(left, right, bottom, top, near, far);
+  glm::vec3 light(0.0f, 0.0f, -10.0f);
+  glm::vec3 xAxis(1.0f, 0.0f, 0.0f);
+  glm::vec3 yAxis(0.0f, 1.0f, 0.0f);
+  glm::vec3 zAxis(0.0f, 0.0f, 1.0f);
+  modelMatrix = glm::rotate((glm::mediump_f32)glm::radians(xRotation), yAxis);
+
   // copy vertex data from host to device (CPU memory to GPU memory)
   glBufferData(GL_ARRAY_BUFFER, numBytes, host_VertexBuffer.data(), GL_STATIC_DRAW);
-  
+
   // clear data from host
   host_VertexBuffer.clear();
 
@@ -150,17 +202,22 @@ int main(void)
 
   // set up shaders using Prof. Willemsen's provided GLSLObject class
   sivelab::GLSLObject shader;
-  shader.addShader(v_perVertexLambertian, sivelab::GLSLObject::VERTEX_SHADER);
+  shader.addShader(v_perVertexNormal, sivelab::GLSLObject::VERTEX_SHADER);
   shader.addShader(f_perVertex, sivelab::GLSLObject::FRAGMENT_SHADER);
   shader.createProgram();
 
   // create reference to projMatrix variable in shader
   GLuint projMatrixID = shader.createUniform("projMatrix");
+  GLuint modelMatrixID = shader.createUniform("modelMatrix");
+  GLuint lightID = shader.createUniform("light");
 
   //activate shader so we can set uniform variable data, then deactivate
   shader.activate();
-  glm::mat4 projMatrix = glm::ortho(left, right, bottom, top, near, far);
+
   glUniformMatrix4fv(projMatrixID, 1, GL_FALSE, glm::value_ptr(projMatrix));
+  glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+  glUniform3fv(lightID, 1, glm::value_ptr(light));
+
   shader.deactivate();
   /********************/
   /* End VBO/VAO demo */
@@ -169,7 +226,7 @@ int main(void)
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
   glClearColor(0.5f, 0.5f, 0.5f, 1.0);
-  glfwSetKeyCallback(window, tPressPrintFPS);
+  glfwSetKeyCallback(window, key_callback);
 
   int fb_width, fb_height;
   glfwGetFramebufferSize(window, &fb_width, &fb_height);
@@ -193,6 +250,21 @@ int main(void)
 
     /* Begin render VBO/VAO demo */
     shader.activate();// bind shader
+    //update rotation if needed
+    if (rotationChange) {
+      modelMatrix = glm::rotate(
+        glm::rotate(
+          glm::rotate(
+            (glm::mediump_f32)glm::radians(zRotation),
+            zAxis),
+          (glm::mediump_f32)glm::radians(yRotation), 
+          yAxis),
+        (glm::mediump_f32)glm::radians(xRotation),
+        xAxis);
+      glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+      rotationChange = false;
+    }
+
     glBindVertexArray(VAO);// bind VAO
     glDrawArrays(GL_TRIANGLES, 0, attribCount);// tell OpenGL to render
     glBindVertexArray(0);// unbind VAO
