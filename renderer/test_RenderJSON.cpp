@@ -20,14 +20,18 @@ using namespace renderer;
 int main(int argc, char *argv[])
 {
   sivelab::GraphicsArgs args;
+  args.reg("multithread", "Enables multithreaded rendering", sivelab::ArgumentParsing::ArgTypes::NONE, 'm');
   args.process(argc, argv);
+
   boost::progress_timer ptimer;
   float startTime, endTime;
   auto fb = Framebuffer(args.width, args.height);
   auto sc = SceneContainer(args.width, args.height);
 
   Renderer *raytracer;
-  if (args.isSet("numcpus"))
+  if (args.isSet("multithread"))
+    raytracer = new ParallelWhittedRayTracer(-1);
+  else if (args.isSet("numcpus"))
     raytracer = new ParallelWhittedRayTracer(args.numCpus);
   else
     raytracer = new WhittedRayTracer();

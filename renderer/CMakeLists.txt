@@ -7,6 +7,7 @@ add_library(renderer
 	DiffuseShader.cpp DiffuseShader.h
 	CoordSys.cpp CoordSys.h
 	Framebuffer.cpp Framebuffer.h
+	GlazeShader.cpp GlazeShader.h
 	HitStructure.cpp HitStructure.h
 	InstancedObject.cpp InstancedObject.h
 	jsonParser.cpp

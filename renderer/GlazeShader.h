@@ -1,22 +1,23 @@
 #pragma once
 #include "Shader.h"
-#include "SceneContainer.h"
+#include "LambertianShader.h"
+#include "MirrorShader.h"
 
 namespace renderer {
 
-class LambertianShader : public Shader
+class GlazeShader : public Shader
 {
 public:
   /**
-   * @brief Creates a Lambertian shader with a diffuse value of (1, 1, 1)
+   * @brief Creates a Glaze shader with a diffuse value of (1, 1, 1) and mirror coefficient of 0.5
   */
-  LambertianShader();
+  GlazeShader();
 
   /**
    * @brief Creates a Lambertian shader with the given diffuse value.
    * @param diffuse 
   */
-  LambertianShader(Vector3D d);
+  GlazeShader(Vector3D d, float mCoef);
 
   /**
    * @brief Returns the color for the given hit structure.
@@ -28,7 +29,9 @@ public:
   virtual Vector3D apply(const HitStructure &h, SceneContainer &sc, int depth) const;
 
 private:
-  Vector3D diffuse;
+  LambertianShader lambert;
+  MirrorShader mirror;
+  float mirrorCoefficient;
 };
 
 }// namespace renderer

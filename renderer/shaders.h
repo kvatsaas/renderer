@@ -4,6 +4,7 @@
 
 #include "BlinnPhongShader.h"
 #include "DiffuseShader.h"
+#include "GlazeShader.h"
 #include "LambertianShader.h"
 #include "MirrorShader.h"
 #include "NormalShader.h"

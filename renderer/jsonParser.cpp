@@ -5,8 +5,12 @@
 #define TRANSFORMS_READY 0
 #define MESHES_READY 0
 #define MONSTERS_READY 1
+#define DIELECTRIC_READY 0
+#define GLAZE_READY 1
+#define BPMIRRORED_READY 0
 #define ADVSHADERS_READY 0
-#define ADVLIGHTS_READY 0
+#define AREALIGHTS_READY 0
+#define SHAPELIGHTS_READY 0
 
 #include <iostream>
 #include <fstream>
@@ -269,7 +273,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
         shaderPtr = new LambertianShader(diffuse);//DiffuseShader(diffuse);
     }
 
-#if ADVSHADERS_READY
+#if DIELECTRIC_READY
     else if (shaderType == "Dielectric") {
       float refrIdx;
       Vector3D attenCoef;
@@ -297,7 +301,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
     else if (shaderType == "Mirror") {
       shaderPtr = new MirrorShader();
     }
-#if ADVSHADERS_READY
+#if GLAZE_READY
     else if (shaderType == "Glaze") {
       Vector3D kd;
       kd = shaderInfo["diffuse"];
@@ -305,7 +309,9 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       float mirrorCoef = 1.0;
       mirrorCoef = shaderInfo["mirrorCoef"];
 
-      shaderPtr = new sivelab::Glaze(kd, mirrorCoef);
+      shaderPtr = new GlazeShader(kd, mirrorCoef);
+#endif
+#if BPMIRRORED_READY
     } else if (shaderType == "BlinnPhongMirrored") {
       Vector3D d, s;
 
@@ -337,8 +343,8 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       float roughnessCoef = shaderInfo["roughness"];
 
       shaderPtr = new sivelab::BlinnPhongMirrored(kd, ks, phongExp, mirrorCoef, roughnessCoef);
-    }
 #endif
+    }
 
     assert(shaderPtr);
 
@@ -411,7 +417,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       scene.addLight(new PointLight(position, radiantEnergy));
     }
 
-#if ADVLIGHTS_READY
+#if AREALIGHTS_READY
     else if (type == "area") {
 
       position = j["scene"]["light"][i]["position"];
@@ -460,7 +466,8 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 
       m_otherObjs.push_back(tPtr);
     }
-
+#endif
+#if SHAPELIGHTS_READY
     else if (type == "shape") {
 
       json shapeInfo = j["scene"]["light"][i]["shape"];
