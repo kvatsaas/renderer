@@ -202,7 +202,7 @@ int main(void)
 
   // set up shaders using Prof. Willemsen's provided GLSLObject class
   sivelab::GLSLObject shader;
-  shader.addShader(v_perVertexNormal, sivelab::GLSLObject::VERTEX_SHADER);
+  shader.addShader(v_perVertexLambertian, sivelab::GLSLObject::VERTEX_SHADER);
   shader.addShader(f_perVertex, sivelab::GLSLObject::FRAGMENT_SHADER);
   shader.createProgram();
 
