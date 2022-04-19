@@ -1,24 +1,26 @@
 #pragma once
 #include "Shader.h"
-#include "LambertianShader.h"
+#include "BlinnPhongShader.h"
 #include "MirrorShader.h"
 
 namespace renderer {
 
-class GlazeShader : public Shader
+class BlinnPhongMirroredShader : public Shader
 {
 public:
   /**
-   * @brief Creates a Glaze shader with a default Lambertian shader and mirror coefficient of 0.5
+   * @brief Creates a mirrored BP shader with a default BP shader and mirror coefficient of 0.5
   */
-  GlazeShader();
+  BlinnPhongMirroredShader();
 
   /**
-   * @brief Creates a Glaze shader using the given diffuse value and mirror coefficient.
+   * @brief Creates a mirrored BP shader using the given BP shader values and mirror coefficient.
    * @param d The diffuse value
+   * @param s The specular value
+   * @param e The Phong exponent
    * @param mCoef The mirror coefficient
   */
-  GlazeShader(Vector3D d, float mCoef);
+  BlinnPhongMirroredShader(Vector3D d, Vector3D s, float e, float mCoef);
 
   /**
    * @brief Returns the color for the given hit structure.
@@ -30,7 +32,7 @@ public:
   virtual Vector3D apply(const HitStructure &h, SceneContainer &sc, int depth) const;
 
 private:
-  LambertianShader lambert;
+  BlinnPhongShader bp;
   MirrorShader mirror;
   float mirrorCoefficient;
 };

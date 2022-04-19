@@ -53,6 +53,11 @@ void SceneContainer::setMaxDepth(int d)
   maxDepth = d;
 }
 
+void SceneContainer::set_rpp(int r)
+{
+  rpp = r;
+}
+
 const std::vector<Camera *> &SceneContainer::getCameras()
 {
   return cameras;
@@ -69,7 +74,7 @@ std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth)
 
   for (int i = 0; i < lights.size(); i++) {
     auto lightRayDir = (lights[i]->getPosition() - point);// light direction
-    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth))
+    if (lights[i]->isVisibleFrom(point, depth, *this))
       visibleLights.push_back(lights[i]);
   }
 
@@ -114,7 +119,7 @@ BVHNode SceneContainer::getRoot()
   return rootNode;
 }
 
-int SceneContainer::getMaxDepth(int d)
+int SceneContainer::getMaxDepth()
 {
   return maxDepth;
 }

@@ -1,4 +1,5 @@
 #include "Light.h"
+#include "SceneContainer.h"
 
 namespace renderer {
 

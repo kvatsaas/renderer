@@ -12,6 +12,7 @@
 #include "WhittedRayTracer.h"
 #include "ParallelWhittedRayTracer.h"
 #include "Framebuffer.h"
+#include "SceneContainer.h"
 #include "jsonParser.cpp"
 #include "../src/handleGraphicsArgs.h"
 
@@ -27,6 +28,8 @@ int main(int argc, char *argv[])
   float startTime, endTime;
   auto fb = Framebuffer(args.width, args.height);
   auto sc = SceneContainer(args.width, args.height);
+  if (args.isSet("rpp"))
+    sc.set_rpp(args.rpp);
 
   Renderer *raytracer;
   if (args.isSet("multithread"))

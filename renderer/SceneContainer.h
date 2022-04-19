@@ -80,6 +80,12 @@ public:
   void setMaxDepth(int d);
 
   /**
+   * @brief Sets the rays per pixel
+   * @param r The rpp
+  */
+  void set_rpp(int r);
+
+  /**
    * @brief Getter for the cameras in the scene
    * @return A vector of pointers to cameras
   */
@@ -146,7 +152,13 @@ public:
    * @brief Gets the max recursive depth for rayColor
    * @return The max depth
   */
-  int getMaxDepth(int d);
+  int getMaxDepth();
+
+  /**
+   * @brief Getter for the rays per pixel
+   * @return The rpp value
+  */
+  int get_rpp();
 
   /**
    * @brief Determines whether the given ray hits any shape in the scene
@@ -176,7 +188,7 @@ protected:
   BVHNode rootNode;
   Vector3D bgColor;
   float default_nx, default_ny;
-  int maxDepth;
+  int maxDepth, rpp;
 };
 
 }// namespace renderer

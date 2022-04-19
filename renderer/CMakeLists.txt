@@ -1,5 +1,7 @@
 add_library(renderer
 	AABoundingBox.cpp AABoundingBox.h
+	AreaLight.cpp AreaLight.h
+	BlinnPhongMirroredShader.cpp BlinnPhongMirroredShader.h
 	BlinnPhongShader.cpp BlinnPhongShader.h
 	Box.cpp Box.h
 	BVHNode.cpp BVHNode.h

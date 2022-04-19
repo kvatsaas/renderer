@@ -1,4 +1,5 @@
 #include "PointLight.h"
+#include "SceneContainer.h"
 
 namespace renderer {
 
@@ -12,6 +13,12 @@ PointLight::PointLight(Vector3D p, Vector3D i)
 {
   position = p;
   intensity = i;
+}
+
+bool PointLight::isVisibleFrom(Vector3D point, int depth, SceneContainer &sc)
+{
+  auto lightRayDir = (position - point);// direction from point to light
+  return !sc.anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth);
 }
 
 }// namespace renderer

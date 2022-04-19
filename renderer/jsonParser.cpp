@@ -7,7 +7,7 @@
 #define MONSTERS_READY 1
 #define DIELECTRIC_READY 0
 #define GLAZE_READY 1
-#define BPMIRRORED_READY 0
+#define BPMIRRORED_READY 1
 #define ADVSHADERS_READY 0
 #define AREALIGHTS_READY 0
 #define SHAPELIGHTS_READY 0
@@ -316,7 +316,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       Vector3D d, s;
 
       d = shaderInfo["diffuse"];
-      Vector3D kd(d, 0);
+      //Vector3D kd(d, 0);
 
       // boost::optional<std::string> pTexName = v.second.get_optional<std::string>("diffuse.<xmlattr>.tex");
       // if (pTexName) {
@@ -334,15 +334,15 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       // ks = Vector3D(s, textureSources[*pTexName]);
       // }
       // else {
-      Vector3D ks = Vector3D(s, 0);
+      //Vector3D ks = Vector3D(s, 0);
       // }
 
       float phongExp = shaderInfo["phongExp"];
 
       float mirrorCoef = shaderInfo["mirrorCoef"];
-      float roughnessCoef = shaderInfo["roughness"];
+      //float roughnessCoef = shaderInfo["roughness"];
 
-      shaderPtr = new sivelab::BlinnPhongMirrored(kd, ks, phongExp, mirrorCoef, roughnessCoef);
+      shaderPtr = new BlinnPhongMirroredShader(d, s, phongExp, mirrorCoef/*, roughnessCoef*/);
 #endif
     }
 
@@ -403,7 +403,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
   std::cout << "Number of leaves: " << scene.getRoot().getLeaves() << std::endl;
   std::cout << "Number of nodes: " << scene.getRoot().getChildren() + 1 << std::endl;
 
-  // Walk over all ligths
+  // Walk over all lights
   std::cout << "Number of lights: " << j["scene"]["light"].size() << std::endl;
   for (auto i = 0; i < j["scene"]["light"].size(); i++) {
 
