@@ -3,10 +3,10 @@
 
 namespace renderer {
 SceneContainer::SceneContainer()
-  : cameras(), shaders(), shapes(), bgColor(), default_nx(100), default_ny(100), maxDepth(3) {}
+  : cameras(), shaders(), shapes(), bgColor(), default_nx(100), default_ny(100) {}
 
-SceneContainer::SceneContainer(int nx, int ny, int d)
-  : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny), maxDepth(d) {}
+SceneContainer::SceneContainer(int nx, int ny)
+  : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny) {}
 
 void SceneContainer::buildBVHTree()
 {
@@ -53,9 +53,9 @@ void SceneContainer::setMaxDepth(int d)
   maxDepth = d;
 }
 
-void SceneContainer::set_rpp(int r)
+void SceneContainer::set_n(int n)
 {
-  rpp = r;
+  this->n = n;
 }
 
 const std::vector<Camera *> &SceneContainer::getCameras()
@@ -74,11 +74,17 @@ std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth)
 
   for (int i = 0; i < lights.size(); i++) {
     auto lightRayDir = (lights[i]->getPosition() - point);// light direction
-    if (lights[i]->isVisibleFrom(point, depth, *this))
+    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth))
       visibleLights.push_back(lights[i]);
   }
 
   return visibleLights;
+}
+
+void SceneContainer::gatherLightSamples(Vector3D point, int depth, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities)
+{
+  for (int i = 0; i < lights.size(); i++)
+    lights[i]->getLightSamples(point, depth, *this, directions, intensities);
 }
 
 Shader *SceneContainer::getShader(std::string name)
@@ -122,6 +128,11 @@ BVHNode SceneContainer::getRoot()
 int SceneContainer::getMaxDepth()
 {
   return maxDepth;
+}
+
+int SceneContainer::get_n()
+{
+  return n;
 }
 
 bool SceneContainer::anyHit(Ray r, float tmin, float tmax, int depth)

@@ -15,10 +15,13 @@ PointLight::PointLight(Vector3D p, Vector3D i)
   intensity = i;
 }
 
-bool PointLight::isVisibleFrom(Vector3D point, int depth, SceneContainer &sc)
+void PointLight::getLightSamples(Vector3D point, int depth, SceneContainer &sc, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities)
 {
-  auto lightRayDir = (position - point);// direction from point to light
-  return !sc.anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth);
+  auto lightRayDir = position - point;// direction from point to light
+  if (!sc.anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth)) {
+    directions.push_back(lightRayDir.normalize());// must normalize before sending to shader
+    intensities.push_back(intensity);
+  }
 }
 
 }// namespace renderer

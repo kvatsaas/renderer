@@ -21,13 +21,14 @@ public:
   PointLight(Vector3D p, Vector3D i);
 
   /**
-   * @brief Determines if the light, or any part of it, is visible from the given point in the given scene
+   * @brief Adds any lights visible from the given point to the given direction and intensity vectors
    * @param point The point
    * @param depth The current recursion depth
    * @param sc The scene
-   * @return True if the light is visible from the point, false otherwise
+   * @param directions A vector of directions from the point toward visible lights
+   * @param intensities A vector of intensities for those lights
   */
-  virtual bool isVisibleFrom(Vector3D point, int depth, SceneContainer &sc);
+  virtual void getLightSamples(Vector3D point, int depth, SceneContainer &sc, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities);
 };
 
 }// namespace renderer

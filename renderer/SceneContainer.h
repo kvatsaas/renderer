@@ -22,9 +22,8 @@ public:
    *        that specifies the number of times a ray can be reflected
    * @param nx The default width for output images
    * @param ny The default height for output images
-   * @param d The maximum recursive depth; defaults to 3
   */
-  SceneContainer(int nx, int ny, int d = 3);
+  SceneContainer(int nx, int ny);
 
   /**
    * @brief Builds the tree of BVHNodes. Should only be called once all shapes are added.
@@ -80,10 +79,10 @@ public:
   void setMaxDepth(int d);
 
   /**
-   * @brief Sets the rays per pixel
-   * @param r The rpp
+   * @brief Sets the n value (sqrt of rpp)
+   * @param n The n value
   */
-  void set_rpp(int r);
+  void set_n(int n);
 
   /**
    * @brief Getter for the cameras in the scene
@@ -99,11 +98,23 @@ public:
 
   /**
    * @brief Gets all lights visible from a given point on a shape
+   *        Deprecated in favor of getLightSamples, which properly supports area lights
    * @param point The point in question
    * @param depth The current reflection depth
    * @return A vector of pointers to lights
   */
   std::vector<Light *> getVisibleLights(Vector3D point, int depth);
+
+  /**
+   * @brief Provides directions to all lights visible from a given point on a shape, and their intensities
+   *        Built as an improvement to getVisibleLights, which does not properly support area lights
+   * @param point The point in question
+   * @param depth The current reflection depth
+   * @param directions A vector of directions from the point toward visible lights
+   * @param intensities A vector of intensities for those lights
+   * @return A vector of pointers to lights
+  */
+  void gatherLightSamples(Vector3D point, int depth, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities);
 
   /**
    * @brief Getter for a single shader
@@ -155,10 +166,10 @@ public:
   int getMaxDepth();
 
   /**
-   * @brief Getter for the rays per pixel
-   * @return The rpp value
+   * @brief Getter for the n value (sqrt of rpp)
+   * @return The n value
   */
-  int get_rpp();
+  int get_n();
 
   /**
    * @brief Determines whether the given ray hits any shape in the scene
@@ -188,7 +199,7 @@ protected:
   BVHNode rootNode;
   Vector3D bgColor;
   float default_nx, default_ny;
-  int maxDepth, rpp;
+  int maxDepth = 3, n = 0;
 };
 
 }// namespace renderer

@@ -11,14 +11,17 @@ Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc, int 
 {
   auto diffColor = Vector3D();
   auto normal = h.getNormal();
-  auto visibleLights = sc.getVisibleLights(normal.getOrigin(), depth);
+
+  auto directions = std::vector<Vector3D>();
+  auto intensities = std::vector<Vector3D>();
+  sc.gatherLightSamples(normal.getOrigin(), depth, directions, intensities);
 
   auto n = normal.getDirection();
-  for (int i = 0; i < visibleLights.size(); i++) {
-    auto l = (visibleLights[i]->getPosition() - normal.getOrigin()).normalize();// light direction
+  for (int i = 0; i < directions.size(); i++) {
+    auto l = directions[i];// light direction
     auto lambert = n.dotProduct(l);
     if (lambert > 0)
-      diffColor += (diffuse * visibleLights[i]->getIntensity()) * lambert;
+      diffColor += (diffuse * intensities[i]) * lambert;
   }
 
   return diffColor;

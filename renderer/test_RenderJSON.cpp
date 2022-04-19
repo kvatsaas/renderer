@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
+#include <cmath>
 
 #include <boost/progress.hpp>
 #include <boost/thread.hpp>
@@ -28,8 +29,10 @@ int main(int argc, char *argv[])
   float startTime, endTime;
   auto fb = Framebuffer(args.width, args.height);
   auto sc = SceneContainer(args.width, args.height);
+  if (args.isSet("recursionDepth"))
+    sc.setMaxDepth(args.recursionDepth);
   if (args.isSet("rpp"))
-    sc.set_rpp(args.rpp);
+    sc.set_n(sqrt(args.rpp));
 
   Renderer *raytracer;
   if (args.isSet("multithread"))
@@ -38,9 +41,6 @@ int main(int argc, char *argv[])
     raytracer = new ParallelWhittedRayTracer(args.numCpus);
   else
     raytracer = new WhittedRayTracer();
-
-  if (args.isSet("recursionDepth"))
-    sc.setMaxDepth(args.recursionDepth);
 
   startTime = ptimer.elapsed();
   parseJSONData(args.inputFileName, sc);

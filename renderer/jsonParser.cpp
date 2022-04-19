@@ -9,7 +9,7 @@
 #define GLAZE_READY 1
 #define BPMIRRORED_READY 1
 #define ADVSHADERS_READY 0
-#define AREALIGHTS_READY 0
+#define AREALIGHTS_READY 1
 #define SHAPELIGHTS_READY 0
 
 #include <iostream>
@@ -29,6 +29,7 @@
 #include "Box.h"
 #include "Mesh.h"
 #include "PointLight.h"
+#include "AreaLight.h"
 #include "shaders.h"
 //#include "Constants.h"// contains a static PI
 
@@ -409,12 +410,12 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 
     std::string type = j["scene"]["light"][i]["_type"];
 
-    Vector3D position, radiantEnergy;
-    radiantEnergy = j["scene"]["light"][i]["intensity"];
+    Vector3D position, intensity;
+    intensity = j["scene"]["light"][i]["intensity"];
 
     if (type == "point") {
       position = j["scene"]["light"][i]["position"];
-      scene.addLight(new PointLight(position, radiantEnergy));
+      scene.addLight(new PointLight(position, intensity));
     }
 
 #if AREALIGHTS_READY
@@ -429,8 +430,8 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       width = j["scene"]["light"][i]["width"];
       length = j["scene"]["light"][i]["length"];
 
-      AreaLight *aLight = new AreaLight(position, radiantEnergy, normal, width, length);
-      lights.push_back(aLight);
+      AreaLight *aLight = new AreaLight(position, intensity, normal, width, length, scene.get_n());
+      scene.addLight(aLight);
 
       //
       // Create two triangles aligned with normal to represent the
@@ -442,29 +443,32 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       //
       // pos - aLight->binormal()*width/2.0 - aLight->tangent()*length/2.0;
 
-      Vector3D v0 = position - aLight->binormal() * width / 2.0 - aLight->tangent() * length / 2.0,
-               v1 = position - aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0,
-               v2 = position + aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0;
+      Vector3D u = aLight->getCoord().get_u();
+      Vector3D v = aLight->getCoord().get_v();
 
-      sivelab::Emission *eSPtr = new sivelab::Emission(radiantEnergy);
+      Vector3D v0 = position - u * width / 2.0 - v * length / 2.0,
+               v1 = position - u * width / 2.0 + v * length / 2.0,
+               v2 = position + u * width / 2.0 + v * length / 2.0;
+
+      auto eSPtr = new Shader(intensity);
 
       Triangle *tPtr = new Triangle(v0, v1, v2);
-      tPtr->setIntersectionVisibility();
+      //tPtr->setIntersectionVisibility();
       tPtr->setName("area light");
-      tPtr->provideShader(eSPtr);
+      tPtr->setShader(eSPtr);
 
-      m_otherObjs.push_back(tPtr);
+      scene.addShape(tPtr);
 
-      v0 = position - aLight->binormal() * width / 2.0 - aLight->tangent() * length / 2.0;
-      v1 = position + aLight->binormal() * width / 2.0 + aLight->tangent() * length / 2.0;
-      v2 = position + aLight->binormal() * width / 2.0 - aLight->tangent() * length / 2.0;
+      v0 = position - u * width / 2.0 - v * length / 2.0;
+      v1 = position + u * width / 2.0 + v * length / 2.0;
+      v2 = position + u * width / 2.0 - v * length / 2.0;
 
       tPtr = new Triangle(v0, v1, v2);
-      tPtr->setIntersectionVisibility();
+      //tPtr->setIntersectionVisibility();
       tPtr->setName("area light");
-      tPtr->provideShader(eSPtr);
+      tPtr->setShader(eSPtr);
 
-      m_otherObjs.push_back(tPtr);
+      scene.addShape(tPtr);
     }
 #endif
 #if SHAPELIGHTS_READY
@@ -476,7 +480,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 
       Shape *emitter_ShapePtr = extractAndCreateShapeFromJSONData(shapeInfo);
 
-      sivelab::Emission *eSPtr = new sivelab::Emission(radiantEnergy);
+      sivelab::Emission *eSPtr = new sivelab::Emission(intensity);
 
       emitter_ShapePtr->provideShader(eSPtr);
       m_otherObjs.push_back(emitter_ShapePtr);

@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "Vector3D.h"
 
 namespace renderer {
@@ -22,13 +23,14 @@ public:
   const Vector3D &getIntensity() const;
 
   /**
-   * @brief Determines if the light, or any part of it, is visible from the given point in the given scene
+   * @brief Adds any lights visible from the given point to the given direction and intensity vectors
    * @param point The point
    * @param depth The current recursion depth
    * @param sc The scene
-   * @return True if the light is visible from the point, false otherwise
+   * @param directions A vector of directions from the point toward visible lights
+   * @param intensities A vector of intensities for those lights
   */
-  virtual bool isVisibleFrom(Vector3D point, int depth, SceneContainer &sc) = 0;
+  virtual void getLightSamples(Vector3D point, int depth, SceneContainer &sc, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities) = 0;
 
 protected:
   Vector3D position, intensity;
