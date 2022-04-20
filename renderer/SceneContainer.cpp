@@ -68,33 +68,6 @@ const std::vector<Light *> &SceneContainer::getLights()
   return lights;
 }
 
-std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth)
-{
-  auto visibleLights = std::vector<Light *>();
-
-  for (int i = 0; i < lights.size(); i++) {
-    auto lightRayDir = (lights[i]->getPosition() - point);// light direction
-    if (!anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth))
-      visibleLights.push_back(lights[i]);
-  }
-
-  return visibleLights;
-}
-
-void SceneContainer::gatherLightSamples(Vector3D point, int depth, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities)
-{
-  for (int i = 0; i < lights.size(); i++)
-    lights[i]->getLightSamples(point, depth, *this, directions, intensities);
-}
-
-Shader *SceneContainer::getShader(std::string name)
-{
-  if (shaders.count(name))
-    return shaders[name];
-  else
-    return nullptr;
-}
-
 const std::map<std::string, Shader *> &SceneContainer::getShaders()
 {
   return shaders;
@@ -135,17 +108,28 @@ int SceneContainer::get_n()
   return n;
 }
 
+std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth, boost::optional<std::vector<std::pair<float, float>>> jitter, int r)
+{
+  auto visibleLights = std::vector<Light *>();
+
+  for (int i = 0; i < lights.size(); i++) {
+    if (lights[i]->isVisibleFrom(point, depth, *this, jitter, r))
+      visibleLights.push_back(lights[i]);
+  }
+
+  return visibleLights;
+}
+
+Shader *SceneContainer::getShader(std::string name)
+{
+  if (shaders.count(name))
+    return shaders[name];
+  else
+    return nullptr;
+}
+
 bool SceneContainer::anyHit(Ray r, float tmin, float tmax, int depth)
 {
-  //pre-BVH logic
-  /*for (int j = 0; j < shapes.size(); j++) {
-    if (shapes[j] == sPtr)
-      continue;
-    if (shapes[j]->hit(r, tmin, tmax))
-      return true;
-  }
-  return false;*/
-
   return rootNode.hit(r, tmin, tmax, depth);
 }
 
@@ -154,17 +138,34 @@ Vector3D SceneContainer::rayColor(Ray &r, float tmin, float tmax, int depth)
   if (depth >= maxDepth)
     return bgColor;
 
+  boost::optional<std::vector<std::pair<float, float>>> dummyJitter;
   HitStructure h;
   bool hitOccurred = rootNode.closestHit(r, tmin, tmax, h, depth);
-  //pre-BVH logic
-  /*for (int s = 0; s < shapes.size(); s++)
-    if (shapes[s]->closestHit(r, tmin, tmax, h))
-      hitOccurred = true;*/
 
   if (hitOccurred)
-    return h.getShader()->apply(h, *this, depth);
+    return h.getShader()->apply(h, *this, depth, dummyJitter, -1);
   else
     return bgColor;
+}
+
+Vector3D SceneContainer::rayColor(std::vector<Ray> &rays, float tmin, float tmax, int depth, std::vector<std::pair<float, float>> &jitterShadows)
+{
+  if (depth >= maxDepth)
+    return bgColor;
+
+  auto color = Vector3D();
+  for (int r = 0; r < rays.size(); r++) {
+    HitStructure h;
+    float local_tmax = tmax;
+    bool hitOccurred = rootNode.closestHit(rays[r], tmin, local_tmax, h, depth);
+    if (hitOccurred)
+      color += h.getShader()->apply(h, *this, depth, jitterShadows, r);
+    else
+      color += bgColor;
+  }
+
+  color /= rays.size();
+  return color;
 }
 
 }// namespace renderer

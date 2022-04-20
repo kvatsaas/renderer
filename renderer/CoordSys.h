@@ -35,19 +35,19 @@ public:
    * @brief Returns the vector of the u axis
    * @return The vector of the u axis
   */
-  Vector3D &get_u();
+  const Vector3D &get_u() const;
 
   /**
    * @brief Returns the vector of the v axis
    * @return The vector of the u axis
   */
-  Vector3D &get_v();
+  const Vector3D &get_v() const;
 
   /**
    * @brief Returns the vector of the w axis
    * @return The vector of the u axis
   */
-  Vector3D &get_w();
+  const Vector3D &get_w() const;
 
 protected:
   // Need to represent each vector of the basis

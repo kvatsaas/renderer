@@ -8,9 +8,9 @@ renderer::GlazeShader::GlazeShader()
 renderer::GlazeShader::GlazeShader(Vector3D d, float mCoef)
   : lambert(d), mirror(), mirrorCoefficient(mCoef) {}
 
-Vector3D renderer::GlazeShader::apply(const HitStructure &h, SceneContainer &sc, int depth) const
+Vector3D renderer::GlazeShader::apply(const HitStructure &h, SceneContainer &sc, int depth, boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const
 {
-  return (mirrorCoefficient * mirror.apply(h, sc, depth)) + ((1 - mirrorCoefficient) * lambert.apply(h, sc, depth));
+  return (mirrorCoefficient * mirror.apply(h, sc, depth, jitter, r)) + ((1 - mirrorCoefficient) * lambert.apply(h, sc, depth, jitter, r));
 }
 
 }// namespace renderer

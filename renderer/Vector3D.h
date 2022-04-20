@@ -149,7 +149,7 @@ public:
 	 * @brief Calculates the length of the vector
 	 * @return The length of the vector
 	*/
-  float length() const;
+  const float length() const;
 
   /**
 	 * @brief Calculates the dot product of this vector and another

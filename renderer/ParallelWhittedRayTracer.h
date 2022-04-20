@@ -1,5 +1,5 @@
 #pragma once
-#include "Renderer.h"
+#include "WhittedRayTracer.h"
 #include "HitStructure.h"
 
 namespace renderer {
@@ -8,7 +8,7 @@ namespace renderer {
  * @brief This is currently using parallel_for, meaning that all threads are utilized and the threads
  *        variable doesn't actually do anything.
 */
-class ParallelWhittedRayTracer : public Renderer
+class ParallelWhittedRayTracer : public WhittedRayTracer
 {
 public:
 

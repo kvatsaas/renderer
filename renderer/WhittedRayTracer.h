@@ -6,6 +6,7 @@ namespace renderer {
 class WhittedRayTracer : public Renderer
 {
 public:
+
   /**
    * @brief Renders an image in the framebuffer for the given scene and camera.
    * @param fb The framebuffer in which to store the rendered image
@@ -24,6 +25,9 @@ public:
    * @param max_t The maximum view distance. Defaults to the max value.
   */
   virtual void renderAA(Framebuffer &fb, SceneContainer sc, int camIndex, int rpp, const float max_t = std::numeric_limits<float>::max());
+
+protected:
+  static void generateJitter(std::vector<std::pair<float, float>> &jitterAA, std::vector<std::pair<float, float>> &jitterShadows, int rpp);
 };
 
 }// namespace renderer

@@ -28,7 +28,7 @@ public:
    * @param n An integer that represents the dimension of the sample grid
    * @param ray A reference to a vector to store the generated rays
   */
-  virtual void generateSampleRays(int i, int j, int n, std::vector<Ray> &rays) = 0;
+  virtual void generateSampleRays(int i, int j, int n, std::vector<std::pair<float, float>> &jitterAA, std::vector<Ray> &rays) = 0;
 
   /**
    * @brief Getter for the camera name

@@ -18,17 +18,17 @@ CoordSys::CoordSys(const Vector3D& gazeDirection, Vector3D tempUp)
   v = w.crossProduct(u).normalize();
 }
 
-Vector3D &CoordSys::get_u()
+const Vector3D &CoordSys::get_u() const
 {
   return u;
 }
 
-Vector3D &CoordSys::get_v()
+const Vector3D &CoordSys::get_v() const
 {
   return v;
 }
 
-Vector3D &CoordSys::get_w()
+const Vector3D &CoordSys::get_w() const
 {
   return w;
 }

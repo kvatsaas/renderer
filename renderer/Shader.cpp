@@ -17,7 +17,7 @@ Shader::Shader()
 Shader::Shader(const Vector3D amb)
   : ambient(amb) {}
 
-Vector3D Shader::apply(const HitStructure &h, SceneContainer &sc, int depth) const
+Vector3D Shader::apply(const HitStructure &h, SceneContainer &sc, int depth, boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const
 {
   return ambient;
 }

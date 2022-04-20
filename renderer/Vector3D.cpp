@@ -192,7 +192,7 @@ Vector3D &Vector3D::operator=(const std::string str)
   return *this;
 }
 
-float Vector3D::length() const
+const float Vector3D::length() const
 {
   return sqrt(x * x + y * y + z * z);
 }

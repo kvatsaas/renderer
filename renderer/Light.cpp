@@ -3,7 +3,7 @@
 
 namespace renderer {
 
-const Vector3D &Light::getPosition() const
+const Vector3D &Light::getPosition(boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const
 {
   return position;
 }

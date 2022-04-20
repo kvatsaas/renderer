@@ -10,15 +10,16 @@ public:
    * @brief Creates a default Ray at (0, 0, 0) with a direction of (1, 1, 1)
   */
   Ray()
-    : origin(0, 0, 0), direction(1, 1, 1) {}
+    : origin(0, 0, 0), direction(1, 1, 1), jitterIndex(-1) {}
 
   /**
    * @brief Creates a Ray with the given attributes
    * @param o The origin of the Ray
    * @param d The direction of the Ray
+   * @param ji Optional parameter used for sampling
   */
-  Ray(const Vector3D &o, const Vector3D &d)
-    : origin(o), direction(d) {}
+  Ray(const Vector3D &o, const Vector3D &d, int ji = -1)
+    : origin(o), direction(d), jitterIndex(ji) {}
 
   /**
    * @brief Getter for the Ray's origin
@@ -33,6 +34,12 @@ public:
   const Vector3D &getDirection() const;
 
   /**
+   * @brief Getter for the Ray's direction
+   * @return A reference to the direction of the Ray
+  */
+  const int &getJitterIndex() const;
+
+  /**
    * @brief Setter for the Ray's origin
    * @param o A reference to the new origin for the Ray
   */
@@ -43,6 +50,12 @@ public:
    * @param o A reference to the new direction for the Ray
   */
   void setDirection(Vector3D &d);
+
+  /**
+   * @brief Setter for the Ray's direction
+   * @param o A reference to the new direction for the Ray
+  */
+  void setJitterIndex(int ji);
   
   /**
    * @brief Maps the direction vector to a color vector in the 0-1 space
@@ -52,6 +65,7 @@ public:
 
 protected:
   Vector3D origin, direction;
+  int jitterIndex;
 };
 
 };

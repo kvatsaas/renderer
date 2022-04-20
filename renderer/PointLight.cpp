@@ -15,13 +15,14 @@ PointLight::PointLight(Vector3D p, Vector3D i)
   intensity = i;
 }
 
-void PointLight::getLightSamples(Vector3D point, int depth, SceneContainer &sc, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities)
+boost::optional<Vector3D> PointLight::isVisibleFrom(Vector3D point, int depth, SceneContainer &sc, boost::optional<std::vector<std::pair<float, float>>> jitter, int r)
 {
   auto lightRayDir = position - point;// direction from point to light
+  boost::optional<Vector3D> out;
   if (!sc.anyHit(Ray(point, lightRayDir), 0.0001f, 1.0f, depth)) {
-    directions.push_back(lightRayDir.normalize());// must normalize before sending to shader
-    intensities.push_back(intensity);
+    out = position;
   }
+  return out;
 }
 
 }// namespace renderer

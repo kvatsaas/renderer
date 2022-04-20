@@ -343,7 +343,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       float mirrorCoef = shaderInfo["mirrorCoef"];
       //float roughnessCoef = shaderInfo["roughness"];
 
-      shaderPtr = new BlinnPhongMirroredShader(d, s, phongExp, mirrorCoef/*, roughnessCoef*/);
+      shaderPtr = new BlinnPhongMirroredShader(d, s, phongExp, mirrorCoef /*, roughnessCoef*/);
 #endif
     }
 
@@ -398,12 +398,6 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
   }
   std::cout << "Completed parsing shapes." << std::endl;
 
-  // Construct BVH tree
-  scene.buildBVHTree();
-  std::cout << "Completed BVH tree." << std::endl;
-  std::cout << "Number of leaves: " << scene.getRoot().getLeaves() << std::endl;
-  std::cout << "Number of nodes: " << scene.getRoot().getChildren() + 1 << std::endl;
-
   // Walk over all lights
   std::cout << "Number of lights: " << j["scene"]["light"].size() << std::endl;
   for (auto i = 0; i < j["scene"]["light"].size(); i++) {
@@ -446,27 +440,26 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       Vector3D u = aLight->getCoord().get_u();
       Vector3D v = aLight->getCoord().get_v();
 
-      Vector3D v0 = position - u * width / 2.0 - v * length / 2.0,
-               v1 = position - u * width / 2.0 + v * length / 2.0,
-               v2 = position + u * width / 2.0 + v * length / 2.0;
+      Vector3D bot_left = position - (u * width / 2) - (v * length / 2),
+               bot_right = position + (u * width / 2) - (v * length / 2),
+               top_left = position - (u * width / 2) + (v * length / 2),
+               top_right = position + (u * width / 2) + (v * length / 2);
 
       auto eSPtr = new Shader(intensity);
 
-      Triangle *tPtr = new Triangle(v0, v1, v2);
+      Triangle *tPtr = new Triangle(bot_left, bot_right, top_left);
       //tPtr->setIntersectionVisibility();
-      tPtr->setName("area light");
+      tPtr->setName("area light bottom left");
       tPtr->setShader(eSPtr);
+      tPtr->setShadowDepthBounds(-1, -1);
 
       scene.addShape(tPtr);
 
-      v0 = position - u * width / 2.0 - v * length / 2.0;
-      v1 = position + u * width / 2.0 + v * length / 2.0;
-      v2 = position + u * width / 2.0 - v * length / 2.0;
-
-      tPtr = new Triangle(v0, v1, v2);
+      tPtr = new Triangle(bot_left, bot_right, top_left);
       //tPtr->setIntersectionVisibility();
-      tPtr->setName("area light");
+      tPtr->setName("area light top right");
       tPtr->setShader(eSPtr);
+      tPtr->setShadowDepthBounds(-1, -1);
 
       scene.addShape(tPtr);
     }
@@ -487,6 +480,12 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
     }
 #endif
   }
+
+  // Construct BVH tree
+  scene.buildBVHTree();
+  std::cout << "Completed BVH tree." << std::endl;
+  std::cout << "Number of leaves: " << scene.getRoot().getLeaves() << std::endl;
+  std::cout << "Number of nodes: " << scene.getRoot().getChildren() + 1 << std::endl;
 }
 
 }// namespace renderer

@@ -6,6 +6,7 @@
 #include "Shader.h"
 #include "Shape.h"
 #include "BVHNode.h"
+#include <boost/optional/optional.hpp>
 
 namespace renderer {
 
@@ -97,26 +98,6 @@ public:
   const std::vector<Light *> &getLights();
 
   /**
-   * @brief Gets all lights visible from a given point on a shape
-   *        Deprecated in favor of getLightSamples, which properly supports area lights
-   * @param point The point in question
-   * @param depth The current reflection depth
-   * @return A vector of pointers to lights
-  */
-  std::vector<Light *> getVisibleLights(Vector3D point, int depth);
-
-  /**
-   * @brief Provides directions to all lights visible from a given point on a shape, and their intensities
-   *        Built as an improvement to getVisibleLights, which does not properly support area lights
-   * @param point The point in question
-   * @param depth The current reflection depth
-   * @param directions A vector of directions from the point toward visible lights
-   * @param intensities A vector of intensities for those lights
-   * @return A vector of pointers to lights
-  */
-  void gatherLightSamples(Vector3D point, int depth, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities);
-
-  /**
    * @brief Getter for a single shader
    * @param name The name of the shader
    * @return The requested shader, or nullptr if it does not exist
@@ -172,6 +153,16 @@ public:
   int get_n();
 
   /**
+   * @brief Gets all lights visible from a given point
+   * @param point The point
+   * @param depth The current reflection depth
+   * @param jitter The optional shadow jitter values
+   * @param r The current ray number for antialiasing. Use -1 if not using AA
+   * @return A vector of pointers to lights
+  */
+  std::vector<Light *> getVisibleLights(Vector3D point, int depth, boost::optional<std::vector<std::pair<float, float>>>, int r);
+
+  /**
    * @brief Determines whether the given ray hits any shape in the scene
    * @param r The ray
    * @param tmin The minimum tvalue
@@ -190,6 +181,17 @@ public:
    * @return The color
   */
   Vector3D rayColor(Ray &r, float tmin, float tmax, int depth);
+
+  /**
+   * @brief Determines the color hit by the given ray samples in this scene. AA aware version of rayColor
+   * @param rays A vector of sample rays
+   * @param tmin The minimum tvalue
+   * @param tmax The maximum tvalue
+   * @param depth The current recursive depth
+   * @param jitterShadows The shadow jitter values
+   * @return The color
+  */
+  Vector3D rayColor(std::vector<Ray> &rays, float tmin, float tmax, int depth, std::vector<std::pair<float, float>> &jitterShadows);
 
 protected:
   std::vector<Camera *> cameras;

@@ -20,34 +20,40 @@ public:
    * @param nv The normal of the AreaLight
    * @param w The width of the AreaLight
    * @param l The length of the AreaLight
-   * @param nr 
+   * @param nr The n value for AA, i.e. sqrt(rpp)
   */
   AreaLight(Vector3D p, Vector3D i, Vector3D nv, float w, float l, int nr);
 
+  /**
+   * @brief Gets the position of the light
+   * @param jitter The optional shadow jitter values. Use boost::none if not using AA
+   * @param r The current ray number for antialiasing
+   * @return The position of the light
+  */
+  virtual const Vector3D &getPosition(boost::optional<std::vector<std::pair<float, float>>> jitter, int r = -1) const;
+
+  /**
+   * @brief Getter for the area light's coordinate system
+   * @return The coordinate system
+  */
   CoordSys getCoord();
 
   /**
-   * @brief Adds any lights visible from the given point to the given direction and intensity vectors
-   * @param point The point
+   * @brief Determines if the light, or any part of it, is visible to a given ray in the scene
+   * @param point The ray
    * @param depth The current recursion depth
    * @param sc The scene
-   * @param directions A vector of directions from the point toward visible lights
-   * @param intensities A vector of intensities for those lights
+   * @param jitter The optional shadow jitter values
+   * @param r The current ray number for antialiasing
+   * @return True if the light is visible from the point, false otherwise
   */
-  virtual void getLightSamples(Vector3D point, int depth, SceneContainer &sc, std::vector<Vector3D> &directions, std::vector<Vector3D> &intensities);
+  virtual boost::optional<Vector3D> isVisibleFrom(Vector3D point, int depth, SceneContainer &sc, boost::optional<std::vector<std::pair<float, float>>> jitter, int r);
 
 protected:
   Vector3D normal;
   CoordSys coord;
   float width, length;
-  int n = 0;
-  Vector3D subIntensity;
-
-  /* HEY IT'S YOU FROM YESTERDAY
-  * Generate the jitter points for both raytracing AND shadows, then shuffle the one
-  * for shadows so there's no coherence between the two. Maybe stick these in the scene
-  * container for later access. See page 332 in the book
-  */
+  int n;
 
 };
 

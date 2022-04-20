@@ -30,7 +30,7 @@ public:
    * @param depth The current recursive depth of the ray
    * @return The ambient color of this basic shader
   */
-  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc, int depth) const;
+  virtual Vector3D apply(const HitStructure &h, SceneContainer &sc, int depth, boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const;
 
   /**
    * @brief Getter for the name

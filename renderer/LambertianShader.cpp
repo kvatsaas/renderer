@@ -7,21 +7,18 @@ LambertianShader::LambertianShader()
 LambertianShader::LambertianShader(Vector3D d)
   : diffuse(d) {}
 
-Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc, int depth) const
+Vector3D LambertianShader::apply(const HitStructure &h, SceneContainer &sc, int depth, boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const
 {
   auto diffColor = Vector3D();
   auto normal = h.getNormal();
-
-  auto directions = std::vector<Vector3D>();
-  auto intensities = std::vector<Vector3D>();
-  sc.gatherLightSamples(normal.getOrigin(), depth, directions, intensities);
+  auto visibleLights = sc.getVisibleLights(normal.getOrigin(), depth, jitter, r);
 
   auto n = normal.getDirection();
-  for (int i = 0; i < directions.size(); i++) {
-    auto l = directions[i];// light direction
+  for (int i = 0; i < visibleLights.size(); i++) {
+    auto l = (visibleLights[i]->getPosition(jitter, r) - normal.getOrigin()).normalize();// light direction
     auto lambert = n.dotProduct(l);
     if (lambert > 0)
-      diffColor += (diffuse * intensities[i]) * lambert;
+      diffColor += (diffuse * visibleLights[i]->getIntensity()) * lambert;
   }
 
   return diffColor;
