@@ -455,7 +455,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 
       scene.addShape(tPtr);
 
-      tPtr = new Triangle(bot_left, bot_right, top_left);
+      tPtr = new Triangle(top_right, bot_right, top_left);
       //tPtr->setIntersectionVisibility();
       tPtr->setName("area light top right");
       tPtr->setShader(eSPtr);
