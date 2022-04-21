@@ -1,3 +1,4 @@
+
 add_library(renderer
 	AABoundingBox.cpp AABoundingBox.h
 	AreaLight.cpp AreaLight.h
@@ -15,7 +16,7 @@ add_library(renderer
 	jsonParser.cpp
 	LambertianShader.cpp LambertianShader.h
 	Light.cpp Light.h
-	Mesh.cpp Mesh.h
+	OBJMesh.cpp OBJMesh.h
 	MirrorShader.cpp MirrorShader.h
 	NormalShader.cpp NormalShader.h
 	OrthographicCamera.cpp OrthographicCamera.h

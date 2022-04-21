@@ -86,6 +86,12 @@ public:
   void set_n(int n);
 
   /**
+   * @brief Setter for the path to the scene file
+   * @param path The path
+  */
+  void setPathToSceneFile(std::string path);
+
+  /**
    * @brief Getter for the cameras in the scene
    * @return A vector of pointers to cameras
   */
@@ -153,6 +159,12 @@ public:
   int get_n();
 
   /**
+   * @brief Getter for the path to the scene file
+   * @return The path
+  */
+  std::string getPathToSceneFile();
+
+  /**
    * @brief Gets all lights visible from a given point
    * @param point The point
    * @param depth The current reflection depth
@@ -202,6 +214,7 @@ protected:
   Vector3D bgColor;
   float default_nx, default_ny;
   int maxDepth = 3, n = 0;
+  std::string pathToSceneFile;
 };
 
 }// namespace renderer

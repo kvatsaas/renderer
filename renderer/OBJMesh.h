@@ -4,11 +4,11 @@
 
 namespace renderer {
 
-class Mesh : public Shape
+class OBJMesh : public Shape
 {
 public:
-  Mesh() {}
-  Mesh(const std::string &filename, Shader *sPtr);
+  OBJMesh() {}
+  OBJMesh(const std::string &filename, Shader *sPtr);
 
   /**
    * @brief Determines whether the given ray intersects with the box at this node and modifies

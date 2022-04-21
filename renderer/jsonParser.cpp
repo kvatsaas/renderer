@@ -3,7 +3,8 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #define EXTRACT_ROTATION_READY 0
 #define TRANSFORMS_READY 0
-#define MESHES_READY 0
+#define MESHES_READY 1
+#define INSTANCES_READY 0
 #define MONSTERS_READY 1
 #define DIELECTRIC_READY 0
 #define GLAZE_READY 1
@@ -20,6 +21,7 @@
 #include <stack>
 #include <assert.h>
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 
 #include "SceneContainer.h"
 #include "PerspectiveCamera.h"
@@ -27,7 +29,7 @@
 #include "Sphere.h"
 #include "Triangle.h"
 #include "Box.h"
-#include "Mesh.h"
+#include "OBJMesh.h"
 #include "PointLight.h"
 #include "AreaLight.h"
 #include "shaders.h"
@@ -150,11 +152,15 @@ Shape *extractAndCreateShapeFromJSONData(json &shapeData, SceneContainer &scene)
 #if MESHES_READY
   else if (type == "mesh") {
     std::string mesh_filename = shapeData["file"];
-    std::string meshFile_fullPath(getFilePath() + "/" + mesh_filename);
+    std::string meshFile_fullPath(scene.getPathToSceneFile() + "/" + mesh_filename);
 
     Shader *defaultShader = scene.getShader(shapeData["shader"]["_ref"]);
-    sPtr = new Mesh(meshFile_fullPath, defaultShader);
-  } else if (type == "instance") {
+    sPtr = new OBJMesh(meshFile_fullPath, defaultShader);
+  }
+#endif
+
+#if INSTANCES_READY
+  else if (type == "instance") {
 
     // Need to instance an object
     // check for the instance id
@@ -199,6 +205,11 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 {
   std::cout << "Attempting to parse: " << filename << std::endl;
   std::ifstream inputFileStream(filename);
+
+  // Extract the path to the scene file for use in loading other
+  // included files.
+  boost::filesystem::path pathToSceneFile(filename.c_str());
+  scene.setPathToSceneFile(pathToSceneFile.parent_path().string());
 
   // ///////////////////////////////////////
   // open file and parse by json class
@@ -355,7 +366,7 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
   }
 
 
-#if MESHES_READY
+#if INSTANCES_READY
   // //////////////////////////////////////
   //
   // Loop over all shapes that may be instanced -- note that these

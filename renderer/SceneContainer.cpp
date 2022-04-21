@@ -58,6 +58,11 @@ void SceneContainer::set_n(int n)
   this->n = n;
 }
 
+void SceneContainer::setPathToSceneFile(std::string path)
+{
+  pathToSceneFile = path;
+}
+
 const std::vector<Camera *> &SceneContainer::getCameras()
 {
   return cameras;
@@ -106,6 +111,11 @@ int SceneContainer::getMaxDepth()
 int SceneContainer::get_n()
 {
   return n;
+}
+
+std::string SceneContainer::getPathToSceneFile()
+{
+  return pathToSceneFile;
 }
 
 std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth, boost::optional<std::vector<std::pair<float, float>>> jitter, int r)

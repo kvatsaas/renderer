@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Mesh.h"
+#include "OBJMesh.h"
 #include "Triangle.h"
 #include "BlinnPhongShader.h"
 
@@ -8,7 +8,7 @@
 
 namespace renderer {
 
-Mesh::Mesh(const std::string &filename, Shader *defaultShader)
+OBJMesh::OBJMesh(const std::string &filename, Shader *defaultShader)
 {
   std::vector<int> indexList;
   std::vector<Vector3D> vertexList;
@@ -74,9 +74,8 @@ Mesh::Mesh(const std::string &filename, Shader *defaultShader)
       bound.addPoint(tv1);
       bound.addPoint(tv2);
 
-      // My Triangles take a normal vector specified at each vertex, hence
-      // the 3 extra Vector3Ds that are supplied to the constructor.
-      Triangle *tPtr = new Triangle(tv0, tv1, tv2, Vector3D(v0.normal[0], v0.normal[1], v0.normal[2]), Vector3D(v1.normal[0], v1.normal[1], v1.normal[2]), Vector3D(v2.normal[0], v2.normal[1], v2.normal[2]), shaderPtr);
+      Triangle *tPtr = new Triangle(tv0, tv1, tv2, shaderPtr);
+      tPtr->setNormals(Vector3D(v0.normal[0], v0.normal[1], v0.normal[2]), Vector3D(v1.normal[0], v1.normal[1], v1.normal[2]), Vector3D(v2.normal[0], v2.normal[1], v2.normal[2]), false);
 
       // Add the triangle to the mesh's triangle list
       triList.push_back(tPtr);
@@ -91,7 +90,7 @@ Mesh::Mesh(const std::string &filename, Shader *defaultShader)
   meshRoot = new BVHNode(bvhNodeList, 0);
 }
 
-bool Mesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
+bool OBJMesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
   if (!bound.intersectClosest(r, depth))
     return false;
@@ -99,7 +98,7 @@ bool Mesh::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure 
   return meshRoot->closestHit(r, tmin, tmax, hit, depth);
 }
 
-bool Mesh::hit(const Ray &r, float tmin, float tmax, int depth)
+bool OBJMesh::hit(const Ray &r, float tmin, float tmax, int depth)
 {
   if (!bound.intersectAny(r, depth))
     return false;
