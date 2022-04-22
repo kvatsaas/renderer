@@ -4,6 +4,7 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 
+
 namespace renderer {
 
 Vector3D::Vector3D()

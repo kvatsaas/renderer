@@ -3,10 +3,10 @@
 
 namespace renderer {
 SceneContainer::SceneContainer()
-  : cameras(), shaders(), shapes(), bgColor(), default_nx(100), default_ny(100) {}
+  : cameras(), shaders(), shapes(), instancedObjects(), bgColor(), default_nx(100), default_ny(100) {}
 
 SceneContainer::SceneContainer(int nx, int ny)
-  : cameras(), shaders(), shapes(), bgColor(), default_nx(nx), default_ny(ny) {}
+  : cameras(), shaders(), shapes(), instancedObjects(), bgColor(), default_nx(nx), default_ny(ny) {}
 
 void SceneContainer::buildBVHTree()
 {
@@ -31,6 +31,11 @@ void SceneContainer::addShader(Shader *s)
 void SceneContainer::addShape(Shape *s)
 {
   shapes.push_back(s);
+}
+
+void SceneContainer::addInstancedObject(Shape *s)
+{
+  instancedObjects.insert({ s->getName(), s });
 }
 
 void SceneContainer::setBGColor(Vector3D bg)
@@ -78,9 +83,30 @@ const std::map<std::string, Shader *> &SceneContainer::getShaders()
   return shaders;
 }
 
+Shader *SceneContainer::getShader(std::string name)
+{
+  if (shaders.count(name))
+    return shaders[name];
+  else
+    return nullptr;
+}
+
 const std::vector<Shape *> &SceneContainer::getShapes()
 {
   return shapes;
+}
+
+const std::map<std::string, Shape *> &SceneContainer::getInstancedObjects()
+{
+  return instancedObjects;
+}
+
+Shape *SceneContainer::getInstancedObject(std::string name)
+{
+  if (instancedObjects.count(name))
+    return instancedObjects[name];
+  else
+    return nullptr;
 }
 
 const Vector3D &SceneContainer::getBGColor()
@@ -128,14 +154,6 @@ std::vector<Light *> SceneContainer::getVisibleLights(Vector3D point, int depth,
   }
 
   return visibleLights;
-}
-
-Shader *SceneContainer::getShader(std::string name)
-{
-  if (shaders.count(name))
-    return shaders[name];
-  else
-    return nullptr;
 }
 
 bool SceneContainer::anyHit(Ray r, float tmin, float tmax, int depth)

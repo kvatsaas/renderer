@@ -1,5 +1,4 @@
-#ifndef _FRAMEBUFFER
-#define _FRAMEBUFFER
+#pragma once
 
 #include <vector>
 #include "Vector3D.h"
@@ -105,5 +104,3 @@ private:
 };
 
 }// namespace renderer
-
-#endif

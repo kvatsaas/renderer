@@ -73,7 +73,7 @@ public:
         u = l + (r - l) * (i + (p / n) + jitterAA[jitterIndex].first) / nx;
         v = b + (t - b) * (j + (q / n) + jitterAA[jitterIndex].second) / ny;
         origin = position + (u * coord.get_u()) + (v * coord.get_v());
-        rays.push_back(Ray(origin, direction, jitterIndex));
+        rays.push_back(Ray(origin, direction));
       }
     }
   }

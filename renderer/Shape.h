@@ -70,7 +70,7 @@ public:
    * @brief Getter for the shader pointer
    * @return The shader pointer
   */
-  virtual const Shader *getShader() const;
+  virtual Shader *getShader() const;
 
   /**
    * @brief Getter for the name

@@ -50,6 +50,30 @@ public:
   const Ray &getNormal() const;
 
   /**
+   * @brief Setter for the shader
+   * @param s The shader
+  */
+  void setShader(Shader *s);
+
+  /**
+   * @brief Setter for the shader
+   * @param s The shader
+  */
+  void setShape(Shape *s);
+
+  /**
+   * @brief Setter for the hit ray
+   * @param h The hit ray
+  */
+  void setHit(Ray h);
+
+  /**
+   * @brief Setter for the normal
+   * @param n The normal
+  */
+  void setNormal(Ray n);
+
+  /**
    * @brief Getter for the t-value for the intersection
    * @return The t-value for the intersection
   */

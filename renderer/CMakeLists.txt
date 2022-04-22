@@ -30,6 +30,7 @@ add_library(renderer
 	Shader.cpp Shader.h
 	shaders.h
 	Shape.cpp Shape.h
+	shapes.h
 	Sphere.cpp Sphere.h
 	Triangle.cpp Triangle.h
 	Vector3D.cpp Vector3D.h

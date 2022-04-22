@@ -18,7 +18,7 @@ public:
    * @param r The current ray number for antialiasing
    * @return The position of the light
   */
-  virtual const Vector3D &getPosition(boost::optional<std::vector<std::pair<float, float>>> jitter, int r = -1) const;
+  virtual const Vector3D getPosition(boost::optional<std::vector<std::pair<float, float>>> jitter, int r = -1) const;
 
   /**
    * @brief Gets the intensity of the light

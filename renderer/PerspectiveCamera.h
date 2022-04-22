@@ -75,7 +75,7 @@ public:
         u = l + (r - l) * (i + (p + jitterAA[jitterIndex].first) / n) / nx;
         v = b + (t - b) * (j + (q + jitterAA[jitterIndex].second) / n) / ny;
         direction = -1.0 * focalLength * coord.get_w() + u * coord.get_u() + v * coord.get_v();
-        rays.push_back(Ray(position, direction, jitterIndex));
+        rays.push_back(Ray(position, direction));
       }
     }
   }

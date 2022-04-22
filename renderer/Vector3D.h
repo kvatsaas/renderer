@@ -1,6 +1,10 @@
+#pragma once
 #include <string>
-#ifndef _VECTOR_3D
-#define _VECTOR_3D
+#include <iostream>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 namespace renderer {
 
@@ -31,6 +35,28 @@ public:
    * @param str A string description of a vector; i.e. "1 -2 3" === Vector3D(1, -2, 3)
   */
   Vector3D(const std::string str);
+
+  /**
+	 * @brief Creates a vector from a glm::vec3
+	 * @param v The vector to copy
+	*/
+  Vector3D(const glm::vec3 &v)
+  {
+    x = v.x;
+    y = v.y;
+    z = v.z;
+  }
+
+  /**
+	 * @brief Creates a vector from a glm::vec4
+	 * @param v The vector to copy
+	*/
+  Vector3D(const glm::vec4 &v)
+  {
+    x = v.x;
+    y = v.y;
+    z = v.z;
+  }
 
   /**
 	 * @brief Creates a new vector equal to this vector with each value multiplied by a given scalar
@@ -172,6 +198,68 @@ public:
   Vector3D normalize() const;
 
   /**
+   * @brief Returns the vector as a glm-implemented vec3
+   * @return The vector as glm::vec3
+  */
+  glm::vec3 glmGet() const
+  {
+    return glm::vec3(x, y, z);
+  }
+
+  /**
+   * @brief Returns the vector as a glm-implemented vec4, using the provided fourth value
+   * @param w The fourth value for the vec4
+   * @return The vector as glm::vec4
+  */
+  glm::vec4 glmGet(float w) const
+  {
+    return glm::vec4(x, y, z, w);
+  }
+
+  /**
+   * @brief Sets this vector to be equal to the provided glm-implemented vec3
+   * @param v The glm::vec3
+  */
+  void glmSet(const glm::vec3 &v)
+  {
+    x = v.x;
+    y = v.y;
+    z = v.z;
+  }
+
+  /**
+   * @brief Sets this vector to be equal to the provided glm-implemented vec4, truncating the fourth value
+   * @param v The glm::vec4
+  */
+  void glmSet(const glm::vec4 &v)
+  {
+    x = v.x;
+    y = v.y;
+    z = v.z;
+  }
+
+  /**
+   * @brief Transforms the vector using the given 4x4 matrix and a fourth value for the vector.
+   *        Note that the matrix is the left operand.
+   * @param m The transform matrix
+   * @param w The fourth value for the vector
+   * @return The result as a Vector3D
+  */
+  Vector3D transformWithMatrix(const glm::mat4 &m, float w) const
+  {
+    auto temp = glmGet(w);
+    auto inter = m * temp;
+    auto result = Vector3D(inter);
+    /*std::cout << "v: " << this->toString() << std::endl;
+    std::cout << "m: " << glm::to_string(m) << std::endl;
+    std::cout << "t: " << glm::to_string(temp) << std::endl;
+    std::cout << "i: " << glm::to_string(inter) << std::endl;
+    std::cout << "r: " << result.toString() << std::endl;*/
+
+    return result;
+  }
+
+  /**
    * @brief Converts the vector to a string representation
    * @return A string representation of the vector
   */
@@ -248,6 +336,3 @@ const Vector3D operator/(const Vector3D &lhs, const Vector3D &rhs);
 bool operator==(const Vector3D &lhs, const Vector3D &rhs);
 
 }// namespace renderer
-
-
-#endif

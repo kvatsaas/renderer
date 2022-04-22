@@ -28,6 +28,26 @@ const Ray &HitStructure::getNormal() const
   return normal;
 }
 
+void HitStructure::setShader(Shader *s)
+{
+  shaderPtr = s;
+}
+
+void HitStructure::setShape(Shape *s)
+{
+  shapePtr = s;
+}
+
+void HitStructure::setHit(Ray h)
+{
+  hit = h;
+}
+
+void HitStructure::setNormal(Ray n)
+{
+  normal = n;
+}
+
 float HitStructure::get_t() const
 {
   return t;

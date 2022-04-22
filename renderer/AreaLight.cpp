@@ -29,7 +29,7 @@ AreaLight::AreaLight(Vector3D p, Vector3D i, Vector3D nv, float w, float l, int 
   position = p - (coord.get_u() * width / 2) - (coord.get_v() * length / 2);
 }
 
-const Vector3D &AreaLight::getPosition(boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const
+const Vector3D AreaLight::getPosition(boost::optional<std::vector<std::pair<float, float>>> jitter, int r) const
 {
   if (jitter.has_value()) {
     int i = r / n;

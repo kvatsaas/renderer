@@ -1,15 +1,14 @@
 /* Adapted from provided code. */
 
 #define GLM_ENABLE_EXPERIMENTAL
-#define EXTRACT_ROTATION_READY 0
-#define TRANSFORMS_READY 0
+#define EXTRACT_ROTATION_READY 1
+#define TRANSFORMS_READY 1
 #define MESHES_READY 1
-#define INSTANCES_READY 0
+#define INSTANCES_READY 1
 #define MONSTERS_READY 1
 #define DIELECTRIC_READY 0
 #define GLAZE_READY 1
 #define BPMIRRORED_READY 1
-#define ADVSHADERS_READY 0
 #define AREALIGHTS_READY 1
 #define SHAPELIGHTS_READY 0
 
@@ -21,15 +20,11 @@
 #include <stack>
 #include <assert.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/filesystem.hpp>
 
 #include "SceneContainer.h"
 #include "PerspectiveCamera.h"
 #include "OrthographicCamera.h"
-#include "Sphere.h"
-#include "Triangle.h"
-#include "Box.h"
-#include "OBJMesh.h"
+#include "shapes.h"
 #include "PointLight.h"
 #include "AreaLight.h"
 #include "shaders.h"
@@ -46,17 +41,15 @@ glm::mat4 extractRotation(json &rotInfo)
 {
   glm::mat4 tmpM(1.0f);
   float rot = rotInfo["amount"];
+  const float pi = 3.14159265358979323846;
   std::string axis = rotInfo["axis"];
 
   if (axis == "X") {
-    tmpM = glm::rotate(glm::mat4(1.0f), rot * RConsts::m_pi / 180.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    ;
+    tmpM = glm::rotate(glm::mat4(1.0f), rot * pi / 180.0f, glm::vec3(1.0f, 0.0f, 0.0f));
   } else if (axis == "Y") {
-    tmpM = glm::rotate(glm::mat4(1.0f), rot * RConsts::m_pi / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-    ;
+    tmpM = glm::rotate(glm::mat4(1.0f), rot * pi / 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
   } else if (axis == "Z") {
-    tmpM = glm::rotate(glm::mat4(1.0f), rot * RConsts::m_pi / 180.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-    ;
+    tmpM = glm::rotate(glm::mat4(1.0f), rot * pi / 180.0f, glm::vec3(0.0f, 0.0f, 1.0f));
   }
 
   return tmpM;
@@ -88,7 +81,8 @@ glm::mat4 parseTransformData(json &transformData)
       tmpM = glm::scale(glm::mat4(1.0f), glm::vec3(scale[0], scale[1], scale[2]));
       transformStack.push(tmpM);
     } else if (xformInfo["type"] == "rotation") {
-      //transformStack.push(extractRotation(xformInfo));
+      tmpM = extractRotation(xformInfo);
+      transformStack.push(tmpM);
     }
   }
 
@@ -96,15 +90,13 @@ glm::mat4 parseTransformData(json &transformData)
     glm::mat4 m1 = transformStack.top();
     transformStack.pop();
 
-    //        std::cout << "m = ";
-    //        std::cout << glm::to_string(m1) << std::endl;
+    //std::cout << glm::to_string(m1) << std::endl;
 
     // glM = glM * m1; // * glM;
     glM = m1 * glM;
   }
 
-  // std::cout << "\n\nmodelMatrix = ";
-  // std::cout << glm::to_string(glM) << std::endl;
+  //std::cout << glm::to_string(glM) << std::endl;
 
   return glM;
 }
@@ -168,12 +160,11 @@ Shape *extractAndCreateShapeFromJSONData(json &shapeData, SceneContainer &scene)
 
     // attempt to locate this object to instance in the
     // instanceMap
-    std::map<std::string, Shape *>::iterator roIter = m_instanceMap.find(instanceIDName);
-    if (roIter != m_instanceMap.end()) {
-      Shape *robj = roIter->second;
-      Matrix4x4 m(glM[0][0], glM[0][1], glM[0][2], glM[0][3], glM[1][0], glM[1][1], glM[1][2], glM[1][3], glM[2][0], glM[2][1], glM[2][2], glM[2][3], glM[3][0], glM[3][1], glM[3][2], glM[3][3]);
-      m = m.transpose();
-      Matrix4x4 minv = m.inverse();
+    Shape *robj = scene.getInstancedObject(instanceIDName);
+    if (robj) {
+      glm::mat4 m(glM[0][0], glM[0][1], glM[0][2], glM[0][3], glM[1][0], glM[1][1], glM[1][2], glM[1][3], glM[2][0], glM[2][1], glM[2][2], glM[2][3], glM[3][0], glM[3][1], glM[3][2], glM[3][3]);
+      //m = glm::transpose(m);
+      glm::mat4 minv = glm::inverse(m);
 
       sPtr = new InstancedObject(robj, m, minv);
 
@@ -382,8 +373,8 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
       // but we need to still create the base shape.
       json instanceShapeData = j["scene"]["instance"][i];
 
-      Shape *shapePtr = extractAndCreateShapeFromJSONData(instanceShapeData);
-      m_instanceMap[instanceShapeData["_name"]] = shapePtr;
+      Shape *shapePtr = extractAndCreateShapeFromJSONData(instanceShapeData, scene);
+      scene.addInstancedObject(shapePtr);
     }
   }
 #endif

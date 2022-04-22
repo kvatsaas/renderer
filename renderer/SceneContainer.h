@@ -5,6 +5,7 @@
 #include "Light.h"
 #include "Shader.h"
 #include "Shape.h"
+#include "InstancedObject.h"
 #include "BVHNode.h"
 #include <boost/optional/optional.hpp>
 
@@ -39,13 +40,13 @@ public:
 
   /**
    * @brief Adds a light to the SceneContainer
-   * @param l A refepointerrence to the light to add
+   * @param l A pointer to the light to add
   */
   void addLight(Light *l);
 
   /**
    * @brief Adds a shader to the SceneContainer
-   * @param s A pointer to the cashadermera to add
+   * @param s A pointer to the shader to add
   */
   void addShader(Shader *s);
 
@@ -54,6 +55,12 @@ public:
    * @param s A pointer to the shape to add
   */
   void addShape(Shape *s);
+
+  /**
+   * @brief Adds an instanced object to the SceneContainer
+   * @param s A pointer to the instanced object to add
+  */
+  void addInstancedObject(Shape *s);
 
   /**
    * @brief Sets a background color
@@ -104,6 +111,12 @@ public:
   const std::vector<Light *> &getLights();
 
   /**
+   * @brief Getter for the shaders in the scene
+   * @return A map of shader pointers mapped by their names
+  */
+  const std::map<std::string, Shader *> &getShaders();
+
+  /**
    * @brief Getter for a single shader
    * @param name The name of the shader
    * @return The requested shader, or nullptr if it does not exist
@@ -111,16 +124,23 @@ public:
   Shader *getShader(std::string name);
 
   /**
-   * @brief Getter for the shaders in the scene
-   * @return A map of shader pointers mapped by their names
-  */
-  const std::map<std::string, Shader *> &getShaders();
-
-  /**
    * @brief Getter for the shapes in the scene
    * @return A vector of pointers to shapes
   */
   const std::vector<Shape *> &getShapes();
+
+  /**
+   * @brief Getter for the instanced objects in the scene
+   * @return A map of instanced object pointers mapped by their names
+  */
+  const std::map<std::string, Shape *> &getInstancedObjects();
+
+  /**
+   * @brief Getter for a single instanced object
+   * @param name The name of the instanced object
+   * @return The requested instanced object, or nullptr if it does not exist
+  */
+  Shape *getInstancedObject(std::string name);
 
   /**
    * @brief Getter for the background color
@@ -210,6 +230,7 @@ protected:
   std::vector<Light *> lights;
   std::map<std::string, Shader *> shaders;
   std::vector<Shape *> shapes;
+  std::map<std::string, Shape *> instancedObjects;
   BVHNode rootNode;
   Vector3D bgColor;
   float default_nx, default_ny;
