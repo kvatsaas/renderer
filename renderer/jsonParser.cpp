@@ -449,21 +449,23 @@ void parseJSONData(const std::string &filename, SceneContainer &scene)
 
       auto eSPtr = new Shader(intensity);
 
-      Triangle *tPtr = new Triangle(bot_left, bot_right, top_left);
-      //tPtr->setIntersectionVisibility();
-      tPtr->setName("area light bottom left");
-      tPtr->setShader(eSPtr);
-      tPtr->setShadowDepthBounds(-1, -1);
+      if (j["scene"]["light"][i]["visible"].empty() || j["scene"]["light"][i]["visible"] == 1) {
+        Triangle *tPtr = new Triangle(bot_left, bot_right, top_left);
+        //tPtr->setIntersectionVisibility();
+        tPtr->setName("area light bottom left");
+        tPtr->setShader(eSPtr);
+        tPtr->setShadowDepthBounds(-1, -1);
 
-      scene.addShape(tPtr);
+        scene.addShape(tPtr);
 
-      tPtr = new Triangle(top_right, bot_right, top_left);
-      //tPtr->setIntersectionVisibility();
-      tPtr->setName("area light top right");
-      tPtr->setShader(eSPtr);
-      tPtr->setShadowDepthBounds(-1, -1);
+        tPtr = new Triangle(top_right, bot_right, top_left);
+        //tPtr->setIntersectionVisibility();
+        tPtr->setName("area light top right");
+        tPtr->setShader(eSPtr);
+        tPtr->setShadowDepthBounds(-1, -1);
 
-      scene.addShape(tPtr);
+        scene.addShape(tPtr);
+      }
     }
 #endif
 #if SHAPELIGHTS_READY

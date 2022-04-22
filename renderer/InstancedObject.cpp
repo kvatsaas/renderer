@@ -43,6 +43,9 @@ InstancedObject::InstancedObject(Shape *&rShape, glm::mat4 &m, glm::mat4 &invers
 
 bool InstancedObject::closestHit(const Ray &r, const float tmin, float &tmax, HitStructure &hit, int depth)
 {
+  if (depth < bound.getMinDepthVisible() || depth > bound.getMaxDepthVisible())
+    return false;
+
   Ray inverse = Ray(r.getOrigin().transformWithMatrix(mInv, 1.0f), r.getDirection().transformWithMatrix(mInv, 0.0f));
 
   if (refShape->closestHit(inverse, tmin, tmax, hit, depth)) {
@@ -66,6 +69,9 @@ bool InstancedObject::closestHit(const Ray &r, const float tmin, float &tmax, Hi
 
 bool InstancedObject::hit(const Ray &r, float tmin, float tmax, int depth)
 {
+  if (depth < bound.getMinDepthShadow() || depth > bound.getMaxDepthShadow())
+    return false;
+
   Ray inverse = Ray(r.getOrigin().transformWithMatrix(mInv, 1.0f), r.getDirection().transformWithMatrix(mInv, 0.0f));
 
   if (refShape->hit(inverse, tmin, tmax, depth)) {

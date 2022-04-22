@@ -45,6 +45,26 @@ void AABoundingBox::setShadowDepthBounds(int min, int max)
   maxDepthShadow = max;
 }
 
+int AABoundingBox::getMinDepthVisible()
+{
+  return minDepthVisible;
+}
+
+int AABoundingBox::getMaxDepthVisible()
+{
+  return maxDepthVisible;
+}
+
+int AABoundingBox::getMinDepthShadow()
+{
+  return minDepthShadow;
+}
+
+int AABoundingBox::getMaxDepthShadow()
+{
+  return maxDepthShadow;
+}
+
 void AABoundingBox::addPoint(Vector3D p)
 {
   if (p['x'] < minPt['x'])

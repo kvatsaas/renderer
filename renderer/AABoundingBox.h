@@ -64,6 +64,30 @@ public:
   Vector3D &getMaxPoint();
 
   /**
+   * @brief Getter for the minimum reflection depth at which the shape is visible
+   * @return The minimum visible depth
+  */
+  int getMinDepthVisible();
+
+  /**
+   * @brief Getter for the maximum reflection depth at which the shape is visible
+   * @return The maximum visible depth
+  */
+  int getMaxDepthVisible();
+
+  /**
+   * @brief Getter for the minimum reflection depth at which the shape casts a shadow
+   * @return The minimum shadow depth
+  */
+  int getMinDepthShadow();
+
+  /**
+   * @brief Getter for the maximum reflection depth at which the shape casts a shadow
+   * @return The maximum shadow depth
+  */
+  int getMaxDepthShadow();
+
+  /**
    * @brief Enlarges the bounding box to include the given point
    * @param p The point
   */

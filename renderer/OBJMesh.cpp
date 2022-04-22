@@ -75,7 +75,7 @@ OBJMesh::OBJMesh(const std::string &filename, Shader *defaultShader)
       bound.addPoint(tv2);
 
       Triangle *tPtr = new Triangle(tv0, tv1, tv2, shaderPtr);
-      tPtr->setNormals(Vector3D(v0.normal[0], v0.normal[1], v0.normal[2]), Vector3D(v1.normal[0], v1.normal[1], v1.normal[2]), Vector3D(v2.normal[0], v2.normal[1], v2.normal[2]), false);
+      tPtr->setNormals(Vector3D(v0.normal[0], v0.normal[1], v0.normal[2]), Vector3D(v1.normal[0], v1.normal[1], v1.normal[2]), Vector3D(v2.normal[0], v2.normal[1], v2.normal[2]), true);
 
       // Add the triangle to the mesh's triangle list
       triList.push_back(tPtr);
