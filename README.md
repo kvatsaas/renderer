@@ -1,3 +1,10 @@
+This README is considered incomplete and should be used as only the briefest of introductions to this project - a 3D renderer built for a course on graphics, primarily using ray tracing to build PNGs of json-defined scenes. I am happy to provide more context to those interested.
+
+The guide below is from the original course instructions, and I've left it here in case anyone wants to actually try to build this on their local machine (though it's probably more work than it's worth). Instead, I've included the [output images](/output), [original scene files](/scenes), and [my modified/custom scene files](/scenes_custom). There's also a couple of examples of [output from `patterns`](/patterns), a little side project I tacked on, which is ported from an old calculator program I liked to toy with years ago. My own code is in the [renderer](/renderer) directory.
+
+##
+##
+
 Code used for examples in the FCG4 Edition of Using Graphics Hardware chapter.
 
 ### Prerequisite Libraries
