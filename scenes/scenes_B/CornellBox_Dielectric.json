@@ -1,0 +1,280 @@
+{
+    "scene": {
+	"camera": [{
+		"position": "278 273 -800",
+		"viewDir": "0 0 1",
+		"focalLength": 0.035,
+		"imagePlaneWidth": 0.025,
+		"_name": "main",
+		"_type": "perspective"
+	    }],
+
+	"light": [
+	    {
+		"position": "278.0 548.7 279.50",
+		"intensity": "21.7220   18.4637    9.3405",
+		"length": 130.0,
+		"width": 105.0,
+		"normal": "0.0 -1.0 0.0",
+		"_type": "area"
+	    }
+	],
+
+	"shader": [
+            {
+		"diffuse": "0.76 0.75 0.5",
+		"_name": "whiteLambertian",
+		"_type": "Diffuse"
+            },
+            {
+		"diffuse": "0.15 0.48 0.09",
+		"_name": "greenLambertian",
+		"_type": "Diffuse"
+            },
+            {
+		"diffuse": "0.63 0.06 0.04",
+		"_name": "redLambertian",
+		"_type": "Diffuse"
+            },
+            {
+		"refractiveIndex": 1.31,
+		"attenuationCoef": "0.9999 0.9997 0.9999",
+		"_name": "coloredGlass",
+		"_type": "Dielectric"
+            }
+	],
+	"shape": [
+            {
+		"v0": "0.0 0.0 0.0",
+		"v1": "0.0 0.0 559.2",
+		"v2": "549.6 0.0 559.2",
+		"shader": 
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "floor0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "0.0 0.0 0.0",
+		"v1": "549.6 0.0 559.2",
+		"v2": "552.8 0.0 0.0",
+		"shader": 
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "floor1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "0.0 0.0 559.2",
+		"v1": "0.0 548.8 559.2",
+		"v2": "556.0 548.8 559.2",
+		"shader": 
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "BackWall0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "0.0 0.0 559.2",
+		"v1": "556.0 548.8 559.2",
+		"v2": "549.6 0.0 559.2",
+		"shader": 
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "BackWall1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "0.0 0.0 0.0",
+		"v1": "0.0 548.8 0.0",
+		"v2": "0.0 548.8 559.2",
+		"shader": 
+		{
+                    "_ref": "greenLambertian"
+		},
+		"_name": "RightWall0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "0.0 0.0 0.0",
+		"v1": "0.0 548.8 559.2",
+		"v2": "0.0 0.0 559.2",
+		"shader":
+		{
+                    "_ref": "greenLambertian"
+		},
+		"_name": "RightWall1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "549.6 0.0 559.2",
+		"v1": "556.0 548.8 559.2",
+		"v2": "556.0 548.8 0.0",
+		"shader":
+		{
+                    "_ref": "redLambertian"
+		},
+		"_name": "LeftWall0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "549.6 0.0 559.2",
+		"v1": "556.0 548.8 0.0",
+		"v2": "552.8 0.0 0.0",
+		"shader":
+		{
+                    "_ref": "redLambertian"
+		},
+		"_name": "LeftWall1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "556.0 548.8 559.2",
+		"v1": "0.0 548.8 559.2",
+		"v2": "0.0 548.8   0.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "Ceiling0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "556.0 548.8 559.2",
+		"v1": "0.0 548.8   0.0",
+		"v2": "556.0 548.8 0.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "Ceiling1",
+		"_type": "triangle"
+            },
+            {
+		"shader":
+		{
+                    "_ref": "coloredGlass"
+		},
+		"center": "185.5333 99.0000 169.0333",
+		"radius": 96.6667,
+		"_name": "shortObj",
+		"_type": "sphere"
+            },
+            {
+		"v0": "265.0 330.0 296.0",
+		"v1": "314.0 330.0 456.0",
+		"v2": "472.0 330.0 406.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Top0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "265.0 330.0 296.0",
+		"v1": "472.0 330.0 406.0",
+		"v2": "423.0 330.0 247.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Top1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "423.0 330.0 247.0",
+		"v1": "472.0 330.0 406.0",
+		"v2": "472.0   0.0 406.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Top0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "423.0 330.0 247.0",
+		"v1": "472.0   0.0 406.0",
+		"v2": "423.0   0.0 247.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Top1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "472.0 330.0 406.0",
+		"v1": "314.0 330.0 456.0",
+		"v2": "314.0   0.0 456.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Back0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "472.0 330.0 406.0",
+		"v1": "314.0   0.0 456.0",
+		"v2": "472.0   0.0 406.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Back1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "314.0 330.0 456.0",
+		"v1": "265.0 330.0 296.0",
+		"v2": "265.0   0.0 296.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Right0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "314.0 330.0 456.0",
+		"v1": "265.0   0.0 296.0",
+		"v2": "314.0   0.0 456.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Right1",
+		"_type": "triangle"
+            },
+            {
+		"v0": "265.0 330.0 296.0",
+		"v1": "423.0 330.0 247.0",
+		"v2": "423.0   0.0 247.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Front0",
+		"_type": "triangle"
+            },
+            {
+		"v0": "265.0 330.0 296.0",
+		"v1": "423.0   0.0 247.0",
+		"v2": "265.0   0.0 296.0",
+		"shader":
+		{
+                    "_ref": "whiteLambertian"
+		},
+		"_name": "TallBlock_Front1",
+		"_type": "triangle"
+            }
+	],
+	"_bgColor": "0.0 0.0 0.0"
+    }
+}

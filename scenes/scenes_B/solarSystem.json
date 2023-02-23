@@ -1,0 +1,361 @@
+{
+    "scene": {
+	"camera": [{
+            "position": "-50 50.0 48.0",
+            "viewDir": "3.0 -3.0 -5.0",
+            "focalLength": 0.50,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	
+	"light": [
+
+            {
+		"position": "0.0 50.0 0.0",
+		"intensity": "1.0 1.0 1.0",
+		"normal": "0.0 -1.0 0.0",
+		"width": 40.0,
+		"length": 40.0,
+		"_type": "area"
+            }
+	],
+
+	"texture": [
+            {
+		"sourcefile": "images/textureCalibrationNumberGrid.png",
+		"_name": "calibrationTex",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/moon_2k.png",
+		"_name": "MoonDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/earth_daymap_2k.png",
+		"_name": "EarthDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/earth_specular_map_2k.png",
+		"_name": "EarthSpecular",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/venus_atmosphere_2k.png",
+		"_name": "VenusDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/mars_2k.png",
+		"_name": "MarsDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/jupiter_map_css_plus_juno_bj.png",
+		"_name": "JupiterDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/uranus_2k.png",
+		"_name": "UranusDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/neptune_2k.png",
+		"_name": "NeptuneDiffuse",
+		"_type": "image"
+            }
+	],
+
+	"shader": [
+            {
+		"diffuse": {
+		    "tex": "calibrationTex",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "greyTextured",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": {
+		    "tex": "calibrationTex",
+		    "data": "1.0 1.0 1.0"
+		},
+		"specular": "1 1 1",
+		"phongExp": 32.0,
+		"mirrorCoef": 0.8,
+		"roughness": 0.1,
+		"_name": "greyMirroredTextured",
+		"_type": "BlinnPhongMirrored"
+            },
+            {
+		"diffuse": {
+		    "tex": "EarthDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"specular": {
+		    "tex": "EarthSpecular",
+		    "data": "1 1 1"
+		},
+		"phongExp": 64.0,
+		"_name": "EarthShader",
+		"_type": "BlinnPhong"
+            },
+            {
+		"diffuse": {
+		    "tex": "MoonDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "MoonShader",
+		"_type": "Diffuse"
+            },
+            {
+		"diffuse": {
+		    "tex": "VenusDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "VenusShader",
+		"_type": "Diffuse"
+            },
+            {
+		"diffuse": {
+		    "tex": "MarsDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "MarsShader",
+		"_type": "Diffuse"
+            },
+            {
+		"diffuse": {
+		    "tex": "JupiterDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "JupiterShader",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": {
+		    "tex": "UranusDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "UranusShader",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": {
+		    "tex": "NeptuneDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "NeptuneShader",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0.4 0.4 1.0",
+		"_name": "blueMat",
+		"_type": "Lambertian"
+            }
+	],
+	"shape": [
+            {
+		"shader": {
+		    "_ref": "greyTextured"
+		},
+		"minPt": "-50.0 -0.5 -50.0",
+		"maxPt": "50.0 0.0 50.0",
+		"_name": "ground",
+		"_type": "box"
+            },
+            {
+		"shader": {
+		    "_ref": "greyMirroredTextured"
+		},
+		"minPt": "-50.0 0.0 -50.5",
+		"maxPt": "50.0 50.0 -50.0",
+		"_name": "backWall",
+		"_type": "box"
+            },
+            {
+		"shader": {
+		    "_ref": "EarthShader"
+		},
+
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "0.0 5.0 0.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Z",
+			"amount": 23.5
+                    },
+                    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 265.0
+                    },
+		    {
+			"type" : "scale",
+			"amount" : "5 5 5"
+		    }
+		],
+
+		"_name": "Earth",
+		"_type": "instance",
+		"_id": "spheroid"
+            },
+            {
+		"shader": {
+		    "_ref": "MoonShader"
+		},
+
+		"xform" : [
+		    {
+			"type" : "translate",
+			"amount" : "-7.0 10.0 -1.5"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount" : 0.0
+                    }
+		],
+
+		"_name": "Moon",
+		"_type": "instance",
+		"_id": "spheroid"
+            },
+            {
+		"shader": {
+		    "_ref": "VenusShader"
+		},
+		
+		"xform" : [
+		    {
+			"type" : "translate",
+			"amount" : "8.0 5.0 9.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount" : 0.0
+                    },
+		    {
+			"type" : "scale",
+			"amount" : "4.8 4.8 4.8"
+		    }
+		],
+		"_name": "Venus",
+		"_type": "instance",
+		"_id": "spheroid"
+            },
+            {
+		"shader": {
+		    "_ref": "MarsShader"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "-8.0 4.0 9.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 0.0
+                    },
+		    {
+			"type" : "scale",
+			"amount" : "2.8 2.8 2.8"
+		    }
+		],
+		"_name": "Mars",
+		"_type": "instance",
+		"_id": "spheroid"
+            },
+            {
+		"shader": {
+		    "_ref": "JupiterShader"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "20.0 19.0 -18.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Y",
+			"amount": 60.0
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "18 18 18"
+		    }
+		],
+		"_name": "Jupiter",
+		"_type": "instance",
+		"_id": "spheroid"
+            },
+            {
+		"shader": {
+		    "_ref": "NeptuneShader"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "-17.0 14.0 -23.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Y",
+			"amount": 80.0
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "13 13 13"
+		    }
+		],
+		"_name": "Neptune",
+		"_type": "instance",
+		"_id": "spheroid"
+            },
+            {
+		"shader": {
+		    "_ref": "UranusShader"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "-32.0 11.0 5.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 0.0
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "11 11 11"
+		    }
+		],
+		"_name": "Uranus",
+		"_type": "instance",
+		"_id": "spheroid"
+            }
+	],
+	"instance": [
+	    {
+		"shader": {
+		    "_ref": "blueMat"
+		},
+		"center": "0.0 0.0 0.0",
+		"radius": 1.0,
+		"_name": "spheroid",
+		"_type": "sphere"
+	    }
+	],
+	
+	"_bgColor": "0.7 0.7 0.9"
+    }
+}

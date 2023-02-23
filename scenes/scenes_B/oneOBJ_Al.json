@@ -1,0 +1,31 @@
+{
+    "scene": {
+	"camera": [{
+	    "position": "0 0.2 8.0",
+	    "viewDir": "0.0 -0.1 -1.0",
+	    "focalLength": 0.50,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [{
+	    "position": "6.0 6.0 8.0",
+	    "intensity": "1.0 1.0 1.0",
+	    "_type": "point"
+	}],
+	"shader": [{
+	    "diffuse": "0.5 0.5 0.5",
+	    "_name": "greyMat",
+	    "_type": "Lambertian"
+	}],
+	"shape": [{
+	    "file": "objFiles/al.obj",
+	    "shader": {
+		"_ref": "greyMat"
+	    },
+	    "_name": "AlModel",
+	    "_type": "mesh"
+	}],
+	"_bgColor": "0.5 0.5 0.8"
+    }
+}

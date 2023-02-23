@@ -1,0 +1,112 @@
+{
+    "scene": {
+	"camera": [{
+	    "position": "0 3.0 4.0",
+	    "viewDir": "0 -1.5 -3.0",
+	    "focalLength": 0.40,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [
+	    {
+	    "position": "0.0 10.0 0.0",
+	    "intensity": "1.0 1.0 1.0",
+	    "_type": "point"
+	    }
+	],
+	"shader": [
+	    {
+		"diffuse": "0 1 0",
+		"_name": "greenMat",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "1 0 0",
+		"specular": "1 1 1",
+		"phongExp": 32.0,
+		"_name": "redPlastic",
+		"_type": "BlinnPhong"
+	    },
+	    {
+               "refractiveIndex": 1.34,
+               "attenuationCoef": "0.9999 0.95 0.9999",
+               "_name": "dielectric1",
+               "_type": "Dielectric"
+	    },
+           {
+               "refractiveIndex": 1.2,
+               "attenuationCoef": "0.9999 0.80 0.9999",
+               "_name": "dielectric0",
+               "_type": "Dielectric"
+           },
+           {
+               "refractiveIndex": 1.8,
+               "attenuationCoef": "0.9999 0.75 0.9999",
+               "_name": "dielectric2",
+               "_type": "Dielectric"
+           },
+	    {
+		"diffuse": "0.5 0.5 0.5",
+		"_name": "greyMat",
+		"_type": "Lambertian"
+	    }
+	],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "greyMat"
+		},
+		"minPt": "-50.0 -0.5 -50.0",
+		"maxPt": "50.0 0.0 50.0",
+		"_name": "ground",
+		"_type": "box"
+	    },
+	    {
+		"shader": {
+		    "_ref": "redPlastic"
+		},
+		"center": "-1.2 1.0 -3.0",
+		"radius": 1.0,
+		"_name": "leftsphere",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "greenMat"
+		},
+		"center": "1.2 1.10 -4.0",
+		"radius": 1.10,
+		"_name": "rightsphere",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "dielectric0"
+		},
+		"center": "0.0 1.0 -0.7",
+		"radius": 0.4,
+		"_name": "msphere",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "dielectric1"
+		},
+		"center": "-1.0 1.0 -0.7",
+		"radius": 0.4,
+		"_name": "msphere",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "dielectric2"
+		},
+		"center": "1.0 1.0 -0.7",
+		"radius": 0.4,
+		"_name": "msphere",
+		"_type": "sphere"
+	    }
+	]
+    }
+}

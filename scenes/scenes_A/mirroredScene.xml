@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  Comments can be embedded as well. -->
+<scene>
+  <camera name="main" type="perspective">
+    <position>0 6.0 1.0</position>
+    <lookatPoint>0 0.0 -3.0</lookatPoint>
+    <focalLength>0.40</focalLength>
+    <imagePlaneWidth>0.5</imagePlaneWidth>
+  </camera>
+
+  <light type="point">
+    <position>-10.0 10.0 1.0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+  </light>
+
+  <light type="point">
+    <position>10.0 8.0 1.0</position>
+    <intensity>0.8 0.8 0.8</intensity>
+  </light>
+
+  <shader name="redPlastic" type="BlinnPhong">
+    <diffuse>1 0 0</diffuse>
+    <specular>1 1 1</specular>
+    <phongExp>32.0</phongExp>
+  </shader>
+
+  <shader name="blueMat" type="Lambertian">
+    <diffuse>0 0 0.5</diffuse>
+  </shader>
+  <shader name="green1" type="Lambertian">
+    <diffuse>0 1.0 0.0</diffuse>
+  </shader>
+  <shader name="purple1" type="Lambertian">
+    <diffuse>0.8 0.0 1.0</diffuse>
+  </shader>
+  <shader name="red1" type="Lambertian">
+    <diffuse>0.8 0.3 0.3</diffuse>
+  </shader>
+  <shader name="gold" type="BlinnPhong">
+    <diffuse>0.75164 0.60648 0.22648</diffuse>
+    <specular>0.628281 0.555802 0.366065</specular>
+    <phongExp>51.2</phongExp>
+  </shader>
+
+  <shader name="greyMat" type="Lambertian">
+    <diffuse>0.5 0.5 0.5</diffuse>
+  </shader>
+
+  <!-- Simple Mirror Shader -->
+  <shader name="mirrorMat" type="Mirror"/>
+
+  <!-- Ground plane -->
+  <shape name="ground" type="box">
+    <shader ref="blueMat" />
+    <minPt>-50.0 -0.5 -50.0</minPt>
+    <maxPt>50.0 0.0 50.0</maxPt>
+  </shape>
+
+  <!-- ceiling plane -->
+  <shape name="ceil" type="box">
+    <shader ref="gold" />
+    <minPt>-50.0 20.0 -50.0</minPt>
+    <maxPt>50.0 20.5 50.0</maxPt>
+  </shape>
+
+  <!-- Spheres -->
+  <shape name="s1" type="sphere">
+    <shader ref="mirrorMat"/>
+    <center>-1.2 1.0 -3.0</center>
+    <radius>1.0</radius>
+  </shape>
+
+  <shape name="s2" type="sphere">
+    <shader ref="mirrorMat"/>
+    <center>1.2 1.0 -3.0</center>
+    <radius>1.0</radius>
+  </shape>
+
+  <shape name="s3" type="sphere">
+    <shader ref="mirrorMat"/>
+    <center>0.0 1.0 -4.2</center>
+    <radius>1.0</radius>
+  </shape>
+
+  <shape name="s4" type="sphere">
+    <shader ref="mirrorMat"/>
+    <center>0.0 1.0 -2.1</center>
+    <radius>1.0</radius>
+  </shape>
+
+
+  <shape name="s5" type="sphere">
+    <shader ref="red1"/>
+    <center>0.0 3.0 -4.8</center>
+    <radius>0.3</radius>
+  </shape>
+  <shape name="s6" type="sphere">
+    <shader ref="green1"/>
+    <center>-1.0 3.0 -4.0</center>
+    <radius>0.3</radius>
+  </shape>
+  <shape name="s8" type="sphere">
+    <shader ref="purple1"/>
+    <center>1.0 3.0 -4.0</center>
+    <radius>0.3</radius>
+  </shape>
+
+
+  <shape name="b1" type="box">
+    <shader ref="green1"/>
+    <minPt>-3.5 0.0 -2.5</minPt>
+    <maxPt>-3.0 0.5 -2.0</maxPt>
+  </shape>
+  <shape name="b2" type="box">
+    <shader ref="red1"/>
+    <minPt>-0.25 0.0 -1.0</minPt>
+    <maxPt>0.25 0.5 -0.5</maxPt>
+  </shape>
+  <shape name="b3" type="box">
+    <shader ref="purple1"/>
+    <minPt>3.0 0.0 -2.5</minPt>
+    <maxPt>3.5 0.5 -2.0</maxPt>
+  </shape>
+
+</scene>

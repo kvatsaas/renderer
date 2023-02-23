@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<scene bgColor="0.5 0.5 0.5">
+
+  <!-- Simple camera placed back from the origin looking in -Z direction -->
+  <camera name="main" type="perspective">
+    <position>0 3.0 6.0</position>
+    <viewDir>0.0 -1.0 -3.0</viewDir>
+    <focalLength>0.40</focalLength>
+    <imagePlaneWidth>0.5</imagePlaneWidth>
+  </camera>
+
+  <light type="area">
+    <position>0.0 10.0 0.0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+    <normal>0 -1 0</normal>
+    <width>4</width>
+    <length>4</length>
+  </light>
+
+  <!-- Ground plane -->
+  <shader name="greyMat" type="Lambertian">
+    <diffuse>0.5 0.6 0.5</diffuse>
+  </shader>
+  <shape name="ground" type="box">
+    <shader ref="greyMat" />
+    <minPt>-50.0 -0.5 -50.0</minPt>
+    <maxPt>50.0 0.0 50.0</maxPt>
+  </shape>
+
+  <!-- Spheres -->
+  <shader name="darkBlue" type="Lambertian">
+    <diffuse>0.4 0.4 1.</diffuse>
+  </shader>
+  <shader name="darkRed" type="Lambertian">
+    <diffuse>1 0.4 0.4</diffuse>
+  </shader>
+  <shader name="darkYellow" type="Lambertian">
+    <diffuse>1 1.0 0.4</diffuse>
+  </shader>
+  <shader name="darkGreen" type="Lambertian">
+    <diffuse>0.4 1.0 0.4</diffuse>
+  </shader>
+  <shape name="s1" type="sphere">
+    <shader ref="darkBlue"/>
+    <center>0.0 1.0 0.0</center>
+    <radius>1</radius>
+  </shape>
+  <shape name="s2" type="sphere">
+    <shader ref="darkRed"/>
+    <center>-0.85 0.5 0.85</center>
+    <radius>0.5</radius>
+  </shape>
+  <shape name="s3" type="sphere">
+    <shader ref="darkYellow"/>
+    <center>0.85 0.5 0.85</center>
+    <radius>0.5</radius>
+  </shape>
+  <shape name="s4" type="sphere">
+    <shader ref="darkGreen"/>
+    <center>0.0 0.5 -0.85</center>
+    <radius>0.5</radius>
+  </shape>
+
+
+  <!-- Wall Instance -->
+  <instance name="wall" type="box">
+    <shader ref="greyMat" />
+    <minPt>-1. 0.0 -0.5</minPt>
+    <maxPt>1.0 2.0 0.0</maxPt>    
+  </instance>
+
+  <shader name="g0" type="BlinnPhongMirrored">
+    <diffuse>0.5 0.5 0.5</diffuse>
+    <specular>1.0 1.0 1.0</specular>
+    <phongExp>16.0</phongExp>
+    <mirrorCoef>0.5</mirrorCoef>
+    <roughness>0.01</roughness>
+  </shader>
+  <shader name="g1" type="BlinnPhongMirrored">
+    <diffuse>0.5 0.5 0.5</diffuse>
+    <specular>1.0 1.0 1.0</specular>
+    <phongExp>16.0</phongExp>
+    <mirrorCoef>0.5</mirrorCoef>
+    <roughness>0.05</roughness>
+  </shader>
+  <shader name="g2" type="BlinnPhongMirrored">
+    <diffuse>0.5 0.5 0.5</diffuse>
+    <specular>1.0 1.0 1.0</specular>
+    <phongExp>16.0</phongExp>
+    <mirrorCoef>0.5</mirrorCoef>
+    <roughness>0.10</roughness>
+  </shader>
+  <shader name="g3" type="BlinnPhongMirrored">
+    <diffuse>0.5 0.5 0.5</diffuse>
+    <specular>1.0 1.0 1.0</specular>
+    <phongExp>16.0</phongExp>
+    <mirrorCoef>0.5</mirrorCoef>
+    <roughness>0.15</roughness>
+  </shader>
+  <shader name="g4" type="BlinnPhongMirrored">
+    <diffuse>0.5 0.5 0.5</diffuse>
+    <specular>1.0 1.0 1.0</specular>
+    <phongExp>16.0</phongExp>
+    <mirrorCoef>0.5</mirrorCoef>
+    <roughness>0.20</roughness>
+  </shader>
+
+  <shape name="w1" type="instance" id="wall">
+    <shader ref="g0"/>
+    <transform name="xform1">
+      <translate>-3.4641 0.0 -2.0</translate>
+      <scale>1.0 2.0 1.0</scale> 
+      <rotate axis="Y">42</rotate>
+    </transform>
+  </shape> 
+
+  <shape name="w2" type="instance" id="wall">
+    <shader ref="g1"/>
+    <transform name="xform1">
+      <translate>-2.0 0.0 -3.4641</translate>
+      <scale>1.0 2.0 1.0</scale> 
+      <rotate axis="Y">20</rotate>
+    </transform>
+  </shape> 
+
+  <shape name="w3" type="instance" id="wall">
+    <shader ref="g2"/>
+    <transform name="xform1">
+      <translate>0.0 0.0 -4</translate>
+      <scale>1.0 2.0 1.0</scale> 
+    </transform>
+  </shape> 
+
+  <shape name="w4" type="instance" id="wall">
+    <shader ref="g3"/>
+    <transform name="xform1">
+      <translate>2.0 0.0 -3.4641</translate>
+      <scale>1.0 2.0 1.0</scale> 
+      <rotate axis="Y">-20</rotate>
+    </transform>
+  </shape> 
+
+  <shape name="w5" type="instance" id="wall">
+    <shader ref="g4"/>
+    <transform name="xform1">
+      <translate>3.4641 0.0 -2.0</translate>
+      <scale>1.0 2.0 1.0</scale> 
+      <rotate axis="Y">-42</rotate>
+    </transform>
+  </shape> 
+
+</scene>
+

@@ -1,0 +1,168 @@
+{
+   "scene": {
+       "camera": [{
+           "position": "0 2.2 3.8",
+           "lookatPoint": "0.0 1.2 -6.0",
+           "focalLength": 0.60,
+           "imagePlaneWidth": 0.5,
+           "_name": "main",
+           "_type": "perspective"
+       }],
+       "light": [
+	   {
+               "position": "0.0 40.0 0.0",
+               "intensity": "1.0 1.0 1.0",
+               "normal": "0.0 -1.0 0.0",
+               "width": 20.0,
+               "length": 20.0,
+               "_type": "area"
+	   },
+	   {
+               "position": "-10.0 10.0 0.0",
+               "intensity": "2.0 2.0 2.0",
+               "normal": "0.7071 -0.7071 0.0",
+               "width": 10.0,
+               "length": 10.0,
+               "_type": "area"
+	   },
+	   {
+               "position": "10.0 10.0 0.0",
+               "intensity": "2.0 2.0 2.0",
+               "normal": "-0.7071 -0.7071 0.0",
+               "width": 10.0,
+               "length": 10.0,
+               "_type": "area"
+	   },
+	   {
+               "position": "0.0 15.0 10.0",
+               "intensity": "2.0 2.0 2.0",
+               "normal": "0.0 -0.7071 -0.7071",
+               "width": 30.0,
+               "length": 30.0,
+               "_type": "area"
+	   }
+       ],
+
+       "texture": [
+	   {
+               "sourcefile": "images/textureMapCalibration.png",
+               "_name": "calibrationTex",
+               "_type": "image"
+	   }
+       ],
+       
+       "shader": [
+           {
+               "diffuse" : {
+		   "tex" : "calibrationTex",
+		   "data" : "1.0 1.0 1.0"
+	       },
+               "_name": "greyTextured",
+               "_type": "Diffuse"
+           },
+           {
+               "diffuse": "0 0 1",
+               "_name": "blueMat",
+               "_type": "Diffuse"
+           },
+           {
+               "diffuse": "0.1 0.4 0.8",
+               "mirrorCoef": 0.35,
+               "_name": "shiny3",
+               "_type": "Glaze"
+           },
+	   {
+               "diffuse": "1.0 1.0 1.0",
+               "_name": "lightGrey",
+               "_type": "Diffuse"
+           },
+           {
+               "refractiveIndex": 1.34,
+               "attenuationCoef": "0.9999 0.95 0.9999",
+               "_name": "glass",
+               "_type": "Dielectric"
+         }
+       ],
+
+       "shape": [
+           {
+               "shader": {
+                   "_ref": "greyTextured"
+	       },
+               "minPt": "-10.0 -0.5 -30.0",
+               "maxPt": "10.0 0.0 30.0",
+               "_name": "ground",
+               "_type": "box"
+           },
+           {
+               "shader": {
+                   "_ref": "greyTextured"
+	       },
+               "minPt": "-10.0 0.0 -30.5",
+               "maxPt": "10.0 10.0 -30.0",
+               "_name": "backWall",
+               "_type": "box"
+           },
+           {
+               "xform": [
+		   {
+		       "type" : "translate",
+		       "amount" : "0.0 2.5 -8.0"
+		   },
+		   {
+		       "type" : "scale",
+		       "amount" : "3 3 3"
+		   },
+		   {
+		       "type" : "rotation",
+		       "axis": "Y",
+		       "amount": 180
+                   },
+                   {
+		       "type" : "rotation",
+		       "axis": "X",
+		       "amount": -90
+                   }
+	       ],
+               "shader": {
+                   "_ref": "shiny3"
+	       },
+               "_name": "dragon0",
+               "_type": "instance",
+               "_id": "dragonModel"
+           },
+           {
+               "xform": [
+		   {
+		       "type" : "translate",
+		       "amount" : "0.0 0.80 -1.2"
+		   },
+		   {
+		       "type" : "rotation",
+		       "axis": "X",
+		       "amount": -75
+                   }
+	       ],
+               "shader": {
+                   "_ref": "glass"
+	       },
+               "_name": "dragon1",
+               "_type": "instance",
+               "_id": "dragonModel"
+           }
+       ],
+    
+       "instance": [
+	   {
+               "file": "objFiles/dragon.obj",
+               "shader": {
+		   "_ref": "blueMat"
+	       },
+	       "_name": "dragonModel",
+               "_type": "mesh"
+	   }
+       ],
+       
+       "_bgColor": "0.0 0.0 0.0"
+   }
+}

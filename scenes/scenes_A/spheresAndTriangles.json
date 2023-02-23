@@ -1,0 +1,123 @@
+{
+    "scene": {
+	"bgColor": "0.3 0.4 0.35",
+	"camera": [{
+	    "position": "0 0 7",
+	    "viewDir": "0 0 -1",
+	    "focalLength": 1.0,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [{
+	    "position": "100 25 50",
+	    "intensity": "1.0 0.9804 0.9569",
+	    "_type": "point"
+	}],
+	"shader": [
+	    {
+		"diffuse": "0.957 0.957 0.941",
+		"_name": "white_chalk",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "0.929 0.467 0.467",
+		"_name": "red_chalk",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "0.580 0.753 0.8",
+		"_name": "blue_chalk",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "0.961 0.976 0.678",
+		"_name": "yellow_chalk",
+		"_type": "Lambertian"
+	    }
+	],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "white_chalk"
+		},
+		"center": "-1.5 -1.5 -5",
+		"radius": 1,
+		"_name": "sphere1",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "red_chalk"
+		},
+		"center": "1.5 -1.5 -5",
+		"radius": 1,
+		"_name": "sphere2",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "yellow_chalk"
+		},
+		"center": "1.5 1.5 -5",
+		"radius": 1,
+		"_name": "sphere3",
+		"_type": "sphere"
+	    },
+	    {
+		"shader": {
+		    "_ref": "blue_chalk"
+		},
+		"center": "-1.5 1.5 -5",
+		"radius": 1,
+		"_name": "sphere4",
+		"_type": "sphere"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "white_chalk"
+		},
+		"v0": "0 3.5 -5",
+		"v1": "-3.5 0 -5",
+		"v2": "0.0 0.0 -4",
+		"_name": "tri1",
+		"_type": "triangle"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "red_chalk"
+		},
+		"v0": "-3.5 0 -5",
+		"v1": "0 -3.5 -5",
+		"v2": "0.0 0.0 -4",
+		"_name": "tri2",
+		"_type": "triangle"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "yellow_chalk"
+		},
+		"v0": "0 -3.5 -5",
+		"v1": "3.5 0 -5",
+		"v2": "0.0 0.0 -4",
+		"_name": "tri3",
+		"_type": "triangle"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "blue_chalk"
+		},
+		"v0": "3.5 0.0 -5",
+		"v1": "0 3.5 -5",
+		"v2": "0.0 0.0 -4",
+		"_name": "tri4",
+		"_type": "triangle"
+	    }
+
+	]
+    }
+}

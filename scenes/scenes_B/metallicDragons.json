@@ -1,0 +1,186 @@
+{
+    "scene": {
+	"camera": [{
+	    "position": "0 3.0 8.0",
+	    "viewDir": "0 -1.0 -3.0",
+	    "focalLength": 0.40,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [
+	    {
+		"position": "0.0 10.0 0.0",
+		"intensity": "1.0 1.0 1.0",
+		"normal": "0.0 -1.0 0.0",
+		"width": 5.0,
+		"length": 5.0,
+		"_type": "area"
+	    },
+	    {
+		"position": "-2.0 10.0 3.0",
+		"intensity": "1.0 1.0 1.0",
+		"normal": "0.0 -1.0 0.0",
+		"width": 5.0,
+		"length": 5.0,
+		"_type": "area"
+	    },
+	    {
+		"position": "2.0 10.0 4.0",
+		"intensity": "1.0 1.0 1.0",
+		"normal": "0.0 -1.0 0.0",
+		"width": 10.0,
+		"length": 10.0,
+		"_type": "area"
+	    }
+	],
+	"shader": [
+	    {
+		"diffuse": "0.5 0.5 0.5",
+		"mirrorCoef": 0.30,
+		"_name": "greyGlaze",
+		"_type": "Glaze"
+	    },
+	    {
+		"diffuse": "0 0 1",
+		"_name": "blueMat",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "0.75164 0.60648 0.22648",
+		"specular": "0.628281 0.555802 0.366065",
+		"phongExp": 51.2,
+		"_name": "gold",
+		"_type": "BlinnPhong"
+	    },
+	    {
+		"diffuse": "0.714 0.4284 0.18144",
+		"specular": "0.393548 0.271906 0.166721",
+		"phongExp": 25.6,
+		"_name": "bronze",
+		"_type": "BlinnPhong"
+	    },
+	    {
+		"diffuse": "0.50754 0.50754 0.50754",
+		"specular": "0.508273 0.508273 0.508273",
+		"phongExp": 51.2,
+		"_name": "silver",
+		"_type": "BlinnPhong"
+	    }
+	],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "greyGlaze"
+		},
+		"minPt": "-20.0 -0.5 -20.0",
+		"maxPt": "20.0 0.0 20.0",
+		"_name": "ground",
+		"_type": "box"
+	    },
+	    
+	    {
+		"shader": {
+		    "_ref": "gold"
+		},
+		"_name": "dragon0",
+		"_type": "instance",
+		"_id": "dragonModel",
+
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount": "0 1.5 0"
+		    },
+		    {
+			"type" : "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 120
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "X",
+			"amount": -90
+		    }
+		]
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "bronze"
+		},
+		"_name": "dragon1",
+		"_type": "instance",
+		"_id": "dragonModel",
+		
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount": "-2.0 1.5 3.0"
+		    },
+		    {
+			"type" : "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 155
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "X",
+			"amount": -90
+		    }
+		]
+	    },
+	    
+	    {
+		"shader": {
+		    "_ref": "silver"
+		},
+		"_name": "dragon2",
+		"_type": "instance",
+		"_id": "dragonModel",
+		
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount": "2.0 1.5 4.0"
+		    },
+		    {
+			"type" : "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 35
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "X",
+			"amount": -90
+		    }
+		]
+	    }
+	],
+	
+	"instance": [
+	    {
+		"file": "objFiles/dragon.obj",
+		"shader": {
+		    "_ref": "blueMat"
+		},
+		"_name": "dragonModel",
+		"_type": "mesh"
+	    }
+	],
+
+	"_bgColor": "0.7 0.7 0.9"
+    }
+}

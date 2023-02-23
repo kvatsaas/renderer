@@ -1,0 +1,64 @@
+{
+    "scene": {
+    "_bgColor": "0.5 0.5 0.5",
+	"camera": [{
+	    "position": "0 0 0",
+	    "viewDir": "0 0 -1",
+	    "focalLength": 1.0,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [
+        {
+        "position": "-10 10 -5",
+        "intensity": "1.0 0.0 0.0",
+        "_type": "point"
+        },
+        {
+	    "position": "0 10 -5",
+	    "intensity": "0.0 1.0 0.0",
+	    "_type": "point"
+        },
+        {
+        "position": "10 10 -5",
+        "intensity": "0.0 0.0 1.0",
+        "_type": "point"
+        }
+    ],
+	"shader": [{
+	    "diffuse": "1 1 1",
+	    "_name": "white",
+	    "_type": "Lambertian"
+	}],
+	"shape": [
+        {
+        "shader": {
+        "_ref": "white"
+        },
+        "center": "0 -0.5 -5",
+        "radius": 0.6,
+        "_name": "sphere1",
+        "_type": "sphere"
+        },
+        {
+        "shader": {
+        "_ref": "white"
+        },
+        "center": "-0.5 0.5 -5",
+        "radius": 0.3,
+        "_name": "sphere2",
+        "_type": "sphere"
+        },
+        {
+        "shader": {
+        "_ref": "white"
+        },
+        "center": "0.5 0.5 -5",
+        "radius": 0.3,
+        "_name": "sphere2",
+        "_type": "sphere"
+        }
+    ]
+    }
+}

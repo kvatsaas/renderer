@@ -1,0 +1,83 @@
+{
+   "scene": {
+      "camera": [{
+         "position": "0 4.0 8.0",
+         "viewDir": "0.0 -1.0 -3.0",
+         "focalLength": 0.50,
+         "imagePlaneWidth": 0.5,
+         "_name": "main",
+         "_type": "perspective"
+      }],
+       
+      "light": [{
+         "position": "6.0 6.0 8.0",
+         "intensity": "1.0 1.0 1.0",
+         "width": 2.0,
+         "length": 2.0,
+         "normal": "0 -1 0",
+         "_type": "area"
+      }],
+       
+      "shader": [
+         {
+            "diffuse": "0.5 0.5 0.5",
+            "_name": "greyMat",
+            "_type": "Lambertian"
+         },
+         {
+            "diffuse": "0.4 0.4 1.0",
+            "_name": "gooch",
+            "_type": "CoolToWarm"
+         }
+      ],
+
+      "shape": [
+         {
+             "shader": {
+                 "_ref": "greyMat"
+             },
+             "minPt": "-50.0 -0.5 -50.0",
+             "maxPt": "50.0 0.0 50.0",
+             "_name": "ground",
+             "_type": "box"
+         },
+
+          {
+	      "shader": {
+                  "_ref": "gooch"
+              },
+              "xform": [
+		  {
+		      "type" : "translate",
+		      "amount" : "0 2 1"
+		  },
+		  {
+		      "type" : "scale",
+		      "amount" : "2 2 2"
+		  },
+		  {
+		      "type" : "rotation",
+		      "axis": "X",
+                      "amount": -90
+		  }
+	      ],
+              "_name": "b1",
+              "_type": "instance",
+              "_id": "buddha"
+          }
+      ],
+
+       "instance": [
+	   {
+               "file": "objFiles/buddha.obj",
+               "shader": {
+		   "_ref": "redBlinnPhong"
+               },
+               "_name": "buddha",
+               "_type": "mesh"
+	   }
+       ],
+       
+      "_bgColor": "0.5 0.5 0.5"
+   }
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<scene>
+
+  <sceneParameters>
+    <bgColor>0.5 0.5 0.6</bgColor>
+    <envMapPrefix>data/reef_</envMapPrefix>
+  </sceneParameters>
+
+  <camera name="main" type="perspective">
+    <position>0 2.0 1.0</position>
+    <lookatPoint>0.0 0.2 -6.0</lookatPoint>
+    <focalLength>0.40</focalLength>
+    <imagePlaneWidth>0.5</imagePlaneWidth>
+  </camera>
+
+  <!-- Basic point light source placed just above the camera. -->
+  <light type="point">
+    <position>0 10 0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+  </light>
+
+  <texture name="calibrationTex" type="image">
+    <sourcefile>images/textureMapCalibration.png</sourcefile>
+  </texture>
+  <shader name="greyTextured" type="Lambertian">
+    <diffuse tex="calibrationTex">1.0 1.0 1.0</diffuse>
+  </shader>
+  <shape name="ground" type="box">
+    <shader ref="greyTextured" />
+    <minPt>-10.0 -0.5 -30.0</minPt>
+    <maxPt>10.0 0.0 30.0</maxPt>
+  </shape>
+  <shape name="backWall" type="box">
+    <shader ref="greyTextured" />
+    <minPt>-10.0 0.0 -30.5</minPt>
+    <maxPt>10.0 20.0 -30.0</maxPt>
+  </shape>
+
+  <shader name="shiny" type="BlinnPhong">
+    <diffuse>0.8 0.2 0.4</diffuse>
+    <specular>0.8 0.2 0.4</specular>
+    <phongExp>32</phongExp>
+  </shader>
+  <shape name="s1" type="sphere">
+    <shader ref="shiny" />
+    <center>0 2.0 -15</center>
+    <radius>1.8</radius>
+  </shape>
+
+  <shader name="shiny2" type="BlinnPhong">
+    <diffuse>0.1 0.8 0.4</diffuse>
+    <specular>0.8 0.2 0.4</specular>
+    <phongExp>128</phongExp>
+  </shader>
+  <shape name="s2" type="sphere">
+    <shader ref="shiny2" />
+    <center>5 2.0 -15</center>
+    <radius>1.4</radius>
+  </shape>
+
+  <shader name="shiny3" type="Glaze">
+    <diffuse>0.1 0.4 0.8</diffuse>
+    <mirrorCoef>0.5</mirrorCoef>
+  </shader>
+  <shape name="s3" type="sphere">
+    <shader ref="shiny3" />
+    <center>-5 2.0 -15</center>
+    <radius>1.4</radius>
+  </shape>
+
+  <shader name="glass" type="Dielectric">
+    <refractiveIndex>1.5</refractiveIndex>
+  </shader>
+
+  <shape name="sphere1" type="sphere">
+    <shader ref="glass" />
+    <center>-2 1.0 -5</center>
+    <radius>1</radius>
+  </shape>
+
+  <shader name="coloredGlass" type="Dielectric">
+    <refractiveIndex>1.25</refractiveIndex>
+    <attenuationCoef>0.9999 0.94 0.99</attenuationCoef>
+  </shader>
+
+  <shape name="sphere2" type="sphere">
+    <shader ref="coloredGlass" />
+    <center>2 1.0 -5</center>
+    <radius>1</radius>
+  </shape>
+
+  <instance name="box1" type="box">
+    <shader ref="glass"/>
+    <minPt>-0.5 -0.5 -0.5</minPt>
+    <maxPt>0.5 0.5 0.5</maxPt>
+  </instance>
+
+  <shape name="box2" type="instance" id="box1">
+    <shader ref="coloredGlass" />
+    <transform name="x1">
+      <translate>0 2.0 -5.0</translate>
+      <scale>1.5 1.5 1.5</scale>
+      <rotate axis="X">45</rotate>
+      <rotate axis="Y">45</rotate>
+    </transform>
+  </shape>
+
+</scene>

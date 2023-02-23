@@ -1,0 +1,52 @@
+{
+    "scene": {
+	"sceneParameters": {
+            "bgColor": "0.5 0.5 0.7"
+	},
+	"camera": [{
+            "position": "10 10.0 25.0",
+            "lookatPoint": "0 0 0",
+            "focalLength": 0.35,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	"light": [
+            {
+		"position": "10.0 9.5 10.0",
+		"intensity": "1.0 1.0 1.0",
+		"_type": "point"
+            },
+            {
+		"position": "0.0 9.5 10.0",
+		"intensity": "1.0 1.0 1.0",
+		"_type": "point"
+            }
+	],
+	"texture": [{
+            "sourcefile": "images/textureMapCalibration.png",
+            "_name": "textureExample",
+            "_type": "image"
+	}],
+	"shader": [
+	    {
+		"diffuse": {
+		    "tex": "textureExample",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "textureTest",
+		"_type": "Lambertian"
+	    }],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "textureTest"
+		},
+		"center": "0.0 0.0 0.0",
+		"radius": 8.0,
+		"_name": "s1",
+		"_type": "sphere"
+	    }
+	]
+    }
+}

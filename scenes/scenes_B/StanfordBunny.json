@@ -1,0 +1,33 @@
+{
+    "scene": {
+	"camera": [ {
+	    "position": "0 5 0",
+	    "viewDir": "0 -1 0",
+	    "focalLength": 1.0,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [{
+	    "position": "6.0 6.0 8.0",
+	    "intensity": "1.0 1.0 1.0",
+	    "_type": "point"
+	}],
+	"shader": [{
+	    "diffuse": "0.1 0.2 0.2",
+	    "specular": "0.93 0.78 0.93",
+	    "phongExp": 16.0,
+	    "_name": "redMat",
+	    "_type": "BlinnPhong"
+	}],
+	"shape": [{
+	    "file": "objFiles/bunny.obj",
+	    "shader": {
+		"_ref": "redMat"
+	    },
+	    "_name": "BunnyModel",
+	    "_type": "mesh"
+	}],
+	"_bgColor": "0.7 0.7 0.8"
+    }
+}

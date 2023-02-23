@@ -1,0 +1,99 @@
+{
+    "scene": {
+	"sceneParameters": {
+            "bgColor": "0.5 0.5 0.6"
+	},
+
+	"camera": [{
+            "position": "0 8.0 -15.0",
+            "lookatPoint": "0 4.0 -5.0",
+            "focalLength": 0.35,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	
+	"light": [{
+            "position": "10.0 20.0 -20.0",
+            "intensity": "0.7 0.7 0.7",
+            "_type": "point"
+	}],
+	
+	"texture": [
+            {
+		"sourcefile": "images/earth_daymap_2k.png",
+		"_name": "EarthDiffuse",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/earth_specular_map_2k.png",
+		"_name": "EarthSpecular",
+		"_type": "image"
+            }
+	],
+
+	"shader": [
+            {
+		"diffuse": {
+		    "tex": "EarthDiffuse",
+		    "data": "1.0 1.0 1.0"
+		},
+		"specular": {
+		    "tex": "EarthSpecular",
+		    "data": "1 1 1"
+		},
+		"phongExp": 64.0,
+		"_name": "EarthShader",
+		"_type": "BlinnPhong"
+            },
+            {
+		"diffuse": "0.4 0.4 1.0",
+		"_name": "blueMat",
+		"_type": "Lambertian"
+            }
+	],
+
+	"instance": [ {
+            "shader": {
+		"_ref": "blueMat"
+            },
+            "center": "0.0 0.0 0.0",
+            "radius": 1.0,
+            "_name": "spheroid",
+            "_type": "sphere"
+	}],
+	
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "EarthShader"
+		},
+
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "0.0 4.0 -5.0"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "5 5 5"
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Z",
+			"amount" : 23.5
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Y",
+			"amount": 75.0
+		    }
+		],
+
+		"_name": "Earth",
+		"_type": "instance",
+		"_id": "spheroid"
+	    }
+	]
+    }
+}

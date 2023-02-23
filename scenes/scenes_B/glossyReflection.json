@@ -1,0 +1,293 @@
+{
+    "scene": {
+	"camera": [{
+            "position": "0 4.0 6.0",
+            "viewDir": "0.0 -1.0 -3.0",
+            "focalLength": 0.40,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	"light": [{
+            "position": "0.0 10.0 0.0",
+            "intensity": "1.0 1.0 1.0",
+            "normal": "0 -1 0",
+            "width": 4,
+            "length": 4,
+            "_type": "area"
+	}],
+	"shader": [
+            {
+		"diffuse": "0.5 1.0 0.5",
+		"_name": "greyMat0",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0.5 0.6 0.5",
+		"_name": "greyMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0.4 0.4 1.",
+		"_name": "darkBlue",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 0.4 0.4",
+		"_name": "darkRed",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 1.0 0.4",
+		"_name": "darkYellow",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0.4 1.0 0.4",
+		"_name": "darkGreen",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0.5 0.5 0.5",
+		"specular": "1.0 1.0 1.0",
+		"phongExp": 16.0,
+		"mirrorCoef": 0.5,
+		"roughness": 0.01,
+		"_name": "g0",
+		"_type": "Mirror"
+            },
+            {
+		"diffuse": "0.5 0.5 0.5",
+		"specular": "1.0 1.0 1.0",
+		"phongExp": 16.0,
+		"mirrorCoef": 0.5,
+		"roughness": 0.05,
+		"_name": "g1",
+		"_type": "Mirror"
+            },
+            {
+		"diffuse": "0.5 0.5 0.5",
+		"specular": "1.0 1.0 1.0",
+		"phongExp": 16.0,
+		"mirrorCoef": 0.5,
+		"roughness": 0.10,
+		"_name": "g2",
+		"_type": "Mirror"
+            },
+            {
+		"diffuse": "0.5 0.5 0.5",
+		"specular": "1.0 1.0 1.0",
+		"phongExp": 16.0,
+		"mirrorCoef": 0.5,
+		"roughness": 0.15,
+		"_name": "g3",
+		"_type": "Mirror"
+            },
+            {
+		"diffuse": "0.5 0.5 0.5",
+		"specular": "1.0 1.0 1.0",
+		"phongExp": 16.0,
+		"mirrorCoef": 0.5,
+		"roughness": 0.20,
+		"_name": "g4",
+		"_type": "Mirror"
+            }
+	],
+	"shape": [
+            {
+		"shader": {
+                    "_ref": "greyMat"
+		},
+		"minPt": "-50.0 -0.5 -50.0",
+		"maxPt": "50.0 0.0 50.0",
+		"_name": "ground",
+		"_type": "box"
+            },
+            {
+		"shader": {
+                    "_ref": "darkBlue"
+		},
+		"center": "0.0 1.0 0.0",
+		"radius": 1,
+		"_name": "s1",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+                    "_ref": "darkRed"
+		},
+		"center": "-0.85 0.5 0.85",
+		"radius": 0.5,
+		"_name": "s2",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+                    "_ref": "darkYellow"
+		},
+		"center": "0.85 0.5 0.85",
+		"radius": 0.5,
+		"_name": "s3",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+                    "_ref": "darkGreen"
+		},
+		"center": "0.0 0.5 -0.85",
+		"radius": 0.5,
+		"_name": "s4",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+                    "_ref": "greyMat0"
+		},
+		"minPt": "-8.0 0.0 -6.5",
+		"maxPt": "8.0 7.0 -6.0",
+		"_name": "bWall",
+		"_type": "box"
+            },
+            {
+		"shader": {
+                    "_ref": "g0"
+		},
+		"_name": "w1",
+		"_type": "instance",
+		"_id": "wall",
+
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "-3.4641 0.0 -2.0"
+		    },
+		    {
+			"type": "scale",
+			"amount": "1.0 2.0 1.0"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 42
+		    }
+		]
+            },
+
+            {
+		"shader": 
+		{
+                    "_ref": "g1"
+		},
+
+		"_name": "w2",
+		"_type": "instance",
+		"_id": "wall",
+		
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "-2.0 0.0 -3.4641"
+		    },
+		    {
+			"type": "scale",
+			"amount": "1.0 2.0 1.0"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 20
+		    }
+		]
+            },
+	    
+            {
+		"shader": 
+		{
+                    "_ref": "g2"
+		},
+		"_name": "w3",
+		"_type": "instance",
+		"_id": "wall",
+		
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "0.0 0.0 -4"
+		    },
+		    {
+			"type": "scale",
+			"amount": "1.0 2.0 1.0"
+		    }
+		]
+            },
+	    
+            {
+		"shader": 
+		{
+                    "_ref": "g3"
+		},
+		"_name": "w4",
+		"_type": "instance",
+		"_id": "wall",
+
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "2.0 0.0 -3.4641"
+		    },
+		    {
+			"type": "scale",
+			"amount": "1.0 2.0 1.0"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": -20
+		    }
+		]
+	    },
+	    
+            {
+		"shader":
+		{
+                    "_ref": "g4"
+		},
+		"_name": "w5",
+		"_type": "instance",
+		"_id": "wall",
+
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "3.4641 0.0 -2.0"
+		    },
+		    {
+			"type": "scale",
+			"amount": "1.0 2.0 1.0"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": -42
+		    }
+		]
+	    }
+	],
+
+	"instance": [
+	    {
+		"_name": "wall",
+
+		"shader": {
+		    "_ref": "greyMat"
+		},
+
+		"_type": "box",
+		"minPt": "-1. 0.0 -0.5",
+		"maxPt": "1.0 2.0 0.0"
+	    }
+	],
+
+	"_bgColor": "0.5 0.5 0.5"
+    }
+}

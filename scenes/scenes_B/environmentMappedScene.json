@@ -1,0 +1,127 @@
+{
+    "scene": {
+	"sceneParameters": {
+            "bgColor": "0.5 0.5 0.7",
+            "envMapPrefix": "images/reef_"
+	},
+	"camera": [{
+            "position": "0 8.0 15.0",
+            "lookatPoint": "0 0 0",
+            "focalLength": 0.35,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	"light": [{
+            "position": "0.0 50.0 0.0",
+            "intensity": "1.0 1.0 1.0",
+            "_type": "point"
+	}],
+	"shader": [
+            {
+		"diffuse": "1 0 0",
+		"_name": "redMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0 1 0",
+		"_name": "greenMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0 0 1",
+		"_name": "blueMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 1 0",
+		"_name": "yellowMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0 1 1",
+		"_name": "cyanMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 0 1",
+		"_name": "magentaMat",
+		"_type": "Lambertian"
+            },
+            {
+		"_name": "mirror",
+		"_type": "Mirror"
+            },
+            {
+		"diffuse": {
+		    "tex": "calibrationTex",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "greyTextured",
+		"_type": "Lambertian"
+            }
+	],
+	"texture": [{
+            "sourcefile": "images/textureMapCalibration.png",
+            "_name": "calibrationTex",
+            "_type": "image"
+	}],
+	"shape": [
+            {
+		"shader": {
+		    "_ref": "mirror"
+		},
+		"center": "0.0 5.0 0.0",
+		"radius": 3.0,
+		"_name": "mirrorSphere",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+		    "_ref": "blueMat"
+		},
+		"center": "-5.0 1.5 5.0",
+		"radius": 1.0,
+		"_name": "s1",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+		    "_ref": "greenMat"
+		},
+		"center": "5.0 1.5 5.0",
+		"radius": 1.0,
+		"_name": "s2",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+		    "_ref": "redMat"
+		},
+		"center": "-5.0 1.5 -5.0",
+		"radius": 1.0,
+		"_name": "s3",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+		    "_ref": "yellowMat"
+		},
+		"center": "5.0 1.5 -5.0",
+		"radius": 1.0,
+		"_name": "s3",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+		    "_ref": "greyTextured"
+		},
+		"minPt": "-10.0 -0.5 -10.0",
+		"maxPt": "10.0 0.0 10.0",
+		"_name": "ground",
+		"_type": "box"
+            }
+	]
+    }
+}
+

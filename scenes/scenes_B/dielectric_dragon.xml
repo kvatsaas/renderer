@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<scene>
+
+  <sceneParameters>
+    <bgColor>0.0 0.0 0.0</bgColor>
+<!--    <envMapPrefix>images/reef_</envMapPrefix> -->
+  </sceneParameters>
+
+  <camera name="main" type="perspective">
+    <position>0 2.2 1.8</position>
+    <lookatPoint>0.0 1.2 -6.0</lookatPoint>
+    <focalLength>0.60</focalLength>
+    <imagePlaneWidth>0.5</imagePlaneWidth>
+  </camera>
+
+  <!-- Basic point light source placed just above the camera. 
+  <light type="point">
+    <position>0 10 0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+  </light> -->
+
+  <light type="area">
+    <position>0.0 10.0 0.0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+    <normal>0.0 -1.0 0.0</normal>
+    <width>3.0</width>
+    <length>3.0</length>
+  </light>
+
+  <texture name="calibrationTex" type="image">
+    <sourcefile>images/textureMapCalibration.png</sourcefile>
+  </texture>
+  <shader name="greyTextured" type="Lambertian">
+    <diffuse tex="calibrationTex">1.0 1.0 1.0</diffuse>
+  </shader>
+  <shape name="ground" type="box">
+    <shader ref="greyTextured" />
+    <minPt>-10.0 -0.5 -30.0</minPt>
+    <maxPt>10.0 0.0 30.0</maxPt>
+  </shape>
+  <shape name="backWall" type="box">
+    <shader ref="greyTextured" />
+    <minPt>-10.0 0.0 -30.5</minPt>
+    <maxPt>10.0 10.0 -30.0</maxPt>
+  </shape>
+
+  <shader name="blueMat" type="Lambertian">
+    <diffuse>0 0 1</diffuse>
+  </shader>
+  <instance name="dragonModel" type="mesh">
+    <file>objFiles/dragon.obj</file>
+    <shader ref="blueMat"/>
+  </instance> 
+
+  <shader name="shiny3" type="Glaze">
+    <diffuse>0.1 0.4 0.8</diffuse>
+    <mirrorCoef>0.5</mirrorCoef>
+  </shader>
+  <shape name="dragon0" type="instance" id="dragonModel">
+    <transform name="xform">
+      <translate>0.0 2.5 -8.0</translate>
+      <scale>3 3 3</scale>
+      <rotate axis="Y">180</rotate>
+      <rotate axis="X">-90</rotate>
+
+    </transform>
+    <shader ref="shiny3"/>
+  </shape> 
+
+  <shader name="glass" type="Dielectric">
+    <refractiveIndex>1.01</refractiveIndex>
+    <attenuationCoef>0.9999 0.98 0.9999</attenuationCoef>
+  </shader>
+  <shape name="dragon1" type="instance" id="dragonModel">
+    <transform name="xform">
+      <translate>0.0 1.5 -1.2</translate>
+      <rotate axis="X">-75</rotate>
+    </transform>
+    <shader ref="glass"/>
+  </shape> 
+
+</scene>

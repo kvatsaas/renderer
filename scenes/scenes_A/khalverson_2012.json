@@ -1,0 +1,62 @@
+{
+    "scene": {
+	"camera": [{
+	    "position": "4.0 4.0 4.0",
+	    "lookatPoint": "0 0 0",
+	    "focalLength": 1.0,
+	    "imagePlaneWidth": 1.0,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [
+	    {
+		"position": "0.0 4.0 0.0",
+		"intensity": "0.0 1.0 0.0",
+		"_type": "point"
+	    },
+	    {
+		"position": "0.0 0.0 4.0",
+		"intensity": "0.0 0.0 1.0",
+		"_type": "point"
+	    },
+	    {
+		"position": "4.0 0.0 0.0",
+		"intensity": "1.0 0.0 0.0",
+		"_type": "point"
+	    },
+	    {
+		"position": "4.0 4.0 0.0",
+		"intensity": "1.0 1.0 0.0",
+		"_type": "point"
+	    },
+	    {
+		"position": "0.0 4.0 4.0",
+		"intensity": "0.0 1.0 1.0",
+		"_type": "point"
+	    },
+	    {
+		"position": "4.0 0.0 4.0",
+		"intensity": "1.0 0.0 1.0",
+		"_type": "point"
+	    }
+	],
+	"shader": [
+	    {
+		"diffuse": "0.8 0.8 0.8",
+		"_name": "lightGray",
+		"_type": "Lambertian"
+	    }
+	],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "lightGray"
+		},
+		"center": "0.0 0.0 0.0",
+		"radius": 2.0,
+		"_name": "whiteSphere",
+		"_type": "sphere"
+	    }
+	]
+    }
+}

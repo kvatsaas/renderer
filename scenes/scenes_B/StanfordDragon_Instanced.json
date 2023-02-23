@@ -1,0 +1,103 @@
+{
+    "scene": {
+	"camera": [{
+	    "position": "0 1.0 7.0",
+	    "viewDir": "0.0 0.0 -1.0",
+	    "focalLength": 0.8,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"light": [
+	    {
+		"position": "0.0 10.0 0.0",
+		"intensity": "1.0 1.0 1.0",
+		"_type": "point"
+	    }
+	],
+	"shader": [
+	    {
+		"diffuse": "0.5 0.5 0.5",
+		"_name": "greyMat",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "1.0 0.0 0.0",
+		"specular": "1.0 0.0 1.0",
+		"phongExp": 16,
+		"_name": "reddishMat",
+		"_type": "BlinnPhong"
+	    }
+	],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "greyMat"
+		},
+		"minPt": "-50.0 -0.5 -50.0",
+		"maxPt": "50.0 0.0 50.0",
+		"_name": "ground",
+		"_type": "box"
+	    },
+	    {
+		"shader": {
+		    "_ref": "reddishMat"
+		},
+		"_name": "dragon0",
+		"_type": "instance",
+		"_id": "dragonModel",
+
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount": "1.0 1.5 0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "X",
+			"amount": -90
+		    }
+		]
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "reddishMat"
+		},
+		"_name": "dragon1",
+		"_type": "instance",
+		"_id": "dragonModel",
+		
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount": "-1.0 1.5 0.0"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "X",
+			"amount": -90
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 90
+		    }
+		]
+	    }
+	],
+	
+	"instance": [
+	    {
+		"file": "objFiles/dragon.obj",
+		"shader": {
+		    "_ref": "greyMat"
+		},
+		"_name": "dragonModel",
+		"_type": "mesh"
+	    }
+	],
+
+	"_bgColor": "0.7 0.7 0.9"
+    }
+}

@@ -1,0 +1,746 @@
+{
+    "scene": {
+        "_bgColor": "0.75 0.75 0.75",
+        "camera": [
+            {
+                "position": "0 0 10",
+                "viewDir": "0 0 -1.0",
+                "focalLength": 0.25,
+                "imagePlaneWidth": 0.5,
+                "_name": "main",
+                "_type": "perspective"
+            }
+        ],
+        "light": [
+            {
+                "position": "0.0 10.0 0.0",
+                "intensity": "1.0 1.0 1.0",
+                "normal": "0.0 -1.0 0.0",
+                "visible": 0,
+                "width": 3.0,
+                "length": 3.0,
+                "_type": "area"
+            },
+            {
+                "position": "0.0 -10.0 0.0",
+                "intensity": "1.0 1.0 1.0",
+                "normal": "0.0 1.0 0.0",
+                "visible": 0,
+                "width": 3.0,
+                "length": 3.0,
+                "_type": "area"
+            },
+            {
+                "position": "10.0 0.0 0.0",
+                "intensity": "1.0 1.0 1.0",
+                "normal": "-1.0 0.0 0.0",
+                "visible": 0,
+                "width": 3.0,
+                "length": 3.0,
+                "_type": "area"
+            },
+            {
+                "position": "-10.0 0.0 0.0",
+                "intensity": "1.0 1.0 1.0",
+                "normal": "1.0 0.0 0.0",
+                "visible": 0,
+                "width": 3.0,
+                "length": 3.0,
+                "_type": "area"
+            },
+            {
+                "position": "0.0 0.0 10.0",
+                "intensity": "1.0 1.0 1.0",
+                "normal": "0.0 0.0 -1.0",
+                "visible": 0,
+                "width": 3.0,
+                "length": 3.0,
+                "_type": "area"
+            },
+            {
+                "position": "0.0 0.0 -10.0",
+                "intensity": "1.0 1.0 1.0",
+                "normal": "0.0 0.0 10.0",
+                "visible": 0,
+                "width": 3.0,
+                "length": 3.0,
+                "_type": "area"
+            }
+        ],
+        "shader": [
+            {
+                "_name": "mirror",
+                "_type": "Mirror"
+            },
+            {
+                "diffuse": "1 0 0",
+                "mirrorCoef": 0.45,
+                "_name": "redGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "1 0.8431 0",
+                "mirrorCoef": 0.43,
+                "_name": "orangeGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "1 1 0",
+                "mirrorCoef": 0.40,
+                "_name": "yellowGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0 1 0",
+                "mirrorCoef": 0.37,
+                "_name": "greenGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0 0 1",
+                "mirrorCoef": 0.34,
+                "_name": "blueGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.51 0 1",
+                "mirrorCoef": 0.31,
+                "_name": "indigoGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "1 0 1",
+                "mirrorCoef": 0.28,
+                "_name": "purpleGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "1 1 1",
+                "mirrorCoef": 0.25,
+                "_name": "whiteGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.2 0.2 0.2",
+                "mirrorCoef": 0.45,
+                "_name": "grayGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "1 0.0784 0.5765",
+                "mirrorCoef": 0.43,
+                "_name": "pinkGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0 1 1",
+                "mirrorCoef": 0.40,
+                "_name": "cyanGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.251 0.8784 0.8157",
+                "mirrorCoef": 0.37,
+                "_name": "turquoiseGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.1333 0.5451 0.1333",
+                "mirrorCoef": 0.34,
+                "_name": "forestGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.5451 0.2706 0.0745",
+                "mirrorCoef": 0.31,
+                "_name": "brownGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.98 0.502 0.447",
+                "mirrorCoef": 0.28,
+                "_name": "salmonGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0.855 0.647 0.125",
+                "mirrorCoef": 0.25,
+                "_name": "goldGlaze",
+                "_type": "Glaze"
+            },
+            {
+                "diffuse": "0 0 0",
+                "_name": "black",
+                "_type": "Lambertian"
+            }
+        ],
+        "shape": [
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.0 -15.04 -15.04",
+                "maxPt": "15.0 -14.96 -14.96",
+                "_name": "boxedge_1",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.0 -15.04 14.96",
+                "maxPt": "15.0 -14.96 15.04",
+                "_name": "boxedge_2",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.0 14.96 -15.04",
+                "maxPt": "15.0 15.04 -14.96",
+                "_name": "boxedge_3",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.0 14.96 14.96",
+                "maxPt": "15.0 15.04 15.04",
+                "_name": "boxedge_4",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.04 -15.0 -15.04",
+                "maxPt": "-14.96 15.0 -14.96",
+                "_name": "boxedge_5",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.04 -15.0 14.96",
+                "maxPt": "-14.96 15.0 15.04",
+                "_name": "boxedge_6",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "14.96 -15.0 -15.04",
+                "maxPt": "15.0 15.04 -14.96",
+                "_name": "boxedge_7",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "14.96 -15.0 14.96",
+                "maxPt": "15.04 15.0 15.04",
+                "_name": "boxedge_8",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.04 -15.04 -15.0",
+                "maxPt": "-14.96 -14.96 15.0",
+                "_name": "boxedge_9",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "-15.04 14.96 -15.0",
+                "maxPt": "-14.96 15.04 15.0",
+                "_name": "boxedge_10",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "14.96 -15.04 -15.0",
+                "maxPt": "15.0 -14.96 15.04",
+                "_name": "boxedge_11",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "black"
+                },
+                "minPt": "14.96 14.96 -15.0",
+                "maxPt": "15.04 15.04 15.0",
+                "_name": "boxedge_12",
+                "_type": "box"
+            },
+            {
+                "shader": {
+                    "_ref": "redGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-6 6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny1",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "orangeGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-2 6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny2",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "yellowGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "2 6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny3",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "greenGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "6 6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny4",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "blueGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-6 2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny5",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "indigoGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-2 2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny6",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "purpleGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "2 2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny7",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "whiteGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "6 2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny8",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "pinkGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-6 -2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny9",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "salmonGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-2 -2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny10",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "goldGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "2 -2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny11",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "forestGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "6 -2 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny12",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "cyanGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-6 -6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny13",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "turquoiseGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "-2 -6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny14",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "brownGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "2 -6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny15",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            },
+            {
+                "shader": {
+                    "_ref": "grayGlaze"
+                },
+                "xform": [
+                    {
+                        "type": "translate",
+                        "amount": "6 -6 0"
+                    },
+                    {
+                        "type": "scale",
+                        "amount": "2 2 2"
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Y",
+                        "amount": 90
+                    },
+                    {
+                        "type": "rotation",
+                        "axis": "Z",
+                        "amount": 90
+                    }
+                ],
+                "_name": "bunny16",
+                "_type": "instance",
+                "_id": "bunnyModel"
+            }
+        ],
+        "instance": [
+            {
+                "file": "objFiles/bunny.obj",
+                "shader": {
+                    "_ref": "redGlaze"
+                },
+                "_name": "bunnyModel",
+                "_type": "mesh"
+            }
+        ]
+    }
+}

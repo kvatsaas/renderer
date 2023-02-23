@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--  Comments can be embedded as well. -->
+<scene bgColor="0.7 0.7 0.9">
+
+  <!-- Simple camera placed back from the origin looking in -Z direction -->
+  <camera name="main" type="perspective">
+    <position>0 3.0 8.0</position>
+    <viewDir>0 -1.0 -3.0</viewDir>
+    <focalLength>0.40</focalLength>
+    <imagePlaneWidth>0.5</imagePlaneWidth>
+  </camera>
+
+  <light type="area">
+    <position>0.0 10.0 0.0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+    <normal>0.0 -1.0 0.0</normal>
+    <width>5.0</width>
+    <length>5.0</length>
+  </light>
+
+  <light type="area">
+    <position>-2.0 10.0 3.0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+    <normal>0.0 -1.0 0.0</normal>
+    <width>5.0</width>
+    <length>5.0</length>
+  </light>
+
+  <light type="area">
+    <position>2.0 10.0 4.0</position>
+    <intensity>1.0 1.0 1.0</intensity>
+    <normal>0.0 -1.0 0.0</normal>
+    <width>10.0</width>
+    <length>10.0</length>
+  </light>
+
+  <!-- Various Objects with different shaders -->
+  <shader name="greyGlaze" type="Glaze">
+    <diffuse>0.5 0.5 0.5</diffuse>
+    <mirrorCoef>0.30</mirrorCoef>
+  </shader>
+  <shape name="ground" type="box">
+    <shader ref="greyGlaze" />
+    <minPt>-20.0 -0.5 -20.0</minPt>
+    <maxPt>20.0 0.0 20.0</maxPt>
+  </shape>
+
+  <shader name="blueMat" type="Lambertian">
+    <diffuse>0 0 1</diffuse>
+  </shader>
+  <instance name="dragonModel" type="mesh">
+    <file>objFiles/dragon.obj</file>
+    <shader ref="blueMat"/>
+  </instance> 
+
+  <!-- Shader info from acc5.its.brooklyn.cuny.edu/~lscarlat/graphics/SurfMats.html -->
+  <shader name="gold" type="BlinnPhong">
+    <diffuse>0.75164 0.60648 0.22648</diffuse>
+    <specular>0.628281 0.555802 0.366065</specular>
+    <phongExp>51.2</phongExp>
+  </shader>
+  <shape name="dragon0" type="instance" id="dragonModel">
+    <transform name="xform">
+      <translate>0 1.5 0</translate>
+      <scale>2 2 2</scale>
+      <rotate axis="Y">120</rotate>
+      <rotate axis="X">-90</rotate>
+    </transform>
+    <shader ref="gold"/>
+  </shape> 
+
+  <shader name="bronze" type="BlinnPhong">
+    <diffuse>0.714 0.4284 0.18144</diffuse>
+    <specular>0.393548 0.271906 0.166721</specular>
+    <phongExp>25.6</phongExp>
+  </shader>
+  <shape name="dragon1" type="instance" id="dragonModel">
+    <transform name="xform">
+      <translate>-2.0 1.5 3.0</translate>
+      <scale>2 2 2</scale>
+      <rotate axis="Y">155</rotate>
+      <rotate axis="X">-90</rotate>
+    </transform>
+    <shader ref="bronze"/>
+  </shape> 
+
+  <shader name="silver" type="BlinnPhong">
+    <diffuse>0.50754 0.50754 0.50754</diffuse>
+    <specular>0.508273 0.508273 0.508273</specular>
+    <phongExp>51.2</phongExp>
+  </shader>
+  <shape name="dragon2" type="instance" id="dragonModel">
+    <transform name="xform">
+      <translate>2.0 1.5 4.0</translate>
+      <scale>2 2 2</scale>
+      <rotate axis="Y">35</rotate>
+      <rotate axis="X">-90</rotate>
+    </transform>
+    <shader ref="silver"/>
+  </shape> 
+
+
+
+</scene>

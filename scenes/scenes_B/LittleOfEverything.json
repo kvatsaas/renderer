@@ -1,0 +1,335 @@
+{
+    "scene": {
+
+	"sceneParameters": {
+            "bgColor": "0.5 0.5 0.6",
+            "envMapPrefix": "images/reef_"
+	},
+	
+	"camera": [{
+            "position": "0 8.0 15.0",
+            "lookatPoint": "0 0 0",
+            "focalLength": 0.35,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	
+	"light": [
+            {
+		"position": "0.0 20.0 0.0",
+		"intensity": "1.0 1.0 1.0",
+		"normal": "0.0 -1.0 0.0",
+		"width": 10.0,
+		"length": 10.0,
+		"_type": "area"
+            },
+            {
+		"position": "0.0 4.0 10.0",
+		"intensity": "0.7 0.7 0.7",
+		"_type": "point"
+            }
+	],
+	
+	"shader": [
+            {
+		"diffuse": "1 0 0",
+		"_name": "redMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0 1 0",
+		"_name": "greenMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0 0 1",
+		"_name": "blueMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 1 0",
+		"_name": "yellowMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "0 1 1",
+		"_name": "cyanMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 0 1",
+		"_name": "magentaMat",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": "1 0 0",
+		"specular": "1 1 1",
+		"phongExp": 32.0,
+		"_name": "redPlastic",
+		"_type": "BlinnPhong"
+            },
+            {
+		"diffuse": "1 1 1",
+		"specular": "1 1 1",
+		"phongExp": 32.0,
+		"mirrorCoef": 1.0,
+		"roughness": 0.3,
+		"_name": "chrome",
+		"_type": "BlinnPhongMirrored"
+            },
+            {
+		"diffuse": "1 0 0",
+		"mirrorCoef": 0.45,
+		"_name": "redGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0.2941 0.1882 0.5529",
+		"mirrorCoef": 0.40,
+		"_name": "purpleGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0.7 0.7 0.7",
+		"mirrorCoef": 0.60,
+		"_name": "greyGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": {
+		    "tex": "calibrationTex",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "greyTextured",
+		"_type": "Lambertian"
+            },
+            {
+		"diffuse": {
+		    "tex": "JupiterTex",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "JupiterMap",
+		"_type": "Lambertian"
+            }
+	],
+
+	"texture": [
+            {
+		"sourcefile": "images/textureMapCalibration.png",
+		"_name": "calibrationTex",
+		"_type": "image"
+            },
+            {
+		"sourcefile": "images/jupiter_2k.png",
+		"_name": "JupiterTex",
+		"_type": "image"
+            }
+	],
+	
+	"shape": [
+            {
+		"shader": {
+		    "_ref": "greyTextured"
+		},
+		"minPt": "-10.0 -0.5 -10.0",
+		"maxPt": "10.0 0.0 10.0",
+		"_name": "ground",
+		"_type": "box"
+            },
+            {
+		"shader": {
+		    "_ref": "JupiterMap"
+		},
+		"center": "0.0 4.0 -5.0",
+		"radius": 4.0,
+		"_name": "Jupiter",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+                    "_ref": "chrome"
+		},
+		"center": "-5.0 2.0 0.0",
+		"radius": 1.8,
+		"_name": "calibSphere0",
+		"_type": "sphere"
+            },
+            {
+		"shader": {
+                    "_ref": "greyTextured"
+		},
+		"center": "5.0 2.0 0.0",
+		"radius": 1.8,
+		"_name": "calibSphere1",
+		"_type": "sphere"
+            },
+	    {
+		"shader" : {
+		    "_ref" : "redPlastic"
+		},
+		"xform" : [
+		    {
+			"type" : "translate",
+			"amount" : "-2.5 2.0 8.5"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "0.5 0.5 0.5"
+		    }
+		],
+		"_name": "al0",
+		"_type": "instance",
+		"_id": "AlModel"
+            },
+	    {
+		"shader" : {
+		    "_ref" : "purpleGlaze"
+		},
+		"xform" : [
+		    {
+			"type" : "translate",
+			"amount" : "2.5 2.0 8.5"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "0.5 0.5 0.5"
+		    }
+		],
+		"_name": "al1",
+		"_type": "instance",
+		"_id": "AlModel"
+            },
+
+            {
+		"shader": {
+                    "_ref": "redGlaze"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "-5 2.0 5"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 180
+                    },
+                    {
+			"type" : "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"_name": "bunny0",
+		"_type": "instance",
+		"_id": "bunnyModel"
+            },
+
+
+            {
+		"shader": {
+                    "_ref": "greenMat"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "0 2.0 5"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Y",
+			"amount" : 90
+		    },
+                    {
+			"type" : "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"_name": "bunny1",
+		"_type": "instance",
+		"_id": "bunnyModel"
+            },
+	    
+            {
+		"shader": {
+                    "_ref": "yellowMat"
+		},
+		
+		"xform" : [
+		    {
+			"type" : "translate",
+			"amount" : "5 2.0 5"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis": "Y",
+			"amount": 30
+                    },
+                    {
+			"type" : "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"_name": "bunny1",
+		"_type": "instance",
+		"_id": "bunnyModel"
+            },
+
+	    {
+		"shader": {
+                    "_ref": "greyGlaze"
+		},
+		"minPt": "-5.5 0.0 -7.5",
+		"maxPt": "-4.5 7.2 -6.5",
+		"_name": "pedestal0",
+		"_type": "box"
+            },
+	    
+            {
+		"shader": {
+                    "_ref": "greyGlaze"
+		},
+		"minPt": "4.5.0 0.0 -7.5",
+		"maxPt": "5.5 7.2 -6.5",
+		"_name": "pedestal1",
+		"_type": "box"
+            }
+
+	],
+
+
+	"instance": [
+            {
+		"shader": {
+		    "_ref": "greenMat"
+		},
+		"file": "objFiles/bunny.obj",
+		"_name": "bunnyModel",
+		"_type": "mesh"
+            },
+            {
+		"shader": {
+		    "_ref": "redPlastic"
+		},
+		"file": "objFiles/al.obj",
+		"_name": "AlModel",
+		"_type": "mesh"
+            }
+	]
+    }
+}

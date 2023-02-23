@@ -1,0 +1,63 @@
+{
+    "scene": {
+	"camera": [{
+	    "position": "0 3.0 6.0",
+	    "viewDir": "0.0 -1.0 -3.0",
+	    "focalLength": 0.40,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+
+	"light": [
+	    {
+		"_type": "shape",
+		"intensity": "1.0 1.0 1.0",
+	    
+		"shape" : {
+		    "shader": {
+			"_ref": "darkYellow"
+		    },
+		    "center": "-1.0 2.0 2.0",
+		    "radius": 0.25,
+		    "_name": "s1",
+		    "_type": "sphere"
+		}
+	    }
+	],
+	
+	"shader": [
+	    {
+		"diffuse": "0.5 0.5 0.5",
+		"_name": "greyMat",
+		"_type": "Lambertian"
+	    },
+	    {
+		"diffuse": "1.0 1.0 0.4",
+		"_name": "darkYellow",
+		"_type": "Lambertian"
+	    }
+	],
+	"shape": [
+	    {
+		"shader": {
+		    "_ref": "greyMat"
+		},
+		"minPt": "-50.0 -0.5 -50.0",
+		"maxPt": "50.0 0.0 50.0",
+		"_name": "ground",
+		"_type": "box"
+	    },
+	    {
+		"shader": {
+		    "_ref": "darkYellow"
+		},
+		"center": "0.0 2.0 0.0",
+		"radius": 1,
+		"_name": "s1",
+		"_type": "sphere"
+	    }
+	],
+	"bgColor": "0.5 0.5 0.5"
+    }
+}

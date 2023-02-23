@@ -1,0 +1,365 @@
+{
+    "scene": {
+	"sceneParameters": {
+            "bgColor": "0.8 0.8 1.0",
+            "envMapPrefix": "images/reef_"
+	},
+	"camera": [{
+            "position": "-5 2.0 16.0",
+            "lookatPoint": "12 1 -5.0",
+            "focalLength": 0.35,
+            "imagePlaneWidth": 0.5,
+            "_name": "main",
+            "_type": "perspective"
+	}],
+	"light": [{
+            "position": "0.0 10.0 0.0",
+            "intensity": "1.0 1.0 1.0",
+            "normal": "0.0 -1.0 0.0",
+            "width": 3.0,
+            "length": 3.0,
+            "_type": "area"
+	}],
+	"shader": [
+            {
+		"diffuse": "1 0 0",
+		"mirrorCoef": 0.45,
+		"_name": "redGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "1 0.5882 0",
+		"mirrorCoef": 0.43,
+		"_name": "orangeGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "1 1 0",
+		"mirrorCoef": 0.40,
+		"_name": "yellowGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0 1 0",
+		"mirrorCoef": 0.37,
+		"_name": "greenGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0 0 1",
+		"mirrorCoef": 0.34,
+		"_name": "blueGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0.435 0 1",
+		"mirrorCoef": 0.31,
+		"_name": "indigoGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0.559 0 1",
+		"mirrorCoef": 0.28,
+		"_name": "violetGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "1 1 1",
+		"mirrorCoef": 0.25,
+		"_name": "whiteGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": "0 0 0",
+		"mirrorCoef": 0.45,
+		"_name": "blackGlaze",
+		"_type": "Glaze"
+            },
+            {
+		"diffuse": {
+		    "tex": "calibrationTex",
+		    "data": "1.0 1.0 1.0"
+		},
+		"_name": "greyTextured",
+		"_type": "Lambertian"
+            }
+	],
+	"texture": [{
+            "sourcefile": "images/textureMapCalibration.png",
+            "_name": "calibrationTex",
+            "_type": "image"
+	}],
+	"shape": [
+            {
+		"shader": {
+                    "_ref": "greyTextured"
+		},
+		"minPt": "-12.0 -0.5 -12.0",
+		"maxPt": "12.0 0.0 12.0",
+		"_name": "ground",
+		"_type": "box"
+	    },
+	    {
+		"shader": {
+                    "_ref": "redGlaze"
+		},
+		"xform": [
+		    {
+			"type" : "translate",
+			"amount" : "5 2.0 11"
+		    },
+		    {
+			"type" : "scale",
+			"amount" : "2 2 2"
+		    },
+		    {
+			"type" : "rotation",
+			"axis" : "Y",
+			"amount": 90
+                    },
+                    {
+			"type" : "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"_name": "bunnyR",
+		"_type": "instance",
+		"_id": "bunnyModel"
+            },
+            {
+		"shader": {
+                    "_ref": "orangeGlaze"
+		},
+		"_name": "bunnyO",
+		"_type": "instance",
+		"_id": "bunnyModel",
+		
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "5 2.0 8"
+		    },
+		    {
+			"type": "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+                    },
+                    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		]
+            },
+
+            {
+		"shader": {
+                    "_ref": "yellowGlaze"
+		},
+		"_name": "bunnyY",
+		"_type": "instance",
+		"_id": "bunnyModel",
+		
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "5 2.0 5"
+		    },
+		    {
+			"type": "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+                    },
+                    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		]
+            },
+            {
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "5 2.0 2"
+		    },
+		    {
+			"type": "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+                    },
+                    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"shader": {
+		    "_ref": "greenGlaze"
+		},
+		"_name": "bunnyG",
+		"_type": "instance",
+		"_id": "bunnyModel"
+            },
+            {
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "5 2.0 -1"
+		    },
+		    {
+			"type": "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+                    },
+                    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"shader": {
+                    "_ref": "blueGlaze"
+		},
+		"_name": "bunnyB",
+		"_type": "instance",
+		"_id": "bunnyModel"
+            },
+            {
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "5 2.0 -4"
+		    },
+		    {
+			"type": "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+                    },
+                    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+                    }
+		],
+		"shader": {
+                    "_ref": "indigoGlaze"
+		},
+		"_name": "bunnyI",
+		"_type": "instance",
+		"_id": "bunnyModel"
+	    },
+	    {
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "5 2.0 -7"
+		    },
+		    {
+			"type": "scale",
+			"amount": "2 2 2"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+		    }
+		],
+		"shader": {
+		    "_ref": "violetGlaze"
+		},
+		"_name": "bunnyV",
+		"_type": "instance",
+		"_id": "bunnyModel"
+	    },
+	    {
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "-2 1.5 2"
+		    },
+		    {
+			"type": "scale",
+			"amount": "1.5 1.5 1.5"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+		    }
+		],
+		"shader": {
+		    "_ref": "blackGlaze"
+		},
+		"_name": "bunnyBl",
+		"_type": "instance",
+		"_id": "bunnyModel"
+	    },
+	    {
+		"xform": [
+		    {
+			"type": "translate",
+			"amount": "-2 1.0 6"
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Y",
+			"amount": 90
+		    },
+		    {
+			"type": "rotation",
+			"axis": "Z",
+			"amount": 90
+		    }
+		],
+		"shader": {
+		    "_ref": "whiteGlaze"
+		},
+		"_name": "bunnyWh",
+		"_type": "instance",
+		"_id": "bunnyModel"
+	    }
+	],
+	"instance": [
+	    {
+		"file": "objFiles/bunny.obj",
+		"shader": {
+		    "_ref": "redGlaze"
+		},
+		"_name": "bunnyModel",
+		"_type": "mesh"
+	    }
+	]
+    }
+}

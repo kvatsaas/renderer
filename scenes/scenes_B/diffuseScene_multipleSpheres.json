@@ -1,0 +1,114 @@
+{
+    "scene": {
+	"sceneParameters": {
+            "bgColor": "0.8 0.8 1.0",
+	    "envMapVertCross": "images/uffizi_cross.png"
+	},
+	"camera": [{
+	    "position": "0.0 1.2 4.0",
+	    "lookatPoint": "0.0 0.0 0.0",
+	    "focalLength": 0.45,
+	    "imagePlaneWidth": 0.5,
+	    "_name": "main",
+	    "_type": "perspective"
+	}],
+	"shader": [
+	    {
+		"diffuse": "0.5 0.5 0.5",
+		"_name": "greyMat",
+		"_type": "Diffuse"
+	    },
+	    {
+		"diffuse": "1.0 1.0 1.0",
+		"_name": "whiteMat",
+		"_type": "Diffuse"
+	    },
+	    {
+		"diffuse": "1.0 0.0 0.0",
+		"_name": "redMat",
+		"_type": "Diffuse"
+	    },
+	    {
+		"diffuse": "0.0 1.0 0.0",
+		"_name": "greenMat",
+		"_type": "Diffuse"
+	    },
+	    {
+		"diffuse": "1.0 1.0 0.0",
+		"_name": "yellowMat",
+		"_type": "Diffuse"
+	    },
+	    {
+		"diffuse": "0.0 0.0 1.0",
+		"_name": "blueMat",
+		"_type": "Diffuse"
+	    },
+	    {
+		"_name": "chrome",
+		"_type": "Mirror"
+	    }
+	],
+	"shape": [
+
+	    {
+		"shader": {
+		    "_ref": "chrome"
+		},
+		"center": "0 0 0",
+		"radius": 0.5,
+		"_name": "smallSphere",
+		"_type": "sphere"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "redMat"
+		},
+		"center": "1 0 0",
+		"radius": 0.5,
+		"_name": "smallSphere",
+		"_type": "sphere"
+	    },
+	    
+	    {
+		"shader": {
+		    "_ref": "greenMat"
+		},
+		"center": "0.5 0.5 0.0",
+		"radius": 0.25,
+		"_name": "smallSphere",
+		"_type": "sphere"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "yellowMat"
+		},
+		"center": "-0.5 0.5 0.0",
+		"radius": 0.25,
+		"_name": "smallSphere",
+		"_type": "sphere"
+	    },
+
+	    {
+		"shader": {
+		    "_ref": "blueMat"
+		},
+		"center": "-1 0 0",
+		"radius": 0.5,
+		"_name": "smallSphere",
+		"_type": "sphere"
+	    },
+	    
+	    {
+		"shader": {
+		    "_ref": "greyMat"
+		},
+		"center": "0 -100.5 -1.0",
+		"radius": 100.0,
+		"_name": "groundsphere",
+		"_type": "sphere"
+	    }
+	]
+    }
+}
